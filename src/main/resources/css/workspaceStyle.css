@@ -1,0 +1,10 @@
+.button
+{
+    -fx-background-color : #007AFF;
+    -fx-font-size: 14px;
+}
+
+
+#topBar{
+    -fx-background-color: #F3F3F3;
+}
