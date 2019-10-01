@@ -1,4 +1,4 @@
-package mathx.models;
+package main.src.models;
 
 public class TeacherSignUpModel {
 

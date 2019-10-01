@@ -1,4 +1,4 @@
-package main.java.controllers;
+package main.src.controllers;
 
 import javafx.geometry.Insets;
 import javafx.scene.Scene;

@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class mainClass extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root=FXMLLoader.load(getClass().getResource("resources/view/workspace.fxml"));
+        Parent root=FXMLLoader.load(getClass().getResource("res/view/workspace.fxml"));
         primaryStage.setTitle("MathMathX");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
