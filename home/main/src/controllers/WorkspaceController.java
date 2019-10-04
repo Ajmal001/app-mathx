@@ -26,15 +26,6 @@ import java.util.ResourceBundle;
 
 public class WorkspaceController implements Initializable {
 
-    @FXML
-    private VBox operatorSection;
-
-    @FXML
-    private Button addOperator;
-
-    @FXML
-    private Pane practiceSection;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
