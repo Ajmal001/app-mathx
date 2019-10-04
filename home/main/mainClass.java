@@ -17,7 +17,7 @@ public class mainClass extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root=FXMLLoader.load(getClass().getResource("res/view/workspace.fxml"));
-        primaryStage.setTitle("MathMathX");
+        primaryStage.setTitle("Lisa");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
