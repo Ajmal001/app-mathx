@@ -4,7 +4,7 @@ public class TeacherSignUpModel {
 
     String name,photo,summary,userName,password,address,phoneNo,speciality;
 
-    TeacherSignUpModel(){
+    public TeacherSignUpModel(){
 
     }
 
