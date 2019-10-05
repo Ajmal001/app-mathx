@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<BorderPane prefHeight="940.0" prefWidth="1024.0" stylesheets="@../css/workspaceStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+
+<BorderPane prefHeight="940.0" prefWidth="1024.0" stylesheets="@../css/workspaceStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.WorkspaceController">
    <top>
       <HBox prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #F3F3F3;" BorderPane.alignment="CENTER">
             <Pane prefHeight="45.0">
@@ -33,7 +37,7 @@
             </Pane>
             <Pane prefWidth="45.0" />
             <Pane prefHeight="45.0">
-                  <Label layoutY="6.0" prefHeight="33.0" text="Reset">
+                  <Label fx:id="resetButton" layoutY="6.0" prefHeight="33.0" text="Reset">
                      <font>
                         <Font name="Helvetica" size="14.0" />
                      </font>
