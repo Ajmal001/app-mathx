@@ -21,7 +21,7 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) throws IOException {
 
           this.signUpStage=primaryStage;
-          openWorkSpaceWindow();
+          openSignUpWindow();
     }
 
     public void openSignUpWindow() {
