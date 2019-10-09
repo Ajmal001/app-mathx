@@ -14,13 +14,13 @@ public class WorkspaceController implements Initializable {
     @FXML
     private StackPane operator;
 
-    public void setOperator(StackPane operator) {
+    private void setOperator(StackPane operator) {
         this.operator = operator;
 
         final double[] deltaX = new double[1];
         final double[] deltaY = new double[1];
-        deltaX[0]=operator.getLayoutX()-422;
-        deltaY[0]=operator.getLayoutX()-330;
+        deltaX[0]=operator.getLayoutX()-440;
+        deltaY[0]=operator.getLayoutY()-200;
         System.out.println(deltaX[0]);System.out.println(deltaY[0]);
 
         operator.setOnMouseClicked(mouseEvent -> {
