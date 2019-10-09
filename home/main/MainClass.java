@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class MainClass extends Application {
 
-    private static Stage signUpStage,loginStage,homePageStage,workspaceStage;
+    public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
     public static void main(String[] args) {
         launch(args);
     }
@@ -76,7 +76,9 @@ public class MainClass extends Application {
     }
 
     public void openWorkSpaceWindow() {
+
         try {
+
             FXMLLoader loader=new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
             BorderPane pane=loader.load();
             Scene scene=new Scene(pane,1366,768);
@@ -84,6 +86,7 @@ public class MainClass extends Application {
             workspaceStage.setScene(scene);
             workspaceStage.resizableProperty().setValue(Boolean.FALSE);
             workspaceStage.show();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
