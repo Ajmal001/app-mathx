@@ -57,7 +57,7 @@
             <StackPane fx:id="operator" layoutX="232.0" layoutY="220.0">
 
                   <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="70.0" opacity="0.8" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" strokeWidth="2.0" style="-fx-arc-width: 70; -fx-arc-height: 70;" width="190" />
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER" minWidth="190.0">
                         <TextField fx:id="number1" minWidth="40.0" prefWidth="40.0">
                            <HBox.margin>
                               <Insets bottom="10.0" left="20.0" right="10.0" top="10.0" />

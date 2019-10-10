@@ -62,32 +62,31 @@ public class WorkspaceController implements Initializable {
 
     }
 
-    public void setNumber1(TextField number1) {
-        this.number1 = number1;
-        number1.textProperty().addListener((ov, prevText, currText) -> {        // Code Reuse https://bit.ly/314SAz0
+
+    public void setNumber(TextField number){
+        number.textProperty().addListener((ov, prevText, currText) -> {        // Code Reuse https://bit.ly/314SAz0
             Platform.runLater(() -> {
                 Text text = new Text(currText);
-                text.setFont(number1.getFont());
+                text.setFont(number.getFont());
                 double width = text.getLayoutBounds().getWidth()
-                        + number1.getPadding().getLeft() + number1.getPadding().getRight()
+                        + number.getPadding().getLeft() + number.getPadding().getRight()
                         + 2d;
-                number1.setPrefWidth(width);
+                number.setPrefWidth(width);
                 setRectangle(rectangle, (int) width);
-                number1.positionCaret(number1.getCaretPosition());
+                number.positionCaret(number.getCaretPosition());
             });
         });
     }
 
-
     public void setRectangle(Rectangle rectangle,int width) {
         this.rectangle = rectangle;
-        rectangle.setWidth(width+150);
+        rectangle.setWidth(110+number2.getWidth()+number1.getWidth());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setOperator(operator);
-        setNumber1(number1);
-        setNumber1(number2);
+        setNumber(number1);
+        setNumber(number2);
     }
 }
