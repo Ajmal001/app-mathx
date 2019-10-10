@@ -1,5 +1,5 @@
 package main.src.controllers;
-import com.firebase.client.Firebase;
+//import com.firebase.client.Firebase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,15 +42,15 @@ public class SignUpController implements Initializable {
     void registerAction(ActionEvent actionEvent)
     {
 
-        if (nameTF.getText().isEmpty()==true){
+        if (nameTF.getText().isEmpty()){
             showAlert("please enter your name ");
 
         }
-        else if (emailTF.getText().isEmpty()==true){
+        else if (emailTF.getText().isEmpty()){
             showAlert("please enter your email ");
 
         }
-        else if (passwordTF.getText().isEmpty()==true){
+        else if (passwordTF.getText().isEmpty()){
             showAlert("please enter your password ");
 
         }
@@ -71,16 +71,16 @@ public class SignUpController implements Initializable {
         {
             //push data to firebase
 
-            Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
+//            Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
             TeacherSignUpModel model=new TeacherSignUpModel();
             model.setName(nameTF.getText());
             model.setAddress(emailTF.getText());
             model.setPassword(passwordTF.getText());
-            model.setSpeciality((int)spinnerTF.getValue());
-            firebase.child("teachers").push().setValue(model);
+//            model.setSpeciality((int)spinnerTF.getValue());
+//            firebase.child("teachers").push().setValue(model);
             //goto login
             new MainClass().openLoginWindow();
-            MainClass.signUpStage.close();
+//            MainClass.signUpStage.close();
 
         }
 

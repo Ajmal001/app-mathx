@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class MainClass extends Application {
 
-    private static Stage signUpStage,loginStage,homePageStage,workspaceStage;
+    public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
     public static void main(String[] args) {
         launch(args);
     }
@@ -21,8 +21,8 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) throws IOException {
 
           this.signUpStage=primaryStage;
-          openSignUpWindow();
-//        openWorkSpaceWindow();
+//          openSignUpWindow();
+        openWorkSpaceWindow();
     }
 
     private void openSignUpWindow() {
