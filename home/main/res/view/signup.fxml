@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -20,25 +21,28 @@
     <rowConstraints>
         <RowConstraints />
     </rowConstraints>
-    <children>
+    
         <Pane prefHeight="400.0" prefWidth="500.0">
-            <children>
+            
                 <Label layoutX="204.0" layoutY="38.0" text="MathX" textAlignment="CENTER">
                     <font>
                         <Font name="Sawasdee" size="34.0" />
                     </font></Label>
                 <TextField fx:id="nameTF" layoutX="176.0" layoutY="111.0" promptText="Enter your Name" />
                 <TextField fx:id="emailTF" layoutX="175.0" layoutY="145.0" promptText="Enter your E Mail ID" />
+
                 <PasswordField fx:id="useridTF" layoutX="176.0" layoutY="188.0" promptText="Enter password" />
                 <PasswordField fx:id="passwordTF" layoutX="176.0" layoutY="224.0" promptText="Re-enter Password" />
+
+       
                 <HBox alignment="CENTER" layoutX="114.0" layoutY="267.0" prefHeight="28.0" prefWidth="278.0" spacing="20.0">
-               <children>
+               
                         <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Student">
                             <font>
                                 <Font name="Segoe UI" size="12.0" />
                             </font>
                      <toggleGroup>
-                                <ToggleGroup fx:id="User" />
+                                <ToggleGroup/>
                      </toggleGroup>
                         </RadioButton>
                         <RadioButton mnemonicParsing="false" text="Teacher" toggleGroup="$User">
@@ -46,14 +50,14 @@
                                 <Font name="Segoe UI" size="12.0" />
                             </font>
                         </RadioButton>
-               </children>
+               
                 </HBox>
                 <Button alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="350.0" mnemonicParsing="false" onAction="#registerAction" text="Sign Up" textAlignment="CENTER">
                     <font>
                         <Font name="Segoe UI" size="14.0" />
                     </font>
                 </Button>
-<!--                <Spinner layoutX="176.0" layoutY="308.0" />-->
-            </children></Pane>
-    </children>
+                <Spinner layoutX="176.0" layoutY="308.0" />
+            </Pane>
+    
 </GridPane>
