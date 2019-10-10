@@ -29,7 +29,7 @@ public class SignUpController implements Initializable {
 
 
 
-    public void showAlert(String message){
+    private void showAlert(String message){
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -59,7 +59,7 @@ public class SignUpController implements Initializable {
             showAlert("Password must be larger than 7 letters ");
         }
 
-        else if (confirmPasswordTF.getText().isEmpty()==true){
+        else if (confirmPasswordTF.getText().isEmpty()){
             showAlert("please confirm password ");
         }
 
