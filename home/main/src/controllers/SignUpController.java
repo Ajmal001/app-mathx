@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.TextField;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ public class SignUpController implements Initializable {
     private TextField rpswdTF;
 
     @FXML
-    private Spinner spinnerTF;
+    private ComboBox grade;
 
     private void showAlert(String message){
 
@@ -47,6 +48,7 @@ public class SignUpController implements Initializable {
         String email=emailTF.getText();
         String pswd=pswdTF.getText();
         String rpswd=rpswdTF.getText();
+    //    String g=(String) grade.getValue();
 
 //Checking if Name is not empty
         if (name.isEmpty()){
@@ -84,7 +86,6 @@ public class SignUpController implements Initializable {
         Pattern UpperCasePatten = Pattern.compile("[A-Z ]");
         Pattern lowerCasePatten = Pattern.compile("[a-z ]");
         Pattern digitCasePatten = Pattern.compile("[0-9 ]");
-
         String error="";
 
         if (pswd.length() < 8) {
@@ -110,9 +111,18 @@ public class SignUpController implements Initializable {
             pswdTF.requestFocus();
         }
 
+
+//Checking if both Passwords are same
         else if (!pswd.equals(rpswd)) {
             showAlert("Passwords do not match ");
             rpswdTF.requestFocus();
+            return;
+        }
+
+
+//Checking if Grade is selected
+        else if(grade.getValue()==null){
+            showAlert("Please choose a Grade");
             return;
         }
 
