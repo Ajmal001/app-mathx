@@ -13,4 +13,8 @@ public class HomepageController {
         new MainClass().openWorkSpaceWindow();
 //        MainClass.homePageStage.close();
     }
+    @FXML
+    public void display(ActionEvent event) {
+        AlertBox.display();
+    }
 }
