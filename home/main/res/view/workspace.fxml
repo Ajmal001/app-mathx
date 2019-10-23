@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<BorderPane prefHeight="940.0" prefWidth="1024.0" stylesheets="@../css/workspaceStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
-=======
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -19,7 +12,6 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="940.0" prefWidth="1024.0" stylesheets="@../css/workspaceStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.WorkspaceController">
-
    <top>
       <HBox prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #F3F3F3;" BorderPane.alignment="CENTER">
             <Pane prefHeight="45.0">
@@ -59,17 +51,6 @@
             </Pane>
       </HBox>
    </top>
-
-   <left>
-      <VBox fx:id="operatorSection" prefHeight="695.0" prefWidth="210.0" style="-fx-background-color: #FFF;" BorderPane.alignment="CENTER">
-         <padding>
-            <Insets bottom="10.0" top="10.0" />
-         </padding></VBox>
-   </left>
-   <center>
-      <Pane fx:id="practiceSection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-=======
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 
@@ -112,5 +93,4 @@
          </padding>
       </VBox>
    </bottom>
-
 </BorderPane>
