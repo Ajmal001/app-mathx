@@ -4,10 +4,8 @@ public class TeacherSignUpModel {
 
     String name,photo,summary,userName,password,address,phoneNo,speciality;
 
-
-    TeacherSignUpModel(){
-=======
     public TeacherSignUpModel(){
+
     }
 
     public TeacherSignUpModel(String name, String photo, String summary, String userName, String password, String address, String phoneNo, String speciality) {
