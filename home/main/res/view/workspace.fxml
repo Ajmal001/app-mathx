@@ -12,9 +12,8 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="940.0" prefWidth="1024.0" stylesheets="@../css/workspaceStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.WorkspaceController">
-
    <top>
-      <HBox prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #007AFF;" BorderPane.alignment="CENTER">
+      <HBox prefHeight="45.0" prefWidth="200.0" style="-fx-background-color: #F3F3F3;" BorderPane.alignment="CENTER">
             <Pane prefHeight="45.0">
                   <Label layoutY="6.0" prefHeight="33.0" text="MathMathX">
                      <font>
@@ -53,9 +52,6 @@
       </HBox>
    </top>
    <center>
-      <Pane fx:id="practiceSection" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </center>
-   <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
 
             <StackPane fx:id="operator" layoutX="232.0" layoutY="220.0">
@@ -85,7 +81,7 @@
       </Pane>
    </center>
    <bottom>
-      <VBox prefHeight="60.0" prefWidth="1024.0" style="-fx-background-color: #007AFF;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="60.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
          
             <Label prefHeight="60.0" prefWidth="1024.0" text="Result">
                <font>
@@ -97,5 +93,4 @@
          </padding>
       </VBox>
    </bottom>
-
 </BorderPane>
