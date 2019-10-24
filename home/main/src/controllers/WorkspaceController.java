@@ -28,7 +28,6 @@ public class WorkspaceController implements Initializable {
     @FXML
     private TextField number2;
 
-
     private void setOperator(StackPane operator) {
         this.operator = operator;
 
@@ -40,8 +39,28 @@ public class WorkspaceController implements Initializable {
             deltaY[0]=operator.getLayoutY()-mouseEvent.getSceneY();
         });
         operator.setOnMouseDragged(mouseEvent -> {
-            operator.setLayoutX(mouseEvent.getSceneX()+deltaX[0]);
-            operator.setLayoutY(mouseEvent.getSceneY()+deltaY[0]);  /*190,110*/ /*232,220*/
+            //Left X-Bound
+            if(mouseEvent.getSceneX()<-deltaX[0]){
+                operator.setLayoutX(1);
+            }
+            //Right X-Bound
+            else if(mouseEvent.getSceneX()+operator.getWidth()+deltaX[0]>1365){
+                operator.setLayoutX(1365-operator.getWidth());
+            }
+            else {
+                operator.setLayoutX(mouseEvent.getSceneX() + deltaX[0]);
+            }
+            //Upper Y-Bound
+            if(mouseEvent.getSceneY()<-deltaY[0]){
+                operator.setLayoutY(1);
+            }
+            //Lower Y-Bound
+            else if(mouseEvent.getSceneY()+operator.getHeight()+deltaY[0]>660){
+                operator.setLayoutY(660-operator.getHeight());
+            }
+            else {
+                operator.setLayoutY(mouseEvent.getSceneY() + deltaY[0]);  /*190,110*/ /*232,220*/
+            }
         });
 
     }
