@@ -21,8 +21,9 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) throws IOException {
 
           signUpStage=primaryStage;
-          openSignUpWindow();
+//          openSignUpWindow();
 //        openWorkSpaceWindow();
+        openHomePageWindow();
     }
 
     private void openSignUpWindow() {
@@ -41,7 +42,7 @@ public class MainClass extends Application {
 
     }
 
-    public  void openLoginWindow() {
+    public void openLoginWindow() {
 
         try {
 
