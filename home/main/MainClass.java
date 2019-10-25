@@ -12,19 +12,20 @@ import java.io.IOException;
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
+    private static Stage signUpStage,loginStage,homePageStage,workspaceStage;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
 
-          this.signUpStage=primaryStage;
+          signUpStage=primaryStage;
           openSignUpWindow();
+//        openWorkSpaceWindow();
     }
 
-    public void openSignUpWindow() {
+    private void openSignUpWindow() {
 
         try {
 
@@ -80,9 +81,10 @@ public class MainClass extends Application {
 
             FXMLLoader loader=new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
             BorderPane pane=loader.load();
-            Scene scene=new Scene(pane);
+            Scene scene=new Scene(pane,1366,768);
             workspaceStage=new Stage();
             workspaceStage.setScene(scene);
+            workspaceStage.resizableProperty().setValue(Boolean.FALSE);
             workspaceStage.show();
 
         } catch (IOException e) {

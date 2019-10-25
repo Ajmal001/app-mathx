@@ -11,6 +11,6 @@ public class HomepageController {
     void workspaceAction(ActionEvent actionEvent)
     {
         new MainClass().openWorkSpaceWindow();
-        MainClass.homePageStage.close();
+//        MainClass.homePageStage.close();
     }
 }
