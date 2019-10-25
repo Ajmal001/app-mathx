@@ -28,42 +28,45 @@ public class WorkspaceController implements Initializable {
     @FXML
     private TextField number2;
 
-
     private void setOperator(StackPane operator) {
         this.operator = operator;
 
         final double[] deltaX = new double[1];
         final double[] deltaY = new double[1];
-//        deltaX[0]=operator.getLayoutX()-440;
-//        deltaY[0]=operator.getLayoutY()-200;
-//        System.out.println(deltaX[0]);System.out.println(deltaY[0]);
-//
-//        operator.setOnMouseClicked(mouseEvent -> {
-//            deltaX[0]=operator.getLayoutX()-mouseEvent.getSceneX();
-//            deltaY[0]=operator.getLayoutY()-mouseEvent.getSceneY();  /*190,110*/ /*232,220*/
-//            System.out.println(deltaX[0]);System.out.println(deltaY[0]);
-//        });
-//
-//        operator.setOnMouseDragged(mouseEvent -> {
-//            operator.setLayoutX(mouseEvent.getSceneX()+deltaX[0]);
-//            operator.setLayoutY(mouseEvent.getSceneY()+deltaY[0]);  /*190,110*/ /*232,220*/
-//            System.out.println(deltaX[0]);System.out.println(deltaY[0]);
-//        });
         operator.setOnMouseEntered(mouseEvent -> operator.setCursor(Cursor.MOVE));
         operator.setOnMouseMoved(mouseEvent -> {
             deltaX[0]=operator.getLayoutX()-mouseEvent.getSceneX();
             deltaY[0]=operator.getLayoutY()-mouseEvent.getSceneY();
         });
         operator.setOnMouseDragged(mouseEvent -> {
-            operator.setLayoutX(mouseEvent.getSceneX()+deltaX[0]);
-            operator.setLayoutY(mouseEvent.getSceneY()+deltaY[0]);  /*190,110*/ /*232,220*/
-            System.out.println(deltaX[0]);System.out.println(deltaY[0]);
+            //Left X-Bound
+            if(mouseEvent.getSceneX()<-deltaX[0]){
+                operator.setLayoutX(1);
+            }
+            //Right X-Bound
+            else if(mouseEvent.getSceneX()+operator.getWidth()+deltaX[0]>1365){
+                operator.setLayoutX(1365-operator.getWidth());
+            }
+            else {
+                operator.setLayoutX(mouseEvent.getSceneX() + deltaX[0]);
+            }
+            //Upper Y-Bound
+            if(mouseEvent.getSceneY()<-deltaY[0]){
+                operator.setLayoutY(1);
+            }
+            //Lower Y-Bound
+            else if(mouseEvent.getSceneY()+operator.getHeight()+deltaY[0]>660){
+                operator.setLayoutY(660-operator.getHeight());
+            }
+            else {
+                operator.setLayoutY(mouseEvent.getSceneY() + deltaY[0]);  /*190,110*/ /*232,220*/
+            }
         });
 
     }
 
 
-    public void setNumber(TextField number){
+    private void setNumber(TextField number){
         number.textProperty().addListener((ov, prevText, currText) -> {        // Code Reuse https://bit.ly/314SAz0
             Platform.runLater(() -> {
                 Text text = new Text(currText);
@@ -71,10 +74,25 @@ public class WorkspaceController implements Initializable {
                 double width = text.getLayoutBounds().getWidth()
                         + number.getPadding().getLeft() + number.getPadding().getRight()
                         + 2d;
+                if (width<30)
+                    rectangle.setWidth(190);
                 number.setPrefWidth(width);
-                setRectangle(rectangle, (int) width);
                 number.positionCaret(number.getCaretPosition());
+                setRectangle(rectangle, (int) width);
             });
+        });
+        number.lengthProperty().addListener(new ChangeListener<>() {
+            int LIMIT = 10;
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    if (number.getText().length() >= LIMIT) {
+                        number.setText(number.getText().substring(0, LIMIT));
+                    }
+                } else if (number.getText().length() < LIMIT)
+                    rectangle.setWidth(190);
+            }
         });
     }
 

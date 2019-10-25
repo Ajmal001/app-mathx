@@ -12,13 +12,13 @@ import java.io.IOException;
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
+    private static Stage signUpStage,loginStage,homePageStage,workspaceStage;
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) {
 
           signUpStage=primaryStage;
           openSignUpWindow();
