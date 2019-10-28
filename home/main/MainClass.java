@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class MainClass extends Application {
 
-    private static Stage signUpStage,loginStage,homePageStage,workspaceStage;
+    public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
     public static void main(String[] args) {
         launch(args);
     }

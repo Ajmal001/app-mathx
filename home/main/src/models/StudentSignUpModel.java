@@ -1,14 +1,16 @@
 package main.src.models;
 
-public class TeacherSignUpModel {
+public class StudentSignUpModel {
 
     String name,photo,summary,userName,password,address,phoneNo,speciality,grade;
 
-    public TeacherSignUpModel(){
+    public StudentSignUpModel(){
 
     }
 
-    public TeacherSignUpModel(String name, String photo, String summary, String userName, String password, String address, String phoneNo, String speciality) {
+
+
+    public StudentSignUpModel(String name, String photo, String summary, String userName, String password, String address, String phoneNo, String speciality) {
         this.name = name;
         this.photo = photo;
         this.summary = summary;
@@ -20,20 +22,20 @@ public class TeacherSignUpModel {
         this.grade = grade;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getGrade() {
         return grade;
     }
 
     public void setGrade(String grade) {
         this.grade = grade;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoto() {
