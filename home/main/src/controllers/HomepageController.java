@@ -15,8 +15,9 @@ import java.util.List;
 
 public class HomepageController {
 
-    @FXML
+//    @FXML
     void displayAssignments() throws Exception {
+        
 
         InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
@@ -37,7 +38,6 @@ public class HomepageController {
 //        }
 
         ApiFuture<QuerySnapshot> documentNames = db.collection("assignments").get();
-        // future.get() blocks on response
         List<QueryDocumentSnapshot> documents = documentNames.get().getDocuments();
         DocumentReference docRef;
         ApiFuture<DocumentSnapshot> documentApi;
@@ -48,7 +48,6 @@ public class HomepageController {
             documentApi = docRef.get();
             documentData=documentApi.get();
             question=documentData.getData().toString();
-//            System.out.println(documentData.getData());
             System.out.println(question);
             System.out.println("-----");
         }
