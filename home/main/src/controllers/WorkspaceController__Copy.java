@@ -18,9 +18,6 @@ import java.util.ResourceBundle;
 public class WorkspaceController__Copy implements Initializable {
 
     @FXML
-    private StackPane operator;
-
-    @FXML
     private Rectangle rectangle;
 
     @FXML
@@ -29,7 +26,6 @@ public class WorkspaceController__Copy implements Initializable {
     private TextField number2;
 
     private void setOperator(StackPane operator) {
-        this.operator = operator;
 
         final double[] deltaX = new double[1];
         final double[] deltaY = new double[1];
@@ -82,7 +78,7 @@ public class WorkspaceController__Copy implements Initializable {
             });
         });
         number.lengthProperty().addListener(new ChangeListener<>() {
-            int LIMIT = 10;
+            final int LIMIT = 10;
 
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
@@ -96,7 +92,7 @@ public class WorkspaceController__Copy implements Initializable {
         });
     }
 
-    public void setRectangle(Rectangle rectangle,int width) {
+    private void setRectangle(Rectangle rectangle, int width) {
         this.rectangle = rectangle;
         rectangle.setWidth(110+number2.getWidth()+number1.getWidth());
     }
