@@ -2,7 +2,6 @@ package main.src.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -22,39 +21,13 @@ public class WorkspaceController implements Initializable{
         DOUBLE,
         TRIPLE
     }
-//
-//    private void addToExpressionPane(VBox expressionType){
-//        expressionPane.getChildren().addAll((expressionType));
-//    }
-//
-//    private VBox expressionTypeFactory(int inputs) {
-//        VBox expression=new VBox();
-//        if (inputs == 1) {
-//            expression = createSingleInputExpression();
-//        }
-//        return expression;
-//    }
-//
-//
-//    private VBox createSingleInputExpression(){
-//        VBox expression=new VBox();
-//
-//        return expression;
-//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        Expression expression = ExpressionFactory.produceExpression(expressionType.SINGLE);
-//        if(expression!=null)
-//            expression.produceExpression();
-//        else
-//            System.out.println("Couldn't Draw Single");
-//        Expression expression1 = ExpressionFactory.produceExpression(expressionType.DOUBLE);
-//        if(expression1!=null)
-//            expression1.produceExpression();
-//        else
-//            System.out.println("Couldn't Draw Double");
-//
+        Expression expression=ExpressionFactory.produceExpressionType(expressionType.SINGLE,expressionPane);
+        expression.produceExpressionType(expressionPane);
 
+        Expression expression1=ExpressionFactory.produceExpressionType(expressionType.DOUBLE,expressionPane);
+        expression1.produceExpressionType(expressionPane);
     }
 }
