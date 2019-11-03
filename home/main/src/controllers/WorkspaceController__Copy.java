@@ -1,5 +1,15 @@
 package main.src.controllers;
-
+/**
+ * Title:		 Math-X Application
+ * Description:  CSE515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author
+ * @version 	 1.0
+ * @since        8/30/2019
+ * @modified     11/3/2019
+ */
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -15,16 +25,29 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
+
+/**
+ * The Class WorkspaceController__Copy.
+ */
 public class WorkspaceController__Copy implements Initializable {
 
+    /** The rectangle. */
     @FXML
     private Rectangle rectangle;
 
+    /** The number 1. */
     @FXML
     private TextField number1;
+    
+    /** The number 2. */
     @FXML
     private TextField number2;
 
+    /**
+     * Sets the operator.
+     *
+     * @param operator the new operator
+     */
     private void setOperator(StackPane operator) {
 
         final double[] deltaX = new double[1];
@@ -62,6 +85,11 @@ public class WorkspaceController__Copy implements Initializable {
     }
 
 
+    /**
+     * Sets the number.
+     *
+     * @param number the new number
+     */
     private void setNumber(TextField number){
         number.textProperty().addListener((ov, prevText, currText) -> {        // Code Reuse https://bit.ly/314SAz0
             Platform.runLater(() -> {
@@ -92,11 +120,23 @@ public class WorkspaceController__Copy implements Initializable {
         });
     }
 
+    /**
+     * Sets the rectangle.
+     *
+     * @param rectangle the rectangle
+     * @param width the width
+     */
     private void setRectangle(Rectangle rectangle, int width) {
         this.rectangle = rectangle;
         rectangle.setWidth(110+number2.getWidth()+number1.getWidth());
     }
 
+    /**
+     * Initialize.
+     *
+     * @param url the url
+     * @param resourceBundle the resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        setOperator(operator);

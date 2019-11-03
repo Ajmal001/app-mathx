@@ -1,5 +1,15 @@
 package main.src.controllers;
-
+/**
+ * Title:		 Math-X Application
+ * Description:  CSE515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author 		 Mehta Ria
+ * @version 	 1.0
+ * @since        8/30/2019
+ * @modified     11/3/2019
+ */
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
@@ -14,10 +24,18 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The Class HomepageController.
+ */
 public class HomepageController  {
 
+    /** The submitted assignments. */
     @FXML private javafx.scene.control.ComboBox submittedAssignments;
 
+    /**
+     * Initialize.
+     */
     @FXML
     public void initialize(){
 //        String labelHead=submittedAssignments.getText()+"\n\n\n";
@@ -32,6 +50,12 @@ public class HomepageController  {
     }
 
 
+    /**
+     * Display assignments.
+     *
+     * @return the array list
+     * @throws Exception the exception
+     */
     @FXML
     ArrayList<String> displayAssignments() throws Exception {
 
@@ -69,12 +93,23 @@ public class HomepageController  {
         return assignmentNum;
     }
 
+    /**
+     * Workspace action.
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     void workspaceAction(ActionEvent actionEvent)
     {
         new MainClass().openWorkSpaceWindow();
 //        MainClass.homePageStage.close();
     }
+    
+    /**
+     * Display.
+     *
+     * @param event the event
+     */
     @FXML
     public void display(ActionEvent event) {
         AlertBox.display();
