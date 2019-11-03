@@ -1,14 +1,23 @@
 package main;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
+
 
 public class MainClass extends Application {
 
@@ -21,8 +30,8 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) {
 
           signUpStage=primaryStage;
-          openSignUpWindow();
-//        openWorkSpaceWindow();
+//          openSignUpWindow();
+        openWorkSpaceWindow();
     }
 
     private void openSignUpWindow() {
@@ -41,7 +50,7 @@ public class MainClass extends Application {
 
     }
 
-    public  void openLoginWindow() {
+    public void openLoginWindow() {
 
         try {
 
@@ -83,6 +92,7 @@ public class MainClass extends Application {
             BorderPane pane=loader.load();
             Scene scene=new Scene(pane,1366,768);
             workspaceStage=new Stage();
+            workspaceStage.setTitle("Workspace");
             workspaceStage.setScene(scene);
             workspaceStage.resizableProperty().setValue(Boolean.FALSE);
             workspaceStage.show();
