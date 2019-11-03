@@ -11,13 +11,29 @@ import javafx.fxml.FXML;
 import main.MainClass;
 import java.io.InputStream;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
-public class HomepageController {
+public class HomepageController  {
 
-//    @FXML
-    void displayAssignments() throws Exception {
-        
+    @FXML private javafx.scene.control.ComboBox submittedAssignments;
+
+    @FXML
+    public void initialize(){
+//        String labelHead=submittedAssignments.getText()+"\n\n\n";
+        try{
+            submittedAssignments.getItems().addAll(displayAssignments());
+            submittedAssignments.getSelectionModel().selectFirst();
+//            JOptionPane.showMessageDialog(null,labelHead+labelContent);
+//            submittedAssignments.setVisible(true);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    ArrayList<String> displayAssignments() throws Exception {
 
         InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
@@ -42,15 +58,15 @@ public class HomepageController {
         DocumentReference docRef;
         ApiFuture<DocumentSnapshot> documentApi;
         DocumentSnapshot documentData;
-        String question;
+        ArrayList<String> assignmentNum = new ArrayList<>();
         for (QueryDocumentSnapshot document : documents) {
             docRef=db.collection("assignments").document(document.getId());
             documentApi = docRef.get();
             documentData=documentApi.get();
-            question=documentData.getData().toString();
-            System.out.println(question);
-            System.out.println("-----");
+            assignmentNum.add(documentData.getId()); //documentData.getId() gets the name of the Document
+//            question=documentData.getData().toString();
         }
+        return assignmentNum;
     }
 
     @FXML
