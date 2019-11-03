@@ -6,6 +6,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 You will need to install OpenJDK 11 and OpenJavaFX 11 in order to run the software.
+You will need to add firebase jar files to your library
 
 **OpenJavaFX 11**
 - Download OpenJavaFX 11 from [Gluon Official Website](https://gluonhq.com/products/javafx/).
@@ -13,6 +14,11 @@ You will need to install OpenJDK 11 and OpenJavaFX 11 in order to run the softwa
 
 **OpenJDK**
 - Linux ```sudo apt install openjdk-11-jdk```
+
+**Firebase**
+- For more info on firebase goto: https://tree.taiga.io/project/sheran-12-ser515-classscrum/wiki/firebase-docs
+- Download the firebase-client-android-2.5.2 found at the above location and add the same to your Libraries
+
 
 **IntelliJ** *(Required you want to compile, run and generate executable)*
 - Install [IntelliJ](https://www.jetbrains.com/help/idea/installation-guide.html)
