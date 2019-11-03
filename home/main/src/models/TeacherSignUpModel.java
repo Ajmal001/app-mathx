@@ -3,7 +3,7 @@ package main.src.models;
 
 /**
  * Title:		 Math-X Application
- * Description:  CSE515 Project
+ * Description:  SER 515 Project
  * Copyright:    Copyright (c) 2019
  * Company:      Department of Computer Software Engineering, Arizona State University.
  *

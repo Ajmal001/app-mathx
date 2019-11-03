@@ -1,7 +1,7 @@
 package main.src.controllers;
 /**
  * Title:		 Math-X Application
- * Description:  CSE515 Project
+ * Description:  SER 515 Project
  * Copyright:    Copyright (c) 2019
  * Company:      Department of Computer Software Engineering, Arizona State University.
  *
@@ -60,6 +60,7 @@ public class HomepageController  {
     ArrayList<String> displayAssignments() throws Exception {
 
         InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
+
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(credentials)
