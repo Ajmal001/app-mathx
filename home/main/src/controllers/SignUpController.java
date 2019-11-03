@@ -1,15 +1,13 @@
 package main.src.controllers;
-//import com.firebase.client.Firebase;
+import com.firebase.client.Firebase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import main.MainClass;
+import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,6 +29,9 @@ public class SignUpController implements Initializable {
 
     @FXML
     private ComboBox grade;
+
+    @FXML
+    private ToggleGroup User;
 
     private void showAlert(String message){
 
@@ -128,15 +129,41 @@ public class SignUpController implements Initializable {
 
         else
         {
-            //push data to firebase
+            //Push data into firebase
 
-//            Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
-            TeacherSignUpModel model=new TeacherSignUpModel();
-            model.setName(nameTF.getText());
-            model.setAddress(emailTF.getText());
-            model.setPassword(pswdTF.getText());
-//            model.setSpeciality((int)spinnerTF.getValue());
-//            firebase.child("teachers").push().setValue(model);
+            RadioButton selectedRadiobutton=(RadioButton) User.getSelectedToggle();
+
+            Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
+
+            //Create a Teacher or Student depending on the type selected
+
+            if(selectedRadiobutton.getText().equals("Teacher")) {
+
+                TeacherSignUpModel model = new TeacherSignUpModel();
+
+                model.setName(nameTF.getText());
+                model.setAddress(emailTF.getText());
+                model.setPassword(pswdTF.getText());
+                model.setGrade(grade.getValue().toString());
+
+                firebase.child(selectedRadiobutton.getText()).push().setValue(model);
+
+            }
+
+            else{
+
+                StudentSignUpModel model = new StudentSignUpModel();
+
+                model.setName(nameTF.getText());
+                model.setAddress(emailTF.getText());
+                model.setPassword(pswdTF.getText());
+                model.setGrade(grade.getValue().toString());
+
+                firebase.child(selectedRadiobutton.getText()).push().setValue(model);
+
+
+
+            }
             //goto login
             new MainClass().openLoginWindow();
 //            MainClass.signUpStage.close();
