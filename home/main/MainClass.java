@@ -50,7 +50,7 @@ public class MainClass extends Application {
 
     }
 
-    public  void openLoginWindow() {
+    public void openLoginWindow() {
 
         try {
 
