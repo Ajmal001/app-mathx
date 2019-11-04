@@ -12,6 +12,7 @@ package main.src.controllers;
  */
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Hyperlink;
 import main.MainClass;
 
 
@@ -19,6 +20,9 @@ import main.MainClass;
  * The Class LoginController.
  */
 public class LoginController {
+
+    @FXML
+    private Hyperlink signup;
 
     /**
      * Login action.
@@ -30,5 +34,6 @@ public class LoginController {
     {
         new MainClass().openHomePageWindow();
         MainClass.loginStage.close();
+
     }
 }
