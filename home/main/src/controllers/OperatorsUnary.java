@@ -1,5 +1,15 @@
 package main.src.controllers;
-
+/**
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author 		 Grewal Karandeep Singh
+ * @version 	 1.0
+ * @since        8/30/2019
+ * @modified     11/3/2019
+ */
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -14,15 +24,23 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
-/*
-@author - Karandeep Singh Grewal
-*/
 
+/**
+ * The Class OperatorsUnary.
+ */
 public class OperatorsUnary implements Expression {
 
+    /** The shape width. */
     private float shapeWidth = 110;
+    
+    /** The shape height. */
     private float shapeHeight = 50;
 
+    /**
+     * Produce expression type.
+     *
+     * @param vBox the v box
+     */
     @Override
     public void produceExpressionType(VBox vBox) {
         vBox.getChildren().addAll(produceLabelPane(), produceShape("log"),
@@ -32,6 +50,12 @@ public class OperatorsUnary implements Expression {
 
     }
 
+    /**
+     * Produce shape.
+     *
+     * @param string the string
+     * @return the stack pane
+     */
     @Override
     public StackPane produceShape(String string) {
         StackPane operatorPane = new StackPane();
@@ -67,6 +91,11 @@ public class OperatorsUnary implements Expression {
         return operatorPane;
     }
 
+    /**
+     * Produce label pane.
+     *
+     * @return the pane
+     */
     @Override
     public Pane produceLabelPane() {
         Pane labelPane = new Pane();

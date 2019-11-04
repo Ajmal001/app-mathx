@@ -1,5 +1,15 @@
 package main.src.controllers;
-
+/**
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author
+ * @version 	 1.0
+ * @since        8/30/2019
+ * @modified     11/3/2019
+ */
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -13,8 +23,15 @@ import main.MainClass;
 
 import java.io.IOException;
 
+
+/**
+ * The Class AlertBox.
+ */
 public class AlertBox {
 
+    /**
+     * Display.
+     */
     @FXML
     public static void display(){
         Stage window = new Stage();
