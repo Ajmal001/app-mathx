@@ -1,5 +1,17 @@
 package main.src.controllers;
-
+/**
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author
+ * @version 	 1.0
+ * @since        8/30/2019
+ * @modified     11/3/2019
+ */
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,13 +19,25 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import main.MainClass;
 
+import java.io.IOException;
+
+
+/**
+ * The Class AlertBox.
+ */
 public class AlertBox {
-    public static void display(String title, String message){
+
+    /**
+     * Display.
+     */
+    @FXML
+    public static void display(){
         Stage window = new Stage();
 
         window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(title);
+        window.setTitle("Logout");
         window.setMinWidth(250);
 
         //Grid
@@ -24,14 +48,18 @@ public class AlertBox {
 
         //Message
         Label label=new Label();
-        label.setText(message);
+        label.setText("Are you sure you want to logout?");
         GridPane.setConstraints(label, 0,0);
 
         //Option Buttons
         Button noButton = new Button("No");
         Button yesButton = new Button("Yes");
         noButton.setOnAction(e -> window.close());
-        yesButton.setOnAction(e -> window.close());
+        yesButton.setOnAction(e -> {
+            window.close();
+            MainClass.homePageStage.close();
+
+        });
 
         GridPane.setConstraints(yesButton,1,3);
         GridPane.setConstraints(noButton, 0,3);
