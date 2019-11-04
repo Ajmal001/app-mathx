@@ -15,9 +15,15 @@ You will need to add firebase jar files to your library
 **OpenJDK**
 - Linux ```sudo apt install openjdk-11-jdk```
 
-**Firebase**
-- For more info on firebase goto: https://tree.taiga.io/project/sheran-12-ser515-classscrum/wiki/firebase-docs
-- Download the firebase-client-android-2.5.2 found at the above location and add the same to your Libraries
+**Adding Firebase libraries**
+- Download the firebase-client-android-2.5.2 from attachment location: https://tree.taiga.io/project/sheran-12-ser515-classscrum/wiki/firebase-docs
+- Go to `File` &#8594; `Project Structure`
+    
+    - &#8600;`Libraries`
+         - Add new library `+` &#8594; `Java`  
+         - Go to the file location where you extracted the Firebase and add the same
+   
+- **`Apply`**
 
 
 **IntelliJ** *(Required you want to compile, run and generate executable)*
