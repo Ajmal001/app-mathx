@@ -21,8 +21,6 @@ import javafx.fxml.FXML;
 import main.MainClass;
 import java.io.InputStream;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -30,8 +28,9 @@ import java.util.List;
  */
 public class HomepageController  {
 
-    /** The submitted assignments. */
+    /** The assignment elements. */
     @FXML private javafx.scene.control.ComboBox submittedAssignments;
+    @FXML private javafx.scene.control.ComboBox notSubmittedAssignments;
 
     /**
      * Initialize.
@@ -40,10 +39,9 @@ public class HomepageController  {
     public void initialize(){
 //        String labelHead=submittedAssignments.getText()+"\n\n\n";
         try{
-            submittedAssignments.getItems().addAll(displayAssignments());
+            displaySubmittedAssignments();
             submittedAssignments.getSelectionModel().selectFirst();
-//            JOptionPane.showMessageDialog(null,labelHead+labelContent);
-//            submittedAssignments.setVisible(true);
+            notSubmittedAssignments.getSelectionModel().selectFirst();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -52,12 +50,9 @@ public class HomepageController  {
 
     /**
      * Display assignments.
-     *
-     * @return the array list
-     * @throws Exception the exception
      */
     @FXML
-    ArrayList<String> displayAssignments() throws Exception {
+    private void displaySubmittedAssignments() throws Exception {
 
         InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
 
@@ -78,20 +73,30 @@ public class HomepageController  {
 //            System.out.println("No such document!");
 //        }
 
-        ApiFuture<QuerySnapshot> documentNames = db.collection("assignments").get();
-        List<QueryDocumentSnapshot> documents = documentNames.get().getDocuments();
-        DocumentReference docRef;
+        /**
+         * Logic for displaying list of assignments - submitted and not submitted
+         */
+
+        String userEmail = "karandeep@gmail.com";
+        Iterable<DocumentReference> docRefUpcoming  = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApi;
         DocumentSnapshot documentData;
-        ArrayList<String> assignmentNum = new ArrayList<>();
-        for (QueryDocumentSnapshot document : documents) {
-            docRef=db.collection("assignments").document(document.getId());
-            documentApi = docRef.get();
+
+        for(DocumentReference doc :docRefUpcoming){
+            documentApi = doc.get();             //Gets reference of document
             documentData=documentApi.get();
-            assignmentNum.add(documentData.getId()); //documentData.getId() gets the name of the Document
-//            question=documentData.getData().toString();
+            notSubmittedAssignments.getItems().addAll(documentData.getId());
         }
-        return assignmentNum;
+
+        Iterable<DocumentReference> docRefSolved  = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
+        ApiFuture<DocumentSnapshot> documentApiSolved;
+        DocumentSnapshot documentDataSolved;
+
+        for(DocumentReference doc :docRefSolved){
+            documentApiSolved = doc.get();             //Gets reference of document
+            documentDataSolved=documentApiSolved.get();
+            submittedAssignments.getItems().addAll(documentDataSolved.getId());
+        }
     }
 
     /**
