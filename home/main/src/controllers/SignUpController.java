@@ -21,6 +21,7 @@ import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,6 +65,7 @@ public class SignUpController implements Initializable {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Signup Form Error");
+        alert.setHeaderText(null);
         //   alert.setHeaderText("Required Fields Empty");
         alert.setContentText(message);
         alert.showAndWait();
