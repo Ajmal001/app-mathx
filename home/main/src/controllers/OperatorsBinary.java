@@ -64,7 +64,7 @@ public class OperatorsBinary implements Operator {
         Tooltip t =new Tooltip(operationFullName);
         t.setShowDelay(new Duration(0));
         if(operationFullName !=null)
-        Tooltip.install(hBox,t);
+            Tooltip.install(hBox,t);
 
         TextField input1 = new TextField();
         input1.setMinWidth(40);
