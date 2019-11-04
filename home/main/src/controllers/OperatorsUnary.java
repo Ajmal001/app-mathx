@@ -1,8 +1,10 @@
 package main.src.controllers;
 
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -13,12 +15,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
+import javafx.util.Duration;
 
 /*
 @author - Karandeep Singh Grewal
 */
 
-public class OperatorsUnary implements Expression {
+public class OperatorsUnary implements Operator {
 
     private float shapeWidth = 110;
     private float shapeHeight = 50;
@@ -26,9 +29,7 @@ public class OperatorsUnary implements Expression {
     @Override
     public void produceExpressionType(VBox vBox) {
         vBox.getChildren().addAll(produceLabelPane(), produceShape("log"),
-                produceShape("sin"),produceShape("cos"),
-                produceShape("tan"),produceShape("lg"));
-        System.out.println(vBox.getChildren());
+                produceShape("lg"), produceShape("sin"),produceShape("cos"),produceShape("tan"));
 
     }
 
@@ -48,9 +49,26 @@ public class OperatorsUnary implements Expression {
         rectangle.setStrokeType(StrokeType.INSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
 
+        String operationFullName = null;
+        if(string.equals("log"))
+            operationFullName = "Logarithm - Base e";
+        if(string.equals("sin"))
+            operationFullName = "Sin(x)";
+        if(string.equals("cos"))
+            operationFullName = "Cos(x)";
+        if(string.equals("tan"))
+            operationFullName = "Tan(x)";
+        if(string.equals("lg"))
+            operationFullName = "Logarithm - Base 2";
+
         HBox hBox = new HBox();
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
+
+        Tooltip t =new Tooltip(operationFullName);
+        t.setShowDelay(new Duration(0));
+        if(operationFullName !=null)
+        Tooltip.install(hBox,t);
 
         TextField input = new TextField();
         input.setMinWidth(40);
