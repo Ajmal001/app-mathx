@@ -23,8 +23,8 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) {
 
         signUpStage = primaryStage;
-        openLoginWindow();
-        //       openWorkSpaceWindow();
+//        openLoginWindow();
+        openWorkSpaceWindow();
     }
 
     public void openSignUpWindow() {
@@ -74,7 +74,6 @@ public class MainClass extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void openWorkSpaceWindow() {
@@ -83,7 +82,7 @@ public class MainClass extends Application {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
             BorderPane pane = loader.load();
-            Scene scene = new Scene(pane, 1366, 768);
+            Scene scene = new Scene(pane, 1366, 940);
             workspaceStage = new Stage();
             workspaceStage.setTitle("Workspace");
             workspaceStage.setScene(scene);
