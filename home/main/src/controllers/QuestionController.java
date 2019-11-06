@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 /**
  * The Class question.
  */
-public class question implements Initializable {
+public class QuestionController implements Initializable {
 
     /**
      * The question TF.
