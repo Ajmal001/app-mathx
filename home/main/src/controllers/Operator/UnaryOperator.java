@@ -15,15 +15,12 @@ import javafx.scene.shape.StrokeType;
 
 public class UnaryOperator implements Operator {
     @Override
-    public StackPane produceOperator() {
-
+    public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();
         stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
-
         float shapeWidth = 165;
         float shapeHeight = 50;
-
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
@@ -33,32 +30,23 @@ public class UnaryOperator implements Operator {
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.INSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
-
         HBox hBox = new HBox();
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
-
         TextField input1 = new TextField();
         input1.setMinWidth(40);
         input1.setPrefWidth(40);
-
-        Label operator = new Label("+");
+        Label operator = new Label(operatorString);
         operator.setMinWidth(40);
         operator.setPrefWidth(40);
         operator.setAlignment(Pos.CENTER);
         operator.setStyle("-fx-font-size: 14");
         operator.setTextFill(Color.WHITE);
-
-
         TextField input2 = new TextField();
         input2.setMinWidth(40);
         input2.setPrefWidth(40);
-
         hBox.getChildren().addAll(input1, operator, input2);
-
-
         stackPane.getChildren().addAll(rectangle, hBox);
-
         return stackPane;
     }
 

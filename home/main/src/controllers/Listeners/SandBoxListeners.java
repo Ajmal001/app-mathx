@@ -1,11 +1,11 @@
-package main.src.controllers;
+package main.src.controllers.Listeners;
 
 import javafx.scene.Cursor;
 import javafx.scene.layout.StackPane;
 
-class SandBoxListeners {
+public class SandBoxListeners {
 
-    void makeDraggable(StackPane operator) {
+    public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
         int HorizontalBound = 1176;
         int VerticalBound = 730;

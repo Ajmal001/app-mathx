@@ -1,4 +1,4 @@
-package main.src.controllers;
+package main.src.controllers.Listeners;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
-class SidePaneListeners {
+public class SidePaneListeners {
 
 
     void installToolTip(StackPane stackPane) {

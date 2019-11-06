@@ -8,7 +8,7 @@ import main.src.controllers.Listeners.SidePaneListeners;
 import main.src.controllers.Operator.Operator;
 import main.src.controllers.Operator.UnaryOperator;
 
-public class GradeOne implements GradeParent {
+public class GradeTwo implements GradeParent {
 
 
     @Override
@@ -16,12 +16,12 @@ public class GradeOne implements GradeParent {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
         Operator operator1 = new UnaryOperator();
         StackPane stackPane1;
-        stackPane1 = operator1.produceOperator("+");
+        stackPane1 = operator1.produceOperator("*");
         Pane unaryLabel = operator1.produceLabel();
         expressionPane.getChildren().addAll(unaryLabel, stackPane1);
         SandBoxListeners sandBoxListeners = new SandBoxListeners();
         Operator operator = new UnaryOperator();
-        StackPane stackPane = new StackPane(operator.produceOperator("+"));
+        StackPane stackPane = new StackPane(operator.produceOperator("*"));
         sandBoxListeners.makeDraggable(stackPane);
         sandBox.getChildren().addAll(stackPane);
     }

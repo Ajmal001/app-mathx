@@ -5,7 +5,7 @@ import javafx.scene.layout.StackPane;
 
 public interface Operator {
 
-    StackPane produceOperator();
+    StackPane produceOperator(String operatorString);
 
     Pane produceLabel();
 }
