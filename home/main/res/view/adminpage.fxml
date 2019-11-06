@@ -1,28 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1">
-    <Label layoutX="14.0" layoutY="14.0" text="MathMathX">
-        <font>
-            <Font name="Comic Sans MS" size="18.0"/>
-        </font>
-    </Label>
-    <Separator layoutX="8.0" layoutY="42.0" prefHeight="0.0" prefWidth="583.0"/>
-    <TextArea layoutX="28.0" layoutY="100.0" prefHeight="200.0" prefWidth="113.0"
-              text="Ria&#10;Michael&#10;Karan&#10;Aditya"/>
-    <TextArea layoutX="165.0" layoutY="100.0" prefHeight="200.0" prefWidth="113.0" text="Sheran&#10;David"/>
-    <TextArea layoutX="309.0" layoutY="100.0" prefHeight="200.0" prefWidth="113.0" text="Alexa&#10;Manas"/>
-    <TextArea layoutX="450.0" layoutY="100.0" prefHeight="200.0" prefWidth="113.0"
-              text="Nick&#10;John&#10;James&#10;Rick&#10;"/>
-    <Label layoutX="166.0" layoutY="77.0" text="Students"/>
-    <Label layoutX="309.0" layoutY="77.0" text="Teachers"/>
-    <Label layoutX="450.0" layoutY="77.0" text="Pending Authorization"/>
-    <Label layoutX="28.0" layoutY="77.0" text="New Registration"/>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="14.0" layoutY="14.0" text="MathMathX">
+         <font>
+            <Font name="Comic Sans MS" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="8.0" layoutY="42.0" prefHeight="0.0" prefWidth="583.0" />
+      <Label layoutX="272.0" layoutY="52.0" text="Students" />
+      <Label layoutX="466.0" layoutY="52.0" text="Teachers" />
+      <Label layoutX="52.0" layoutY="52.0" text="New Registrations" />
+      <ComboBox fx:id="registrationList" layoutX="30.0" layoutY="78.0" onAction="#displayInfo" prefHeight="27.0" prefWidth="150.0" />
+      <ComboBox fx:id="studentsList" layoutX="225.0" layoutY="78.0" onAction="#displayStudentInfo" prefHeight="27.0" prefWidth="150.0" />
+      <ComboBox fx:id="teachersList" layoutX="420.0" layoutY="78.0" onAction="#displayTeacherInfo" prefHeight="27.0" prefWidth="150.0" />
+      <Button fx:id="authorizeButton" layoutX="30.0" layoutY="225.0" mnemonicParsing="false" onAction="#authorize" text="Authorize" />
+      <Button fx:id="declineButton" layoutX="116.0" layoutY="225.0" mnemonicParsing="false" onAction="#decline" text="Decline" />
+      <TextArea fx:id="registrationInfoDisplay" layoutX="30.0" layoutY="112.0" prefHeight="100.0" prefWidth="150.0" />
+      <TextArea fx:id="studentInfoDisplay" layoutX="225.0" layoutY="112.0" prefHeight="100.0" prefWidth="150.0" />
+      <Button fx:id="rescindButtonStudent" layoutX="225.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeStudentAccess" prefHeight="27.0" prefWidth="150.0" text="Rescind Access" />
+      <Button fx:id="rescindButtonTeacher" layoutX="420.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeTeacherAccess" prefHeight="27.0" prefWidth="150.0" text="Rescind Access" />
+      <TextArea fx:id="teacherInfoDisplay" layoutX="420.0" layoutY="112.0" prefHeight="100.0" prefWidth="150.0" />
+      <Separator layoutX="8.0" layoutY="278.0" prefHeight="3.0" prefWidth="583.0" />
+      <Label layoutX="30.0" layoutY="292.0" text="Activity Log" />
+      <TextArea layoutX="30.0" layoutY="318.0" prefHeight="60.0" prefWidth="540.0" />
+      <ScrollBar layoutX="30.0" layoutY="378.0" prefHeight="17.0" prefWidth="540.0" />
+      <ScrollBar layoutX="553.0" layoutY="318.0" orientation="VERTICAL" prefHeight="60.0" prefWidth="17.0" />
+   </children>
 </Pane>
