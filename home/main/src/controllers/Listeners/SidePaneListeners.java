@@ -9,8 +9,7 @@ import javafx.util.Duration;
 
 public class SidePaneListeners {
 
-
-    void installToolTip(StackPane stackPane) {
+    public void installToolTip(StackPane stackPane) {
         Tooltip tooltip = new Tooltip("Tooltip");
         tooltip.setShowDelay(new Duration(100));
         final ObservableList<Node> sideBarOperators = stackPane.getChildren().filtered(i -> i instanceof HBox);

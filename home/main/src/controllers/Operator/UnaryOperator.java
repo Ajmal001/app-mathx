@@ -4,7 +4,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -51,8 +50,8 @@ public class UnaryOperator implements Operator {
     }
 
     @Override
-    public Pane produceLabel() {
-        Pane labelPane = new Pane();
+    public StackPane produceLabel() {
+        StackPane labelPane = new StackPane();
         labelPane.setPrefSize(200, 30);
         Label label = new Label("Unary Operators");
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 16");

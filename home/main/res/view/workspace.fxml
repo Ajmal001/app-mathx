@@ -48,7 +48,7 @@
 <!--            </font>-->
 <!--         </Label>-->
           <ScrollPane layoutY="-1.0" prefHeight="740.0" prefWidth="200.0">
-              <VBox fx:id="expressionPane" maxHeight="5000.0" prefHeight="740.0" prefWidth="200.0"/>
+             <VBox fx:id="sidePane" maxHeight="5000.0" prefHeight="740.0" prefWidth="200.0"/>
          </ScrollPane>
       </Pane>
    </left>

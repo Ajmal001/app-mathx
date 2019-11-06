@@ -19,13 +19,13 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Label homeButton;
     @FXML
-    private VBox expressionPane;
+    private VBox sidePane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        GradeParent grade = new GradeOne();
         GradeParent grade = new GradeTwo();
-        grade.produceWorkspace(sandBox, expressionPane);
+        grade.produceWorkspace(sandBox, sidePane);
 
 
 

@@ -1,7 +1,11 @@
 package main.src.controllers.Operator;
 
 import javafx.geometry.Insets;
-import javafx.scene.layout.*;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 public class BinaryOperator implements Operator {
@@ -14,7 +18,12 @@ public class BinaryOperator implements Operator {
     }
 
     @Override
-    public Pane produceLabel() {
-        return null;
+    public StackPane produceLabel() {
+        StackPane labelPane = new StackPane();
+        labelPane.setPrefSize(200, 30);
+        Label label = new Label("Binary Operators");
+        label.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
+        labelPane.getChildren().addAll(label);
+        return labelPane;
     }
 }
