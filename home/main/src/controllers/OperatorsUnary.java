@@ -1,18 +1,10 @@
 package main.src.controllers;
-/**
- * Title:		 Math-X Application
- * Description:  CSE515 Project
- * Copyright:    Copyright (c) 2019
- * Company:      Department of Computer Software Engineering, Arizona State University.
- *
- * @author 		 Grewal Karandeep Singh
- * @version 	 1.0
- * @since        8/30/2019
- * @modified     11/3/2019
- */
+
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -23,39 +15,24 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
+import javafx.util.Duration;
 
+/*
+@author - Karandeep Singh Grewal
+*/
 
-/**
- * The Class OperatorsUnary.
- */
-public class OperatorsUnary implements Expression {
+public class OperatorsUnary implements Operator {
 
-    /** The shape width. */
     private float shapeWidth = 110;
-    
-    /** The shape height. */
     private float shapeHeight = 50;
 
-    /**
-     * Produce expression type.
-     *
-     * @param vBox the v box
-     */
     @Override
     public void produceExpressionType(VBox vBox) {
         vBox.getChildren().addAll(produceLabelPane(), produceShape("log"),
-                produceShape("sin"),produceShape("cos"),
-                produceShape("tan"),produceShape("lg"));
-        System.out.println(vBox.getChildren());
+                produceShape("lg"), produceShape("sin"),produceShape("cos"),produceShape("tan"));
 
     }
 
-    /**
-     * Produce shape.
-     *
-     * @param string the string
-     * @return the stack pane
-     */
     @Override
     public StackPane produceShape(String string) {
         StackPane operatorPane = new StackPane();
@@ -72,9 +49,26 @@ public class OperatorsUnary implements Expression {
         rectangle.setStrokeType(StrokeType.INSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
 
+        String operationFullName = null;
+        if(string.equals("log"))
+            operationFullName = "Logarithm - Base e";
+        if(string.equals("sin"))
+            operationFullName = "Sin(x)";
+        if(string.equals("cos"))
+            operationFullName = "Cos(x)";
+        if(string.equals("tan"))
+            operationFullName = "Tan(x)";
+        if(string.equals("lg"))
+            operationFullName = "Logarithm - Base 2";
+
         HBox hBox = new HBox();
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
+
+        Tooltip t =new Tooltip(operationFullName);
+        t.setShowDelay(new Duration(0));
+        if(operationFullName !=null)
+        Tooltip.install(hBox,t);
 
         TextField input = new TextField();
         input.setMinWidth(40);
@@ -91,11 +85,6 @@ public class OperatorsUnary implements Expression {
         return operatorPane;
     }
 
-    /**
-     * Produce label pane.
-     *
-     * @return the pane
-     */
     @Override
     public Pane produceLabelPane() {
         Pane labelPane = new Pane();

@@ -1,27 +1,20 @@
 package main;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
+    public static Stage signUpStage, loginStage, homePageStage, workspaceStage;
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -29,18 +22,18 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-          signUpStage=primaryStage;
-          openSignUpWindow();
- //       openWorkSpaceWindow();
+        signUpStage = primaryStage;
+        openLoginWindow();
+        //       openWorkSpaceWindow();
     }
 
-    private void openSignUpWindow() {
+    public void openSignUpWindow() {
 
         try {
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
-            GridPane pane=loader.load();
-            Scene scene=new Scene(pane);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
+            GridPane pane = loader.load();
+            Scene scene = new Scene(pane);
             signUpStage.setScene(scene);
             signUpStage.show();
 
@@ -54,10 +47,10 @@ public class MainClass extends Application {
 
         try {
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("res/view/loginpage.fxml"));
-            Pane pane=loader.load();
-            Scene scene=new Scene(pane);
-            loginStage=new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/loginpage.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            loginStage = new Stage();
             loginStage.setScene(scene);
             loginStage.show();
 
@@ -71,10 +64,10 @@ public class MainClass extends Application {
 
         try {
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("res/view/homepage.fxml"));
-            GridPane pane=loader.load();
-            Scene scene=new Scene(pane);
-            homePageStage=new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/homepage.fxml"));
+            GridPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            homePageStage = new Stage();
             homePageStage.setScene(scene);
             homePageStage.show();
 
@@ -88,10 +81,10 @@ public class MainClass extends Application {
 
         try {
 
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
-            BorderPane pane=loader.load();
-            Scene scene=new Scene(pane,1366,768);
-            workspaceStage=new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
+            BorderPane pane = loader.load();
+            Scene scene = new Scene(pane, 1366, 768);
+            workspaceStage = new Stage();
             workspaceStage.setTitle("Workspace");
             workspaceStage.setScene(scene);
             workspaceStage.resizableProperty().setValue(Boolean.FALSE);
