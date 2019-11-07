@@ -13,13 +13,13 @@ public class GradeTwo implements GradeParent {
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
         String[] unaryOperators = {"log", "lg", "sin", "cos"};
         for (String operator : unaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary");
         }
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
-        String[] binaryOperators = {"+", "-", "*", "/", "+", "-", "*", "/", "+", "-", "*", "/", "+", "-", "*", "/", "+", "-", "*", "/"};
+        String[] binaryOperators = {"+", "-", "*"};
         for (String operator : binaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary");
         }
 
     }

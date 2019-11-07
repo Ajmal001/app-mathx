@@ -27,12 +27,23 @@ public class SidePaneFactory {
         sidePane.getChildren().addAll(unaryLabel);
     }
 
-    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string) {
+    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
         Operator operator = new UnaryOperator();
-        StackPane stackPane;
+//        Operator operator = null;
+//        switch (operatorType) {
+//            case "Unary": {
+//                operator = new UnaryOperator();
+//                break;
+//            }
+//            case "Binary": {
+//                operator = new BinaryOperator();
+//                break;
+//            }
+//        }
 
+        StackPane stackPane;
         stackPane = operator.produceOperator(string);
         sidePaneListeners.installToolTip(stackPane);
         sidePane.getChildren().addAll(stackPane);

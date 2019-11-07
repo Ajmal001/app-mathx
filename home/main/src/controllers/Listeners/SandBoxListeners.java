@@ -1,6 +1,7 @@
 package main.src.controllers.Listeners;
 
 import javafx.scene.Cursor;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
 public class SandBoxListeners {
@@ -45,7 +46,11 @@ public class SandBoxListeners {
             else {
                 operator.setLayoutY(mouseEvent.getSceneY() + deltaY[0]);
             }
+            StackPane dummy;
+            dummy = (StackPane) operator.getChildren().get(0);
+            HBox dummyBox = (HBox) dummy.getChildren().get(1);
         });
+
     }
 
 }
