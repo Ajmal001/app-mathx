@@ -22,18 +22,20 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        signUpStage = primaryStage;
+        this.loginStage = primaryStage;
         openLoginWindow();
-        //       openWorkSpaceWindow();
+        //openWorkSpaceWindow();
     }
 
     public void openSignUpWindow() {
 
         try {
 
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
             GridPane pane = loader.load();
             Scene scene = new Scene(pane);
+            signUpStage=new Stage();
             signUpStage.setScene(scene);
             signUpStage.show();
 
