@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.ViewAssignmentController">
+   <children>
+      <Label layoutX="115.0" layoutY="33.0" text="Assignment name">
+         <font>
+            <Font name="Sawasdee" size="24.0" />
+         </font></Label>
+      <Button layoutX="174.0" layoutY="442.0" mnemonicParsing="false" text="Back">
+         <font>
+            <Font name="Sawasdee" size="14.0" />
+         </font></Button>
+      <ScrollPane layoutX="100.0" layoutY="78.0" prefHeight="339.0" prefWidth="216.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="212.0" />
+        </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
