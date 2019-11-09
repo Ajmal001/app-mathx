@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--        * Title:		 Math-X Application-->
+<!--        * Description:  SER 515 Project-->
+<!--        * Copyright:    Copyright (c) 2019-->
+<!--        * Company:      Department of Computer Software Engineering, Arizona State University.-->
+<!--        *-->
+<!--        * @author 		 Mehta Ria-->
+<!--        * @version 	 1.0-->
+<!--        * @since        8/30/2019-->
+<!--        * @modified     11/3/2019-->
+<!--        */-->
+
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.HomepageController">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.HomepageController">
    <columnConstraints>
       <ColumnConstraints />
    </columnConstraints>
    <rowConstraints>
       <RowConstraints />
    </rowConstraints>
-   
+
       <Pane prefHeight="720.0" prefWidth="1280.0">
          <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </opaqueInsets>
-      
+
+                  <Label layoutX="415.0" layoutY="158.0" prefHeight="51.0" prefWidth="158.0" text="Upcoming Assignments">
+                     <font>
+                        <Font name="Helvetica Bold" size="13.0" />
+                     </font>
+                  </Label>
+
       <Label layoutX="1083.0" layoutY="14.0" prefHeight="43.0" prefWidth="183.0" text="Ria Mehta">
 
       </Label>
             <Label layoutX="1083.0" layoutY="44.0" prefHeight="43.0" prefWidth="183.0" text="rnmehta1@asu.edu" />
             <Label layoutX="1083.0" layoutY="76.0" prefHeight="43.0" prefWidth="183.0" text="12178986" />
             <Label layoutX="1083.0" layoutY="107.0" prefHeight="43.0" prefWidth="183.0" text="Grade - 2nd" />
-            <Button layoutX="1083.0" layoutY="236.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="130.0" text="Logout" />
+            <Button layoutX="1083.0" layoutY="236.0" mnemonicParsing="false" onAction="#display" prefHeight="43.0" prefWidth="130.0" text="Logout" />
             <Label layoutX="38.0" layoutY="23.0" prefHeight="51.0" prefWidth="248.0" text="MathMathX">
                <font>
                   <Font name="Helvetica Bold" size="43.0" />
                </font></Label>
-            <ScrollPane layoutX="51.0" layoutY="150.0" prefHeight="453.0" prefWidth="260.0">
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="200.0">
-                     
-                        <Label layoutX="7.0" prefHeight="51.0" prefWidth="152.0" text="Submitted Assignments">
-                           <font>
-                              <Font name="Helvetica Bold" size="13.0" />
-                           </font>
-                        </Label>
-                     </AnchorPane>
-            </ScrollPane>
-            <ScrollPane layoutX="354.0" layoutY="150.0" prefHeight="453.0" prefWidth="260.0">
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="336.0" prefWidth="200.0">
-                     
-                        <Label layoutX="7.0" prefHeight="51.0" prefWidth="158.0" text="Upcoming Assignments">
-                           <font>
-                              <Font name="Helvetica Bold" size="13.0" />
-                           </font>
-                        </Label>
-                     
-                  </AnchorPane>
-            </ScrollPane>
       <Button layoutX="1083.0" layoutY="162.0" mnemonicParsing="false" onAction="#workspaceAction" prefHeight="43.0" prefWidth="130.0" text="Workspace" />
-      
+      <ComboBox fx:id="submittedAssignments" layoutX="73.0" layoutY="209.0" prefHeight="27.0" prefWidth="173.0" />
+   
+                  <Label layoutX="88.0" layoutY="158.0" prefHeight="51.0" prefWidth="183.0" text="Submitted Assignments" visible="true">
+                     <font>
+                        <Font name="Helvetica Bold" size="13.0" />
+                     </font>
+                  </Label>
+      <ComboBox layoutX="401.0" layoutY="209.0" prefHeight="27.0" prefWidth="173.0" />
+
       </Pane>
    
 </GridPane>
