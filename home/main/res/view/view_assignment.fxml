@@ -12,7 +12,7 @@
          <font>
             <Font name="Sawasdee" size="24.0" />
          </font></Label>
-      <Button layoutX="174.0" layoutY="442.0" mnemonicParsing="false" text="Back">
+      <Button layoutX="174.0" layoutY="442.0" mnemonicParsing="false" text="Back" onAction="#back">
          <font>
             <Font name="Sawasdee" size="14.0" />
          </font></Button>
