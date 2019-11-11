@@ -30,22 +30,24 @@ public class SidePaneFactory {
     public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
-        Operator operator = new UnaryOperator();
-//        Operator operator = null;
-//        switch (operatorType) {
-//            case "Unary": {
-//                operator = new UnaryOperator();
-//                break;
-//            }
-//            case "Binary": {
-//                operator = new BinaryOperator();
-//                break;
-//            }
-//        }
+//        Operator operator = new UnaryOperator();
+        Operator operator;
+        switch (operatorType) {
+            case "Unary": {
+                operator = new UnaryOperator();
+                break;
+            }
+            case "Binary": {
+                operator = new BinaryOperator();
+                break;
+            }
+            default:
+                operator = new BinaryOperator();
+        }
 
         StackPane stackPane;
         stackPane = operator.produceOperator(string);
-        sidePaneListeners.installToolTip(stackPane);
+//        sidePaneListeners.installToolTip(stackPane);
         sidePane.getChildren().addAll(stackPane);
 
         stackPane.setOnMouseClicked(e -> {

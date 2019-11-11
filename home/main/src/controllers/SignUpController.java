@@ -163,7 +163,9 @@ public class SignUpController implements Initializable {
 
             RadioButton selectedRadiobutton = (RadioButton) User.getSelectedToggle();
 
-            Firebase firebase = new Firebase("https://mathx-eea50.firebaseio.com/");
+            //Firebase firebase = new Firebase("https://mathx-eea50.firebaseio.com/");
+              Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+
 
             //Create a Teacher or Student depending on the type selected
 
@@ -193,7 +195,7 @@ public class SignUpController implements Initializable {
             }
             //goto login
             new MainClass().openLoginWindow();
-//            MainClass.signUpStage.close();
+            MainClass.signUpStage.close();
 
         }
 

@@ -22,7 +22,7 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        signUpStage = primaryStage;
+        this.loginStage = primaryStage;
 //        openLoginWindow();
         openWorkSpaceWindow();
     }
@@ -31,9 +31,11 @@ public class MainClass extends Application {
 
         try {
 
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
             GridPane pane = loader.load();
             Scene scene = new Scene(pane);
+            signUpStage=new Stage();
             signUpStage.setScene(scene);
             signUpStage.show();
 
@@ -74,6 +76,7 @@ public class MainClass extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     public void openWorkSpaceWindow() {
@@ -82,7 +85,7 @@ public class MainClass extends Application {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
             BorderPane pane = loader.load();
-            Scene scene = new Scene(pane, 1366, 940);
+            Scene scene = new Scene(pane, 1366, 768);
             workspaceStage = new Stage();
             workspaceStage.setTitle("Workspace");
             workspaceStage.setScene(scene);
@@ -94,4 +97,6 @@ public class MainClass extends Application {
         }
 
     }
+
+
 }

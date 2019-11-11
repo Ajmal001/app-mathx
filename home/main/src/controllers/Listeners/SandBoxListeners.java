@@ -1,10 +1,47 @@
 package main.src.controllers.Listeners;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Cursor;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+
+import java.awt.*;
 
 public class SandBoxListeners {
+
+    public void setNumber(TextField number, Rectangle rectangle) {
+        number.textProperty().addListener((ov, prevText, currText) -> {        // Code Reuse https://bit.ly/314SAz0
+            Platform.runLater(() -> {
+                Text text = new Text(currText);
+                text.setFont(number.getFont());
+                double width = text.getLayoutBounds().getWidth()
+                        + number.getPadding().getLeft() + number.getPadding().getRight()
+                        + 2d;
+//                if (width<30)
+//                    rectangle.setWidth(190);
+                number.setPrefWidth(width);
+                number.positionCaret(number.getCaretPosition());
+            });
+        });
+        number.lengthProperty().addListener(new ChangeListener<>() {
+            final int LIMIT = 10;
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    if (number.getText().length() >= LIMIT) {
+                        number.setText(number.getText().substring(0, LIMIT));
+                    }
+                } else if (number.getText().length() < LIMIT)
+//                    rectangle.setWidth(190);
+                    System.out.println("Rectangle Length");
+            }
+        });
+    }
 
     public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
@@ -20,6 +57,7 @@ public class SandBoxListeners {
             deltaX[0] = operator.getLayoutX() - mouseEvent.getSceneX();
             deltaY[0] = operator.getLayoutY() - mouseEvent.getSceneY();
         });
+
 
         //No drag out of bounds
         operator.setOnMouseDragged(mouseEvent -> {

@@ -19,7 +19,6 @@ public class UnaryOperator implements Operator {
         stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
         float shapeWidth = 110;
-        float shapeHeight = 50;
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
@@ -34,7 +33,6 @@ public class UnaryOperator implements Operator {
         hBox.setAlignment(Pos.CENTER);
         Label operator = new Label(operatorString);
         operator.setMinWidth(40);
-        operator.setPrefWidth(40);
         operator.setAlignment(Pos.CENTER);
         operator.setStyle("-fx-font-size: 14");
         operator.setTextFill(Color.WHITE);

@@ -11,7 +11,7 @@ public class GradeTwo implements GradeParent {
     public void produceWorkspace(Pane sandBox, VBox sidePane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
-        String[] unaryOperators = {"log", "lg", "sin", "cos"};
+        String[] unaryOperators = {"log", "lg", "sin", ""};
         for (String operator : unaryOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary");
         }

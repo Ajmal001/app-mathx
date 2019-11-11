@@ -13,7 +13,7 @@ public class SidePaneListeners {
         Tooltip tooltip = new Tooltip("Tooltip");
         tooltip.setShowDelay(new Duration(100));
         final ObservableList<Node> sideBarOperators = stackPane.getChildren().filtered(i -> i instanceof HBox);
-        Tooltip.install(sideBarOperators.get(0), tooltip);
+//        Tooltip.install(sideBarOperators.get(0), tooltip);
     }
 
 }
