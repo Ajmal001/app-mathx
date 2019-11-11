@@ -1,5 +1,4 @@
 package main;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,7 +17,6 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
-
 public class MainClass extends Application {
 
     public static Stage signUpStage,loginStage,homePageStage,workspaceStage;
@@ -30,8 +28,8 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) {
 
           signUpStage=primaryStage;
-          openSignUpWindow();
-//          openHomePageWindow();
+//          openSignUpWindow();
+          openHomePageWindow();
  //       openWorkSpaceWindow();
     }
 
