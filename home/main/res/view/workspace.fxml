@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="1080.0" prefWidth="1920.0"
-            style="-fx-background-color: #FFFFFF;" stylesheets="/main/res/css/workspace.css"
-            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="main.src.controllers.WorkspaceController">
+            style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1"
+            fx:controller="main.src.controllers.WorkspaceController">
    <top>
       <HBox prefHeight="40.0" prefWidth="1920.0" style="-fx-background-color: #E3E3E3;" BorderPane.alignment="CENTER">
          <Pane prefHeight="45.0" prefWidth="135.0">
@@ -50,7 +50,11 @@
       <Pane fx:id="sandBox" style="-fx-background-color: #FFFFFF" BorderPane.alignment="CENTER"/>
    </center>
     <bottom>
-       <Pane prefHeight="520.0" prefWidth="1024.0" style="-fx-background-color: #E3E3E3;"
-             BorderPane.alignment="CENTER"/>
+       <Pane fx:id="resultPane" prefHeight="520.0" prefWidth="1024.0" style="-fx-background-color: #E3E3E3;"
+             BorderPane.alignment="CENTER">
+          <children>
+             <Label layoutX="25.0" layoutY="33.0" prefHeight="23.0" prefWidth="58.0" text="Result"/>
+          </children>
+       </Pane>
     </bottom>
 </BorderPane>

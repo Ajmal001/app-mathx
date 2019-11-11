@@ -20,6 +20,8 @@ public class WorkspaceController implements Initializable {
     private Label homeButton;
     @FXML
     private VBox sidePane;
+    @FXML
+    public Pane resultPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

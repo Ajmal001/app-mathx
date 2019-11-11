@@ -7,13 +7,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import main.src.controllers.WorkspaceExtras.AllRectangles;
 import main.src.controllers.WorkspaceExtras.SandBoxChildren;
 
 import java.util.Map;
 
 public class SandBoxListeners {
-
 
     public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
@@ -94,8 +92,21 @@ public class SandBoxListeners {
                     }
             }
 
+//            for (Node tempStackPane:sandBox.getChildren()
+//                 ) {
+//                tempStackPane = (Pane)tempStackPane;
+//                ResultExtractor.formValues(tempStackPane);
+//            }
 
-            Map<Node, Object> allRectangles = AllRectangles.formValues(sandBox);
+            //Adding result to resultPane
+
+//            System.out.println(sandBox.getParent());
+//            BorderPane borderPane;
+//            borderPane = (BorderPane) sandBox.getParent();
+//            Pane resultPane = (Pane) borderPane.getChildren().get(3);
+//            Label result = new Label(ResultExtractor.formValues(sandBox).toString());
+//            resultPane.getChildren().addAll((Collection<? extends Node>) result);
+//            Map<Node, Object> allRectangles = AllRectangles.formValues(sandBox);
 //            System.out.println(allRectangles);
 
             System.out.println("------");
