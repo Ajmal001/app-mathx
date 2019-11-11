@@ -16,32 +16,37 @@ public class BinaryOperator implements Operator {
     @Override
     public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();
-        stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
+
         float shapeWidth = 165;
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
         rectangle.setOpacity(0.8);
         rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Color.WHITE);
+        rectangle.setStroke(Color.TRANSPARENT);
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
-        rectangle.setStrokeType(StrokeType.INSIDE);
+        rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
+
         HBox hBox = new HBox();
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
+
         Label operator = new Label(operatorString);
         operator.setMinWidth(40);
         operator.setAlignment(Pos.CENTER);
         operator.setStyle("-fx-font-size: 14");
         operator.setTextFill(Color.WHITE);
+
         TextField input1 = new TextField();
         input1.setMinWidth(40);
         input1.setPrefWidth(40);
+
         TextField input2 = new TextField();
         input2.setMinWidth(40);
         input2.setPrefWidth(40);
+
         hBox.getChildren().addAll(input1, operator, input2);
         stackPane.getChildren().addAll(rectangle, hBox);
         return stackPane;

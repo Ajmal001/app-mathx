@@ -18,7 +18,6 @@ public class GradeOne implements GradeParent {
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
         String[] binaryOperators = {"+", "-"};
         for (String operator : binaryOperators) {
-            System.out.println(operator);
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary");
         }
 

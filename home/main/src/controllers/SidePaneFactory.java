@@ -30,7 +30,6 @@ public class SidePaneFactory {
     public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
-//        Operator operator = new UnaryOperator();
         Operator operator;
         switch (operatorType) {
             case "Unary": {
@@ -47,12 +46,10 @@ public class SidePaneFactory {
 
         StackPane stackPane;
         stackPane = operator.produceOperator(string);
-//        sidePaneListeners.installToolTip(stackPane);
         sidePane.getChildren().addAll(stackPane);
 
         stackPane.setOnMouseClicked(e -> {
             SandBoxListeners sandBoxListeners = new SandBoxListeners();
-            Operator newOperator = new UnaryOperator();
             StackPane newStackPane;
             newStackPane = new StackPane(operator.produceOperator(string));
             sandBoxListeners.makeDraggable(newStackPane);
