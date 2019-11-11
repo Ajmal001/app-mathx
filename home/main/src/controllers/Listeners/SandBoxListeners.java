@@ -2,19 +2,23 @@ package main.src.controllers.Listeners;
 
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import main.src.controllers.WorkspaceExtras.AllRectangles;
+import main.src.controllers.WorkspaceExtras.SandBoxChildren;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public class SandBoxListeners {
 
 
-
     public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
-        int HorizontalBound = 1176;
-        int VerticalBound = 730;
+        int HorizontalBound = 1650;
+        int VerticalBound = 480;
 
         operator.setOnMouseEntered(mouseEvent -> operator.setCursor(Cursor.MOVE));
 
@@ -60,12 +64,50 @@ public class SandBoxListeners {
         });
 
         operator.setOnMouseReleased(mouseEvent -> {
+            Map<Node, Object> nodes1 = SandBoxChildren.formValues(operator);
+
             Pane sandBox = new Pane();
             sandBox = (Pane) operator.getParent();
-            ArrayList<Node> nodes = new ArrayList<Node>();
-            System.out.println(nodes);
+            Map<Node, Object> nodes = SandBoxChildren.formValues(sandBox);
+
+            for (Map.Entry<Node, Object> entry : nodes1.entrySet())
+                nodes.remove(entry.getKey(), entry.getValue());
+
+            for (Node node : nodes.keySet()) {
+                float nodePositionX = (float) node.localToScene(node.getBoundsInLocal()).getMinX();
+                float nodePositionY = (float) node.localToScene(node.getBoundsInLocal()).getMinY();
+                if (mouseEvent.getSceneX() > nodePositionX && mouseEvent.getSceneX() < nodePositionX + 40)
+                    if (mouseEvent.getSceneY() > nodePositionY && mouseEvent.getSceneY() < nodePositionY + 40) {
+                        HBox nodeParent;
+                        nodeParent = (HBox) node.getParent();
+                        int tempIndex = nodeParent.getChildren().indexOf(node);
+                        float tempNodeWidth = (float) node.getBoundsInLocal().getWidth();
+                        nodeParent.getChildren().add(tempIndex, operator);
+                        nodeParent.getChildren().remove(tempIndex + 1);
+                        StackPane tempStackPane;
+                        tempStackPane = (StackPane) nodeParent.getParent();
+                        Rectangle tempRectangle;
+                        tempRectangle = (Rectangle) tempStackPane.getChildren().get(0);
+                        float tempRectangleWidth = (float) tempRectangle.getWidth();
+//                        tempRectangle.setWidth(tempRectangleWidth + operator.getWidth() - tempNodeWidth);
+                        tempRectangle.setWidth(500);
+                    }
+            }
+
+
+            Map<Node, Object> allRectangles = AllRectangles.formValues(sandBox);
+//            System.out.println(allRectangles);
+
+            System.out.println("------");
         });
 
+        operator.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                Pane sandbox;
+                sandbox = (Pane) operator.getParent();
+                sandbox.getChildren().remove(operator);
+            }
+        });
 
 
     }

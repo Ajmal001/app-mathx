@@ -19,6 +19,7 @@ public class UnaryOperator implements Operator {
         stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
         float shapeWidth = 110;
+
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
@@ -28,17 +29,21 @@ public class UnaryOperator implements Operator {
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.INSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
+
         HBox hBox = new HBox();
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
+
         Label operator = new Label(operatorString);
         operator.setMinWidth(40);
         operator.setAlignment(Pos.CENTER);
         operator.setStyle("-fx-font-size: 14");
         operator.setTextFill(Color.WHITE);
+
         TextField input = new TextField();
         input.setMinWidth(40);
         input.setPrefWidth(40);
+
         hBox.getChildren().addAll(operator, input);
         stackPane.getChildren().addAll(rectangle, hBox);
         return stackPane;

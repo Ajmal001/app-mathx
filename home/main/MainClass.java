@@ -85,7 +85,7 @@ public class MainClass extends Application {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
             BorderPane pane = loader.load();
-            Scene scene = new Scene(pane, 1366, 768);
+            Scene scene = new Scene(pane, 1920, 1080);
             workspaceStage = new Stage();
             workspaceStage.setTitle("Workspace");
             workspaceStage.setScene(scene);

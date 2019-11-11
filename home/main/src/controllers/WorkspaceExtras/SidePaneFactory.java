@@ -1,4 +1,4 @@
-package main.src.controllers;
+package main.src.controllers.WorkspaceExtras;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
