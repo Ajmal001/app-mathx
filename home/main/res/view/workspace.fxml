@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-
 <BorderPane prefHeight="940.0" prefWidth="1024.0" style="-fx-background-color: #FFFFFF;" stylesheets="/main/res/css/workspace.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.WorkspaceController">
    <top>
       <HBox prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #E3E3E3;" BorderPane.alignment="CENTER">
@@ -51,12 +47,16 @@
 <!--               <Font name="System Bold Italic" size="11.0" />-->
 <!--            </font>-->
 <!--         </Label>-->
-         <ScrollPane layoutY="29.0" prefHeight="871.0" prefWidth="200.0">
-            <VBox fx:id="expressionPane" maxHeight="5000.0" prefHeight="846.0" prefWidth="200.0" />
+          <ScrollPane layoutY="-1.0" prefHeight="740.0" prefWidth="200.0">
+             <VBox fx:id="sidePane" maxHeight="5000.0" prefHeight="740.0" prefWidth="200.0"/>
          </ScrollPane>
       </Pane>
    </left>
    <center>
       <Pane fx:id="sandBox" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF" BorderPane.alignment="CENTER" />
    </center>
+    <bottom>
+        <Pane prefHeight="160.0" prefWidth="1024.0" style="-fx-background-color: #E3E3E3;"
+              BorderPane.alignment="CENTER"/>
+    </bottom>
 </BorderPane>
