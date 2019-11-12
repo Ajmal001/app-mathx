@@ -1,15 +1,5 @@
-package main.src.controllers;
-/**
- * Title:		 Math-X Application
- * Description:  SER 515 Project
- * Copyright:    Copyright (c) 2019
- * Company:      Department of Computer Software Engineering, Arizona State University.
- *
- * @author
- * @version 	 1.0
- * @since        8/30/2019
- * @modified     11/3/2019
- */
+package main.src.controllers.workspaceCopies;
+
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

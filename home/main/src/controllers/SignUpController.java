@@ -21,6 +21,7 @@ import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -64,6 +65,7 @@ public class SignUpController implements Initializable {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Signup Form Error");
+        alert.setHeaderText(null);
         //   alert.setHeaderText("Required Fields Empty");
         alert.setContentText(message);
         alert.showAndWait();
@@ -161,7 +163,9 @@ public class SignUpController implements Initializable {
 
             RadioButton selectedRadiobutton = (RadioButton) User.getSelectedToggle();
 
-            Firebase firebase = new Firebase("https://mathx-eea50.firebaseio.com/");
+            //Firebase firebase = new Firebase("https://mathx-eea50.firebaseio.com/");
+              Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+
 
             //Create a Teacher or Student depending on the type selected
 
@@ -191,7 +195,7 @@ public class SignUpController implements Initializable {
             }
             //goto login
             new MainClass().openLoginWindow();
-//            MainClass.signUpStage.close();
+            MainClass.signUpStage.close();
 
         }
 

@@ -16,7 +16,7 @@ package main.src.models;
 public class StudentSignUpModel {
 
     /** The grade. */
-    String name,photo,summary,userName,password,address,phoneNo,speciality,grade;
+    String name,photo,summary,userName,password,address,phoneNo,speciality,grade,id;
 
     /**
      * Instantiates a new student sign up model.
@@ -49,6 +49,14 @@ public class StudentSignUpModel {
         this.phoneNo = phoneNo;
         this.speciality = speciality;
         this.grade = grade;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
