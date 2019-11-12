@@ -6,7 +6,7 @@ package main.src.controllers;
  * Company:      Department of Computer Software Engineering, Arizona State University.
  *
  * @author 		 Mehta Ria
- * @version 	 1.0
+ * @version 	 2.0
  * @since        8/30/2019
  * @modified     11/3/2019
  */
@@ -18,32 +18,44 @@ import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import main.MainClass;
+
 import java.io.InputStream;
 import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-
+import javafx.scene.control.Label;
 /**
  * The Class HomepageController.
  */
-public class HomepageController  {
+public class HomepageController {
 
-    /** The submitted assignments. */
+    /** The assignment elements. */
     @FXML private javafx.scene.control.ComboBox submittedAssignments;
+    @FXML private javafx.scene.control.ComboBox notSubmittedAssignments;
+    @FXML private javafx.scene.chart.BarChart assignmentComparisonChart;
+    @FXML private VBox notSubmittedVBox;
+    @FXML private VBox submittedVBox;
+    private RadioButton radioButtonAssign;
+    ToggleGroup toggleGroup = new ToggleGroup();
+
+
 
     /**
      * Initialize.
+     *
      */
     @FXML
     public void initialize(){
 //        String labelHead=submittedAssignments.getText()+"\n\n\n";
         try{
-            submittedAssignments.getItems().addAll(displayAssignments());
+            displaySubmittedAssignments();
             submittedAssignments.getSelectionModel().selectFirst();
-//            JOptionPane.showMessageDialog(null,labelHead+labelContent);
-//            submittedAssignments.setVisible(true);
+            notSubmittedAssignments.getSelectionModel().selectFirst();
+            compareAssignmentsOnBarChart();
         } catch (Exception e){
             e.printStackTrace();
         }
@@ -52,12 +64,9 @@ public class HomepageController  {
 
     /**
      * Display assignments.
-     *
-     * @return the array list
-     * @throws Exception the exception
      */
     @FXML
-    ArrayList<String> displayAssignments() throws Exception {
+    private void displaySubmittedAssignments() throws Exception {
 
         InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
 
@@ -69,30 +78,86 @@ public class HomepageController  {
 
         FirebaseApp.initializeApp(options);
         Firestore db= FirestoreClient.getFirestore();
-//        DocumentReference docRef = db.collection("assignments").document("Assignment1");
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//        DocumentSnapshot document = future.get();
-//        if (document.exists()) {
-//            System.out.println("Document data: " + document.getData());
-//        } else {
-//            System.out.println("No such document!");
-//        }
 
-        ApiFuture<QuerySnapshot> documentNames = db.collection("assignments").get();
-        List<QueryDocumentSnapshot> documents = documentNames.get().getDocuments();
-        DocumentReference docRef;
+        /**
+         * Logic for displaying list of assignments - submitted and not submitted
+         */
+
+        String userEmail = "karandeep@gmail.com";
+        Iterable<DocumentReference> docRefUpcoming  = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApi;
         DocumentSnapshot documentData;
-        ArrayList<String> assignmentNum = new ArrayList<>();
-        for (QueryDocumentSnapshot document : documents) {
-            docRef=db.collection("assignments").document(document.getId());
-            documentApi = docRef.get();
+
+        notSubmittedVBox.setSpacing(5);
+        //Unsubmitted Assignments
+        for(DocumentReference doc :docRefUpcoming){
+            documentApi = doc.get();             //Gets reference of document
             documentData=documentApi.get();
-            assignmentNum.add(documentData.getId()); //documentData.getId() gets the name of the Document
-//            question=documentData.getData().toString();
+            radioButtonAssign =new RadioButton();
+//            radioButtonAssign.setBorder();
+            radioButtonAssign.setText(documentData.getId());
+            radioButtonAssign.setToggleGroup(toggleGroup);
+            notSubmittedVBox.getChildren().add(radioButtonAssign);
         }
-        return assignmentNum;
+
+        Iterable<DocumentReference> docRefSolved  = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
+        ApiFuture<DocumentSnapshot> documentApiSolved;
+        DocumentSnapshot documentDataSolved;
+
+
+        submittedVBox.setSpacing(5);
+
+        //Submitted assignments
+        for(DocumentReference doc :docRefSolved){
+            documentApiSolved = doc.get();             //Gets reference of document
+            documentDataSolved=documentApiSolved.get();
+            submittedAssignments.getItems().addAll(documentDataSolved.getId());
+            radioButtonAssign =new RadioButton();
+            radioButtonAssign.setText(documentDataSolved.getId());
+            radioButtonAssign.setToggleGroup(toggleGroup);
+            submittedVBox.getChildren().addAll(radioButtonAssign);
+        }
     }
+
+    /**
+     * Comparing grades of assignments on bar charts
+     */
+
+    void compareAssignmentsOnBarChart() throws Exception{
+
+        Firestore db= FirestoreClient.getFirestore();
+
+        String userEmail = "karandeep@gmail.com";
+
+        Iterable<DocumentReference> docRefSolved  = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
+        ApiFuture<DocumentSnapshot> documentApiSolved;
+        DocumentSnapshot documentDataSolved;
+        assignmentComparisonChart.setTitle("Comparison of Assignments graded");
+        assignmentComparisonChart.getXAxis().setLabel("Assignments");
+        assignmentComparisonChart.getYAxis().setLabel("Grades out of 10");
+        XYChart.Series<String, Number> assignments = new XYChart.Series<>();
+        assignments.setName("Assignments");
+        int grade=0;
+
+        for(DocumentReference doc :docRefSolved){
+            documentApiSolved = doc.get();             //Gets reference of document
+            documentDataSolved=documentApiSolved.get();
+            if(documentDataSolved.get("Grade")!=null){
+                grade=Integer.parseInt(documentDataSolved.get("Grade").toString());
+            }
+
+            assignments.getData().add(new XYChart.Data<>(documentDataSolved.getId(), grade));
+
+            System.out.println(documentDataSolved.getData());
+
+        }
+
+
+        assignmentComparisonChart.getData().addAll(assignments);
+    }
+
+
+
 
     /**
      * Workspace action.
@@ -102,10 +167,11 @@ public class HomepageController  {
     @FXML
     void workspaceAction(ActionEvent actionEvent)
     {
+
         new MainClass().openWorkSpaceWindow();
 //        MainClass.homePageStage.close();
     }
-    
+
     /**
      * Display.
      *
