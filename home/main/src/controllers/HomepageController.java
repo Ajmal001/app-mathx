@@ -6,7 +6,7 @@ package main.src.controllers;
  * Company:      Department of Computer Software Engineering, Arizona State University.
  *
  * @author 		 Mehta Ria
- * @version 	 1.0
+ * @version 	 2.0
  * @since        8/30/2019
  * @modified     11/3/2019
  */
@@ -28,11 +28,10 @@ import main.MainClass;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import javafx.scene.control.Label;
-
 /**
  * The Class HomepageController.
  */
-public class HomepageController  {
+public class HomepageController {
 
     /** The assignment elements. */
     @FXML private javafx.scene.control.ComboBox submittedAssignments;
@@ -41,6 +40,7 @@ public class HomepageController  {
     @FXML private VBox notSubmittedVBox;
     @FXML private VBox submittedVBox;
     private RadioButton radioButtonAssign;
+    ToggleGroup toggleGroup = new ToggleGroup();
 
 
 
@@ -78,25 +78,17 @@ public class HomepageController  {
 
         FirebaseApp.initializeApp(options);
         Firestore db= FirestoreClient.getFirestore();
-//        DocumentReference docRef = db.collection("assignments").document("Assignment1");
-//        ApiFuture<DocumentSnapshot> future = docRef.get();
-//        DocumentSnapshot document = future.get();
-//        if (document.exists()) {
-//            System.out.println("Document data: " + document.getData());
-//        } else {
-//            System.out.println("No such document!");
-//        }
 
         /**
          * Logic for displaying list of assignments - submitted and not submitted
          */
-        ToggleGroup toggleGroup = new ToggleGroup();
 
         String userEmail = "karandeep@gmail.com";
         Iterable<DocumentReference> docRefUpcoming  = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApi;
         DocumentSnapshot documentData;
 
+        notSubmittedVBox.setSpacing(5);
         //Unsubmitted Assignments
         for(DocumentReference doc :docRefUpcoming){
             documentApi = doc.get();             //Gets reference of document
@@ -112,6 +104,8 @@ public class HomepageController  {
         ApiFuture<DocumentSnapshot> documentApiSolved;
         DocumentSnapshot documentDataSolved;
 
+
+        submittedVBox.setSpacing(5);
 
         //Submitted assignments
         for(DocumentReference doc :docRefSolved){
@@ -157,27 +151,6 @@ public class HomepageController  {
             System.out.println(documentDataSolved.getData());
 
         }
-
-
-
-//        assignments.getData().add(new XYChart.Data<>("User rating", 3.0));
-//        assignments.getData().add(new XYChart.Data<>("Milage", 5.0));
-//        assignments.getData().add(new XYChart.Data<>("Safety", 5.0));
-//
-//        XYChart.Series<String, Number> series2 = new XYChart.Series<>();
-//        series2.setName("Audi");
-//        series2.getData().add(new XYChart.Data<>("Speed", 5.0));
-//        series2.getData().add(new XYChart.Data<>("User rating", 6.0));
-//
-//        series2.getData().add(new XYChart.Data<>("Milage", 10.0));
-//        series2.getData().add(new XYChart.Data<>("Safety", 4.0));
-//
-//        XYChart.Series<String, Number> series3 = new XYChart.Series<>();
-//        series3.setName("Ford");
-//        series3.getData().add(new XYChart.Data<>("Speed", 4.0));
-//        series3.getData().add(new XYChart.Data<>("User rating", 2.0));
-//        series3.getData().add(new XYChart.Data<>("Milage", 3.0));
-//        series3.getData().add(new XYChart.Data<>("Safety", 6.0));
 
 
         assignmentComparisonChart.getData().addAll(assignments);
