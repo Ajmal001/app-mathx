@@ -1,5 +1,4 @@
 package main;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +8,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
 
 public class MainClass extends Application {
 
@@ -22,10 +20,10 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+
         this.loginStage = primaryStage;
-//        openLoginWindow();
-        openWorkSpaceWindow();
-    }
+        openLoginWindow();
+        }
 
     public void openSignUpWindow() {
 
