@@ -1,6 +1,7 @@
 package main.src.controllers.Grades;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 
@@ -8,7 +9,7 @@ public class GradeTwo implements GradeParent {
 
 
     @Override
-    public void produceWorkspace(Pane sandBox, VBox sidePane) {
+    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane resultOrQuestionPane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
         String[] unaryOperators = {"log", "lg", "sin", ""};
