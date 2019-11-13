@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
-import main.src.controllers.WorkspaceExtras.SandBoxChildren;
+import main.src.controllers.WorkspaceExtras.Extractor;
 
 import java.util.Map;
 
@@ -62,11 +62,11 @@ public class SandBoxListeners {
         });
 
         operator.setOnMouseReleased(mouseEvent -> {
-            Map<Node, Object> nodes1 = SandBoxChildren.formValues(operator);
+            Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
 
             Pane sandBox = new Pane();
             sandBox = (Pane) operator.getParent();
-            Map<Node, Object> nodes = SandBoxChildren.formValues(sandBox);
+            Map<Node, Object> nodes = Extractor.getAllTextFields(sandBox);
 
             for (Map.Entry<Node, Object> entry : nodes1.entrySet())
                 nodes.remove(entry.getKey(), entry.getValue());
@@ -95,7 +95,7 @@ public class SandBoxListeners {
 //            for (Node tempStackPane:sandBox.getChildren()
 //                 ) {
 //                tempStackPane = (Pane)tempStackPane;
-//                ResultExtractor.formValues(tempStackPane);
+//                ResultExtractor.getAllTextFields(tempStackPane);
 //            }
 
             //Adding result to resultPane
@@ -104,9 +104,9 @@ public class SandBoxListeners {
 //            BorderPane borderPane;
 //            borderPane = (BorderPane) sandBox.getParent();
 //            Pane resultPane = (Pane) borderPane.getChildren().get(3);
-//            Label result = new Label(ResultExtractor.formValues(sandBox).toString());
+//            Label result = new Label(ResultExtractor.getAllTextFields(sandBox).toString());
 //            resultPane.getChildren().addAll((Collection<? extends Node>) result);
-//            Map<Node, Object> allRectangles = AllRectangles.formValues(sandBox);
+//            Map<Node, Object> allRectangles = AllRectangles.getAllTextFields(sandBox);
 //            System.out.println(allRectangles);
 
             System.out.println("------");

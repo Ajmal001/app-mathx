@@ -7,14 +7,14 @@ import javafx.scene.layout.Pane;
 import java.util.HashMap;
 import java.util.Map;
 
+public class Extractor {
 
-public class SandBoxChildren {
-
-    public static <T extends Pane> Map<Node, Object> formValues(T parent) {
-        return formValues(parent, new HashMap<>());
+    public static <T extends Pane> Map<Node, Object> getAllTextFields(T parent) {
+        return getAllTextFields(parent, new HashMap<>());
     }
 
-    private static <T extends Pane> Map<Node, Object> formValues(T parent, Map<Node, Object> map) {
+
+    private static <T extends Pane> Map<Node, Object> getAllTextFields(T parent, Map<Node, Object> map) {
         for (Node node : parent.getChildren()) {
 
             //DO NOT MODIFY THIS
@@ -25,7 +25,7 @@ public class SandBoxChildren {
             //DO NOT MODIFY THIS
             // Recursive.
             if (node instanceof Pane) {
-                formValues((Pane) node, map);
+                getAllTextFields((Pane) node, map);
             }
 
         }
