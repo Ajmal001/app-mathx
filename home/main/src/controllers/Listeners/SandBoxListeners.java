@@ -9,6 +9,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import main.src.controllers.WorkspaceExtras.Extractor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SandBoxListeners {
@@ -33,7 +34,7 @@ public class SandBoxListeners {
         operator.setOnMouseDragged(mouseEvent -> {
 
             operator.toFront();
-
+            //Left
             if (mouseEvent.getSceneX() < -deltaX[0]) {
                 operator.setLayoutX(0);
             }
@@ -64,7 +65,7 @@ public class SandBoxListeners {
         operator.setOnMouseReleased(mouseEvent -> {
             Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
 
-            Pane sandBox = new Pane();
+            Pane sandBox;
             sandBox = (Pane) operator.getParent();
             Map<Node, Object> nodes = Extractor.getAllTextFields(sandBox);
 
@@ -92,24 +93,19 @@ public class SandBoxListeners {
                     }
             }
 
-//            for (Node tempStackPane:sandBox.getChildren()
-//                 ) {
-//                tempStackPane = (Pane)tempStackPane;
-//                ResultExtractor.getAllTextFields(tempStackPane);
-//            }
+            HashMap expresssions;
+            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
 
-            //Adding result to resultPane
+            HashMap expressionData;
 
-//            System.out.println(sandBox.getParent());
-//            BorderPane borderPane;
-//            borderPane = (BorderPane) sandBox.getParent();
-//            Pane resultPane = (Pane) borderPane.getChildren().get(3);
-//            Label result = new Label(ResultExtractor.getAllTextFields(sandBox).toString());
-//            resultPane.getChildren().addAll((Collection<? extends Node>) result);
-//            Map<Node, Object> allRectangles = AllRectangles.getAllTextFields(sandBox);
-//            System.out.println(allRectangles);
+            for (Object node : expresssions.keySet()) {
+                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
+                for (Object temp : expressionData.entrySet()) {
+                    System.out.println(temp);
+                }
+            }
+            System.out.println("________________________________");
 
-            System.out.println("------");
         });
 
         operator.setOnMouseClicked(mouseEvent -> {

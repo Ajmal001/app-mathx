@@ -21,8 +21,9 @@ public class MainClass extends Application {
     public void start(Stage primaryStage) {
 
 
-        this.loginStage = primaryStage;
-        openLoginWindow();
+        loginStage = primaryStage;
+//        openLoginWindow();
+        openWorkSpaceWindow();
         }
 
     public void openSignUpWindow() {

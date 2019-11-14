@@ -14,20 +14,18 @@ import java.util.ResourceBundle;
 
 public class WorkspaceController implements Initializable {
 
-    public int resultOrQuestionStatus = 0;
-
     @FXML
     private Pane sandBox;
     @FXML
-    public StackPane resultOrQuestion;
+    public StackPane commonPane;
     @FXML
     private VBox sidePane;
-    @Override
 
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         GradeParent grade = new GradeOne();
 //        GradeParent grade = new GradeTwo();
-        grade.produceWorkspace(sandBox, sidePane, resultOrQuestion);
+        grade.produceWorkspace(sandBox, sidePane, commonPane);
 
     }
 

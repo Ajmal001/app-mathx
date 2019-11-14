@@ -4,13 +4,13 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import main.src.controllers.Listeners.ResultOrQuestionListeners;
+import main.src.controllers.Listeners.CommonPaneListener;
 import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 
 public class GradeOne implements GradeParent {
 
     @Override
-    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane resultOrQuestionPane) {
+    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane resultPane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
         String[] unaryOperators = {"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
@@ -25,10 +25,10 @@ public class GradeOne implements GradeParent {
         }
 
 
-        ResultOrQuestionListeners resultOrQuestionListeners = new ResultOrQuestionListeners();
-        resultOrQuestionPane.setOnMouseClicked(mouseEvent -> {
+        CommonPaneListener commonPaneListener = new CommonPaneListener();
+        resultPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                resultOrQuestionListeners.switchPane(resultOrQuestionPane);
+                commonPaneListener.switchPane(resultPane);
             }
         });
 

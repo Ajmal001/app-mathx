@@ -4,7 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
-public class ResultOrQuestionListeners {
+public class CommonPaneListener {
     public void switchPane(StackPane stackPane) {
 
         StackPane resultPane = new StackPane();

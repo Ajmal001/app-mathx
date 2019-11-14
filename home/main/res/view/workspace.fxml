@@ -50,7 +50,7 @@
        <Pane style="-fx-background-color: #FFFFFF" BorderPane.alignment="CENTER">
            <VBox prefHeight="1040.0" prefWidth="1670.0">
                <Pane fx:id="sandBox" prefHeight="520.0" prefWidth="1670.0" style="-fx-border-color: #BBBBBB;"/>
-               <StackPane fx:id="resultOrQuestion" prefHeight="520.0" prefWidth="1670.0"/>
+               <StackPane fx:id="commonPane" prefHeight="520.0" prefWidth="1670.0"/>
 
            </VBox>
        </Pane>
