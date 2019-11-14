@@ -186,6 +186,7 @@ public class LoginController implements Initializable{
                     returnValue = 1;
                     teacherModel=teachersList.get(i);
                     type="Teacher";
+                    studentModel = null;
                 }
         }
             System.out.println(studentsList.size());
@@ -195,6 +196,7 @@ public class LoginController implements Initializable{
                     returnValue = 1;
                     studentModel=studentsList.get(i);
                     type="Student";
+                    teacherModel = null;
             }
         }
             if (returnValue==1 && type.equals("Teacher")){
