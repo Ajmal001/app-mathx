@@ -19,12 +19,13 @@ public class BinaryOperator implements Operator {
         stackPane.setAlignment(Pos.CENTER);
 
         float shapeWidth = 165;
+
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
         rectangle.setOpacity(0.8);
         rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Color.TRANSPARENT);
+        rectangle.setStroke(Paint.valueOf("007AFF"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
