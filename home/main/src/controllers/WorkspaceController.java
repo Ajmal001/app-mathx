@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import main.src.controllers.Grades.GradeEight;
 import main.src.controllers.Grades.GradeOne;
 import main.src.controllers.Grades.GradeParent;
 
@@ -23,8 +24,21 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        GradeParent grade = new GradeOne();
-//        GradeParent grade = new GradeTwo();
+        int i = 8;
+        GradeParent grade = null;
+        switch (i) {
+            case 1:
+                grade = new GradeOne();
+                break;
+            case 8:
+                grade = new GradeEight();
+                break;
+            default:
+                System.out.println("Unknown Grade");
+                break;
+
+        }
+        System.out.println("Producing Grade:" + i);
         grade.produceWorkspace(sandBox, sidePane, commonPane);
 
     }
