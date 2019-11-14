@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import main.src.controllers.WorkspaceExtras.Extractor;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class SandBoxListeners {
@@ -17,7 +16,7 @@ public class SandBoxListeners {
     public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
         int HorizontalBound = 1650;
-        int VerticalBound = 480;
+        int VerticalBound = 520;
 
         operator.setOnMouseEntered(mouseEvent -> operator.setCursor(Cursor.MOVE));
 
@@ -62,7 +61,27 @@ public class SandBoxListeners {
 
         });
 
+
+//
+//            HashMap expresssions;
+//            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
+//
+//            HashMap expressionData;
+//
+//            for (Object node : expresssions.keySet()) {
+//                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
+//                for (Object temp : expressionData.entrySet()) {
+//                    System.out.println(temp);
+//                }
+//            }
+//            System.out.println("________________________________");
+//
+
+    }
+
+    public void makeJoinable(StackPane operator) {
         operator.setOnMouseReleased(mouseEvent -> {
+
             Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
 
             Pane sandBox;
@@ -92,22 +111,10 @@ public class SandBoxListeners {
                         tempRectangle.setWidth(500);
                     }
             }
-
-            HashMap expresssions;
-            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
-
-            HashMap expressionData;
-
-            for (Object node : expresssions.keySet()) {
-                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
-                for (Object temp : expressionData.entrySet()) {
-                    System.out.println(temp);
-                }
-            }
-            System.out.println("________________________________");
-
         });
+    }
 
+    public void makeRemovable(StackPane operator) {
         operator.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 Pane sandbox;
@@ -115,8 +122,5 @@ public class SandBoxListeners {
                 sandbox.getChildren().remove(operator);
             }
         });
-
-
     }
-
 }
