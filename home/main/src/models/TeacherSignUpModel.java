@@ -15,7 +15,7 @@ package main.src.models;
 public class TeacherSignUpModel {
 
     /** The grade. */
-    String name,photo,summary,userName,password,address,phoneNo,speciality,grade;
+    String name,photo,summary,userName,password,address,phoneNo,speciality,grade,id;
 
     /**
      * Instantiates a new teacher sign up model.
@@ -36,7 +36,7 @@ public class TeacherSignUpModel {
      * @param phoneNo the phone no
      * @param speciality the speciality
      */
-    public TeacherSignUpModel(String name, String photo, String summary, String userName, String password, String address, String phoneNo, String speciality) {
+    public TeacherSignUpModel(String name, String photo, String summary, String userName, String password, String address, String phoneNo, String speciality,String grade) {
         this.name = name;
         this.photo = photo;
         this.summary = summary;
@@ -46,6 +46,14 @@ public class TeacherSignUpModel {
         this.phoneNo = phoneNo;
         this.speciality = speciality;
         this.grade = grade;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+
+        this.id = id;
     }
 
     /**

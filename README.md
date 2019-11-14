@@ -15,17 +15,6 @@ You will need to add firebase jar files to your library
 **OpenJDK**
 - Linux ```sudo apt install openjdk-11-jdk```
 
-**Adding Firebase libraries**
-- Download the firebase-client-android-2.5.2.jar from attachment section 
-  location: https://tree.taiga.io/project/sheran-12-ser515-classscrum/wiki/firebase-docs
-- Go to `File` &#8594; `Project Structure`
-    
-    - &#8600;`Libraries`
-         - Add new library `+` &#8594; `Java`  
-         - Go to the file location where you extracted the Firebase jar file and add the same
-   
-    -  Click on **`Apply`**
-
 
 **IntelliJ** *(Required you want to compile, run and generate executable)*
 - Install [IntelliJ](https://www.jetbrains.com/help/idea/installation-guide.html)
@@ -51,6 +40,29 @@ git clone https://github.com/SER515-Fall2019-Team4/app-mathx.git
             
             `../javafx/lib`
     - **`Apply`**
+      
+      **Adding Firebase libraries**
+- Download the firebase-client-android-2.5.2.jar from attachment section 
+  location: https://tree.taiga.io/project/sheran-12-ser515-classscrum/wiki/firebase-docs
+- Go to `File` &#8594; `Project Structure`
+    
+    - &#8600;`Libraries`
+         - Add new library `+` &#8594; `Java`  
+         - Go to the file location where you extracted the Firebase jar file and add the same
+   
+    -  Click on **`Apply`**
+    
+**Adding Firestore libraries**
+- Go to `File` &#8594; `Project Structure`
+    
+    - &#8600;`Libraries`
+         - Add new library `+` &#8594; `Java`  
+         - Go to home/ of the project and add the **libs** folder
+   
+    -  Click on **`Apply`**
+
+
+      
       
 - Go to `Run` &#8594; `Edit Configuration` 
     - &#8600; `+` Add new configuration &#8594; `Application`

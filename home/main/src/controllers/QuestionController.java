@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 /**
  * The Class question.
  */
-public class question implements Initializable {
+public class QuestionController implements Initializable {
 
     /**
      * The question TF.
@@ -109,7 +109,7 @@ public class question implements Initializable {
 
 //Checking if Difficulty  is selected
         else if (diff.getValue() == null) {
-            showAlert("Please choose Diffculty of question");
+            showAlert("Please choose Difficulty of question");
             return;
         }
     }
