@@ -34,8 +34,8 @@ import javafx.scene.control.Label;
 public class HomepageController {
 
     /** The assignment elements. */
-    @FXML private javafx.scene.control.ComboBox submittedAssignments;
-    @FXML private javafx.scene.control.ComboBox notSubmittedAssignments;
+//    @FXML private javafx.scene.control.ComboBox submittedAssignments;
+//    @FXML private javafx.scene.control.ComboBox notSubmittedAssignments;
     @FXML private javafx.scene.chart.BarChart assignmentComparisonChart;
     @FXML private VBox notSubmittedVBox;
     @FXML private VBox submittedVBox;
@@ -53,8 +53,8 @@ public class HomepageController {
 //        String labelHead=submittedAssignments.getText()+"\n\n\n";
         try{
             displaySubmittedAssignments();
-            submittedAssignments.getSelectionModel().selectFirst();
-            notSubmittedAssignments.getSelectionModel().selectFirst();
+//            submittedAssignments.getSelectionModel().selectFirst();
+//            notSubmittedAssignments.getSelectionModel().selectFirst();
             compareAssignmentsOnBarChart();
         } catch (Exception e){
             e.printStackTrace();
@@ -111,7 +111,6 @@ public class HomepageController {
         for(DocumentReference doc :docRefSolved){
             documentApiSolved = doc.get();             //Gets reference of document
             documentDataSolved=documentApiSolved.get();
-            submittedAssignments.getItems().addAll(documentDataSolved.getId());
             radioButtonAssign =new RadioButton();
             radioButtonAssign.setText(documentDataSolved.getId());
             radioButtonAssign.setToggleGroup(toggleGroup);
