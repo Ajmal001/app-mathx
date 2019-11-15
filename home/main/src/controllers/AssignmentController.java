@@ -28,10 +28,6 @@ public class AssignmentController implements Initializable {
     @FXML
     void create(ActionEvent actionEvent) {
 
-
-
-
-
     }
 
     /**

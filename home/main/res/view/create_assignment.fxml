@@ -58,11 +58,11 @@
         </ScrollPane>
         <VBox layoutX="268.0" layoutY="115.0" prefHeight="84.0" prefWidth="218.0" spacing="10.0">
             <children>
-                <TextField promptText="Enter a Question"/>
-                <TextField promptText="Enter Answer"/>
+                <TextField fx:id="quesTF" promptText="Enter a Question"/>
+                <TextField fx:id="ansTF" promptText="Enter Answer"/>
             </children>
         </VBox>
         <Button alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="340.0" layoutY="187.0" text="Add Question"
-                textAlignment="RIGHT"/>
+                textAlignment="RIGHT" onAction="#addqs" />
     </children>
 </AnchorPane>
