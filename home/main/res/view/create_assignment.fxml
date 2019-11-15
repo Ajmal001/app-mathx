@@ -9,14 +9,36 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 
 <AnchorPane prefHeight="550.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.999-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.CreateAssignmentController">
     <children>
+        <Button layoutX="210.0" layoutY="500.0" mnemonicParsing="false" text="Create" textAlignment="CENTER">
+            <font>
+                <Font name="Sawasdee" size="16.0"/>
+            </font>
+        </Button>
+
         <HBox layoutX="126.0" layoutY="70.0" prefHeight="29.0" prefWidth="274.0" spacing="10.0">
             <children>
                 <TextField prefHeight="25.0" prefWidth="180.0" promptText="Enter Name of Assignment"/>
-                <ComboBox prefHeight="25.0" prefWidth="74.0" promptText="Grade"/>
+                <ComboBox prefHeight="25.0" prefWidth="74.0" promptText="Grade">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="1"/>
+                            <String fx:value="2"/>
+                            <String fx:value="3"/>
+                            <String fx:value="4"/>
+                            <String fx:value="5"/>
+                            <String fx:value="6"/>
+                            <String fx:value="7"/>
+                            <String fx:value="8"/>
+                        </FXCollections>
+                    </items>
+
+                </ComboBox>
             </children>
         </HBox>
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="20.0" text="Create Assignment">
@@ -40,12 +62,7 @@
                 <TextField promptText="Enter Answer"/>
             </children>
         </VBox>
-        <Button alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="358.0" layoutY="187.0" text="Add"
+        <Button alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="340.0" layoutY="187.0" text="Add Question"
                 textAlignment="RIGHT"/>
-        <Button layoutX="210.0" layoutY="500.0" mnemonicParsing="false" text="Create" textAlignment="CENTER">
-            <font>
-                <Font name="Sawasdee" size="16.0"/>
-            </font>
-        </Button>
     </children>
 </AnchorPane>
