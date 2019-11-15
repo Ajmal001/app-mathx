@@ -23,7 +23,8 @@ public class MainClass extends Application {
 
         loginStage = primaryStage;
 //        openLoginWindow();
-        openWorkSpaceWindow();
+     //   openWorkSpaceWindow();
+          openSignUpWindow();
         }
 
     public void openSignUpWindow() {
