@@ -24,7 +24,7 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int i = 8;
+        int i = 1;
         GradeParent grade = null;
         switch (i) {
             case 1:
@@ -43,8 +43,4 @@ public class WorkspaceController implements Initializable {
 
     }
 
-    public enum operatorType {
-        UNARY,
-        BINARY
-    }
 }

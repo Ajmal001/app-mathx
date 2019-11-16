@@ -12,13 +12,14 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
-public class BinaryOperator implements ParentOperator {
+public class CounterOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();
+        stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
 
-        float shapeWidth = 165;
+        float shapeWidth = 110;
 
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
@@ -40,15 +41,11 @@ public class BinaryOperator implements ParentOperator {
         operator.setStyle("-fx-font-size: 14");
         operator.setTextFill(Color.WHITE);
 
-        TextField input1 = new TextField();
-        input1.setMinWidth(40);
-        input1.setPrefWidth(40);
+        TextField input = new TextField();
+        input.setMinWidth(40);
+        input.setPrefWidth(40);
 
-        TextField input2 = new TextField();
-        input2.setMinWidth(40);
-        input2.setPrefWidth(40);
-
-        hBox.getChildren().addAll(input1, operator, input2);
+        hBox.getChildren().addAll(operator, input);
         stackPane.getChildren().addAll(rectangle, hBox);
         return stackPane;
     }
@@ -57,7 +54,7 @@ public class BinaryOperator implements ParentOperator {
     public StackPane produceLabel() {
         StackPane labelPane = new StackPane();
         labelPane.setPrefSize(200, 30);
-        Label label = new Label("Binary Operators");
+        Label label = new Label("Counter");
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
         labelPane.getChildren().addAll(label);
         return labelPane;

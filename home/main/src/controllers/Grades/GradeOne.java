@@ -12,8 +12,22 @@ public class GradeOne implements GradeParent {
     @Override
     public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane resultOrQuestionPane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
+
+        sidePaneFactory.addLabelToSidePane(sidePane, "Number");
+        String[] numberOperators = {"1", "2"};
+        for (String operator : numberOperators) {
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Number", 1);
+        }
+
+        sidePaneFactory.addLabelToSidePane(sidePane, "Counter");
+        String[] counterOperators = {"111"};
+        for (String operator : counterOperators) {
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Counter", 1);
+        }
+
+
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
-        String[] unaryOperators = {"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
+        String[] unaryOperators = {"One"};
         for (String operator : unaryOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 1);
         }

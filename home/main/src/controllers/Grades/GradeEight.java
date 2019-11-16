@@ -55,6 +55,8 @@ public class GradeEight implements GradeParent {
                 commonPaneListener.switchPane(resultOrQuestionPane);
             }
         });
+        //Make Detachable
+
 
     }
 }

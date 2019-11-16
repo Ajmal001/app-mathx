@@ -1,6 +1,5 @@
 package main.src.controllers.WorkspaceExtras;
 
-import javafx.geometry.Bounds;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -35,18 +34,18 @@ public class Extractor {
         return map;
     }
 
-    public static <T extends Pane> Map<String, Double> getExpressionData(T parent) {
+    public static <T extends Pane> Map<Double, String> getExpressionData(T parent) {
         return getExpressionData(parent, new HashMap<>());
     }
 
-    private static <T extends Pane> Map<String, Double> getExpressionData(T parent, Map<String, Double> map) {
+    private static <T extends Pane> Map<Double, String> getExpressionData(T parent, Map<Double, String> map) {
         for (Node node : parent.getChildren()) {
             // Nodes - You can add more.
             if (node instanceof TextField) {
-                map.put(((TextField) node).getText(), node.localToScene(node.getBoundsInLocal()).getMinX());
+                map.put(node.localToScene(node.getBoundsInLocal()).getMinX(), ((TextField) node).getText());
             }
             if (node instanceof Label) {
-                map.put(((Label) node).getText(), node.localToScene(node.getBoundsInLocal()).getMinX());
+                map.put(node.localToScene(node.getBoundsInLocal()).getMinX(), ((Label) node).getText());
             }
             // Recursive.
             if (node instanceof Pane) {
@@ -57,12 +56,13 @@ public class Extractor {
         return map;
     }
 
-    public static Map<Node, Bounds> getAllExpressions(Pane parent) {
+    public static HashMap getAllExpressions(Pane parent) {
         HashMap hashMap = new HashMap<>();
         for (Node node : parent.getChildren()) {
             hashMap.put(node, node.localToScene(node.getBoundsInLocal()));
         }
         return hashMap;
     }
+
 
 }
