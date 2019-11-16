@@ -5,10 +5,11 @@ package main.src.controllers;
  * Description:  SER 515 Project
  * Copyright:    Copyright (c) 2019
  * Company:      Department of Computer Software Engineering, Arizona State University
- * @author 		 Bajaj Aditya, Mahapatra Manas
- * @version 	 1.0
- * @since        8/30/2019
- * @modified     11/3/2019
+ *
+ * @author Bajaj Aditya, Mahapatra Manas
+ * @version 1.0
+ * @modified 11/3/2019
+ * @since 8/30/2019
  */
 
 import com.firebase.client.Firebase;
@@ -31,7 +32,7 @@ import java.util.regex.Pattern;
  * The Class SignUpController.
  */
 public class SignUpController implements Initializable {
-    
+
     /** The name TF. */
     @FXML
     private TextField nameTF;
@@ -128,6 +129,7 @@ public class SignUpController implements Initializable {
         if (pswd.length() > 20) {
             error += "-> Password must have atmost 20 characters\n";
         }
+        /*
         if (!specialCharPatten.matcher(pswd).find()) {
             error += "-> Password must have atleast one special character\n";
         }
@@ -140,11 +142,12 @@ public class SignUpController implements Initializable {
         if (!digitCasePatten.matcher(pswd).find()) {
             error += "-> Password must have atleast one digit character\n";
         }
+
         if (error.length() > 0) {
             showAlert("Please re-enter your password\n" + error);
             pswdTF.requestFocus();
         }
-
+        */
 
 //Checking if both Passwords are same
         else if (!pswd.equals(rpswd)) {
@@ -164,7 +167,7 @@ public class SignUpController implements Initializable {
             RadioButton selectedRadiobutton = (RadioButton) User.getSelectedToggle();
 
             //Firebase firebase = new Firebase("https://mathx-eea50.firebaseio.com/");
-              Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+            Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
 
 
             //Create a Teacher or Student depending on the type selected

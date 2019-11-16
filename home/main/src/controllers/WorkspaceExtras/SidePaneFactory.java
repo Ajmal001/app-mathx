@@ -1,4 +1,4 @@
-package main.src.controllers;
+package main.src.controllers.WorkspaceExtras;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -27,33 +27,37 @@ public class SidePaneFactory {
         sidePane.getChildren().addAll(unaryLabel);
     }
 
-    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType) {
+    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
-        Operator operator = new UnaryOperator();
-//        Operator operator = null;
-//        switch (operatorType) {
-//            case "Unary": {
-//                operator = new UnaryOperator();
-//                break;
-//            }
-//            case "Binary": {
-//                operator = new BinaryOperator();
-//                break;
-//            }
-//        }
+        Operator operator;
+        switch (operatorType) {
+            case "Unary": {
+                operator = new UnaryOperator();
+                break;
+            }
+            case "Binary": {
+                operator = new BinaryOperator();
+                break;
+            }
+            default:
+                operator = new BinaryOperator();
+        }
 
         StackPane stackPane;
         stackPane = operator.produceOperator(string);
-        sidePaneListeners.installToolTip(stackPane);
         sidePane.getChildren().addAll(stackPane);
 
         stackPane.setOnMouseClicked(e -> {
             SandBoxListeners sandBoxListeners = new SandBoxListeners();
-            Operator newOperator = new UnaryOperator();
             StackPane newStackPane;
             newStackPane = new StackPane(operator.produceOperator(string));
             sandBoxListeners.makeDraggable(newStackPane);
+            sandBoxListeners.makeRemovable(newStackPane);
+            //This value x in (grade>x) is the grade after which students use expressions with more than one operator
+            if (grade > 3) {
+                sandBoxListeners.makeJoinable(newStackPane);
+            }
             sandBox.getChildren().addAll(newStackPane);
         });
     }

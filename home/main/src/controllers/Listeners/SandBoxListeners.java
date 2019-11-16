@@ -1,15 +1,22 @@
 package main.src.controllers.Listeners;
 
 import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import main.src.controllers.WorkspaceExtras.Extractor;
+
+import java.util.Map;
 
 public class SandBoxListeners {
 
     public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
-        int HorizontalBound = 1176;
-        int VerticalBound = 730;
+        int HorizontalBound = 1650;
+        int VerticalBound = 520;
 
         operator.setOnMouseEntered(mouseEvent -> operator.setCursor(Cursor.MOVE));
 
@@ -21,8 +28,12 @@ public class SandBoxListeners {
             deltaY[0] = operator.getLayoutY() - mouseEvent.getSceneY();
         });
 
+
         //No drag out of bounds
         operator.setOnMouseDragged(mouseEvent -> {
+
+            operator.toFront();
+            //Left
             if (mouseEvent.getSceneX() < -deltaX[0]) {
                 operator.setLayoutX(0);
             }
@@ -46,11 +57,69 @@ public class SandBoxListeners {
             else {
                 operator.setLayoutY(mouseEvent.getSceneY() + deltaY[0]);
             }
-            StackPane dummy;
-            dummy = (StackPane) operator.getChildren().get(0);
-            HBox dummyBox = (HBox) dummy.getChildren().get(1);
+
+
         });
+
+
+//
+//            HashMap expresssions;
+//            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
+//
+//            HashMap expressionData;
+//
+//            for (Object node : expresssions.keySet()) {
+//                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
+//                for (Object temp : expressionData.entrySet()) {
+//                    System.out.println(temp);
+//                }
+//            }
+//            System.out.println("________________________________");
+//
 
     }
 
+    public void makeJoinable(StackPane operator) {
+        operator.setOnMouseReleased(mouseEvent -> {
+            Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
+
+            Pane sandBox;
+            sandBox = (Pane) operator.getParent();
+            Map<Node, Object> nodes = Extractor.getAllTextFields(sandBox);
+
+            for (Map.Entry<Node, Object> entry : nodes1.entrySet())
+                nodes.remove(entry.getKey(), entry.getValue());
+
+            for (Node node : nodes.keySet()) {
+                float nodePositionX = (float) node.localToScene(node.getBoundsInLocal()).getMinX();
+                float nodePositionY = (float) node.localToScene(node.getBoundsInLocal()).getMinY();
+                if (mouseEvent.getSceneX() > nodePositionX && mouseEvent.getSceneX() < nodePositionX + 40)
+                    if (mouseEvent.getSceneY() > nodePositionY && mouseEvent.getSceneY() < nodePositionY + 40) {
+                        HBox nodeParent;
+                        nodeParent = (HBox) node.getParent();
+                        int tempIndex = nodeParent.getChildren().indexOf(node);
+                        float tempNodeWidth = (float) node.getBoundsInLocal().getWidth();
+                        nodeParent.getChildren().add(tempIndex, operator);
+                        nodeParent.getChildren().remove(tempIndex + 1);
+                        StackPane tempStackPane;
+                        tempStackPane = (StackPane) nodeParent.getParent();
+                        Rectangle tempRectangle;
+                        tempRectangle = (Rectangle) tempStackPane.getChildren().get(0);
+                        float tempRectangleWidth = (float) tempRectangle.getWidth();
+//                        tempRectangle.setWidth(tempRectangleWidth + operator.getWidth() - tempNodeWidth);
+                        tempRectangle.setWidth(500);
+                    }
+            }
+        });
+    }
+
+    public void makeRemovable(StackPane operator) {
+        operator.setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+                Pane sandbox;
+                sandbox = (Pane) operator.getParent();
+                sandbox.getChildren().remove(operator);
+            }
+        });
+    }
 }
