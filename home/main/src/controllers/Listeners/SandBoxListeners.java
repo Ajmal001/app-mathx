@@ -64,21 +64,6 @@ public class SandBoxListeners {
         });
 
 
-//
-//            HashMap expresssions;
-//            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
-//
-//            HashMap expressionData;
-//
-//            for (Object node : expresssions.keySet()) {
-//                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
-//                for (Object temp : expressionData.entrySet()) {
-//                    System.out.println(temp);
-//                }
-//            }
-//            System.out.println("________________________________");
-//
-
         operator.setOnMouseReleased(mouseEvent -> {
             ResultEvaluator resultEvaluator = new ResultEvaluator();
             resultEvaluator.produceResultInput((Pane) operator.getParent());
