@@ -20,7 +20,7 @@ public class GradeOne implements GradeParent {
         }
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Counter");
-        String[] counterOperators = {"\uD83C\uDF3C", ":::"};
+        String[] counterOperators = {"111"};
         for (String operator : counterOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Counter", 1);
         }

@@ -10,7 +10,7 @@ import main.src.controllers.Operator.*;
 public class SidePaneFactory {
 
     public void addLabelToSidePane(VBox sidePane, String labelName) {
-        Operator operator = null;
+        ParentOperator operator = null;
         switch (labelName) {
             case "Unary": {
                 operator = new UnaryOperator();
@@ -29,14 +29,15 @@ public class SidePaneFactory {
                 break;
             }
         }
-        Pane unaryLabel = operator.produceLabel();
-        sidePane.getChildren().addAll(unaryLabel);
+        assert operator != null;
+        Pane label = operator.produceLabel();
+        sidePane.getChildren().addAll(label);
     }
 
     public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
-        Operator operator;
+        ParentOperator operator;
         switch (operatorType) {
             case "Unary": {
                 operator = new UnaryOperator();

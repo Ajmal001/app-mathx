@@ -12,7 +12,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
-public class BinaryOperator implements Operator {
+public class BinaryOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();

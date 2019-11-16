@@ -12,7 +12,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
-public class CounterOperator implements Operator {
+public class CounterOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();
@@ -54,7 +54,7 @@ public class CounterOperator implements Operator {
     public StackPane produceLabel() {
         StackPane labelPane = new StackPane();
         labelPane.setPrefSize(200, 30);
-        Label label = new Label("Unary Operators");
+        Label label = new Label("Counter");
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
         labelPane.getChildren().addAll(label);
         return labelPane;

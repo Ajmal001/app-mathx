@@ -43,8 +43,4 @@ public class WorkspaceController implements Initializable {
 
     }
 
-    public enum operatorType {
-        UNARY,
-        BINARY
-    }
 }

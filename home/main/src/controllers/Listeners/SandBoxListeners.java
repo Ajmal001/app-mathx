@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import main.src.controllers.WorkspaceExtras.Extractor;
+import main.src.controllers.WorkspaceExtras.ResultEvaluator;
 
 import java.util.Map;
 
@@ -59,28 +60,25 @@ public class SandBoxListeners {
             }
 
 
+
+        });
+
+        operator.setOnMouseReleased(mouseEvent -> {
+            ResultEvaluator resultEvaluator = new ResultEvaluator();
+            resultEvaluator.produceResultInput((Pane) operator.getParent());
         });
 
 
-//
-//            HashMap expresssions;
-//            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
-//
-//            HashMap expressionData;
-//
-//            for (Object node : expresssions.keySet()) {
-//                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
-//                for (Object temp : expressionData.entrySet()) {
-//                    System.out.println(temp);
-//                }
-//            }
-//            System.out.println("________________________________");
+
+
 //
 
     }
 
     public void makeJoinable(StackPane operator) {
         operator.setOnMouseReleased(mouseEvent -> {
+            ResultEvaluator resultEvaluator = new ResultEvaluator();
+            resultEvaluator.produceResultInput((Pane) operator.getParent());
 
             Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
 
