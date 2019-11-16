@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
 
 import java.util.ArrayList;
@@ -55,6 +56,23 @@ public class CreateAssignmentController {
      * Use this method to push questions to the DB
      * This Pushes grade,question and ans to firebase
      */
+
+    void pushAssignment(String assignmentName, String grade, List<String> questionId){
+
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        AssignmentModel assignmentModel = new AssignmentModel();
+        assignmentModel.setGrade(grade);
+        assignmentModel.setAssignmentName(assignmentName);
+        assignmentModel.setQuestions(questionId);
+
+        firebase.child("Assignment").push().setValue(assignmentModel);
+
+        System.out.println("Assignment pushed Successfully");
+
+
+
+
+    }
     void pushQuestions(String grade, String question, String answer) {
 
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -163,8 +181,11 @@ public class CreateAssignmentController {
     /**
      public static void main(String[] args) {
 
-     CreateAssignmentController createAssignmentController = new CreateAssignmentController();
-     //createAssignmentController.pushQuestions("8","what is 5+18","23");
+
+        CreateAssignmentController createAssignmentController = new CreateAssignmentController();
+        createAssignmentController.pushQuestions("8","what is 5+18","23");
+
+
 
      List<List<String>> result = createAssignmentController.displayQuestions("8");
 
@@ -177,8 +198,16 @@ public class CreateAssignmentController {
 
      }
 
+         List<String> questionid = new ArrayList<>();
+         questionid.add("id1");
+         questionid.add("id2");
+         questionid.add("id3");
+         createAssignmentController.pushAssignment("Assignment1","2",questionid);
 
-     }
-     **/
 
+
+    }
+
+
+    **/
 }
