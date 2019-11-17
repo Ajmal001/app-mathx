@@ -13,6 +13,9 @@ import main.src.controllers.WorkspaceExtras.Extractor;
 
 import java.util.Map;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
 
 public class SandBoxListeners {
 
@@ -64,7 +67,6 @@ public class SandBoxListeners {
             else {
                 operator.setLayoutY(mouseEvent.getSceneY() + deltaY[0]);
             }
-
 
 
         });

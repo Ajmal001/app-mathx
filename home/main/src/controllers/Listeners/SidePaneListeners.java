@@ -7,6 +7,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
+
 public class SidePaneListeners {
 
     public void installToolTip(StackPane stackPane) {

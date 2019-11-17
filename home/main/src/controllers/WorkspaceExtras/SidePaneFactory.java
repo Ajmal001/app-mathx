@@ -7,6 +7,11 @@ import main.src.controllers.Listeners.SandBoxListeners;
 import main.src.controllers.Listeners.SidePaneListeners;
 import main.src.controllers.Operator.*;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
+
+
 public class SidePaneFactory {
 
     public void addLabelToSidePane(VBox sidePane, String labelName) {

@@ -7,6 +7,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
 
 public class CommonPaneListener {
     StackPane questionPane = new StackPane();

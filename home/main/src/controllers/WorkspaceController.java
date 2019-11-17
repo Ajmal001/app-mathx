@@ -13,7 +13,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class WorkspaceController implements Initializable {
+/**
+ * @author Karandeep Singh Grewal
+ */
+
+
+public class WorkspaceController extends AlertBox implements Initializable {
 
     @FXML
     private Pane sandBox;

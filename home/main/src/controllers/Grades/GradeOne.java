@@ -7,6 +7,10 @@ import javafx.scene.layout.VBox;
 import main.src.controllers.Listeners.CommonPaneListener;
 import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
+
 public class GradeOne implements GradeParent {
 
     @Override

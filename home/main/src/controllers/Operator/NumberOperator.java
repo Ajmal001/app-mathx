@@ -11,6 +11,10 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
+
 public class NumberOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString) {

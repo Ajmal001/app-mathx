@@ -13,7 +13,7 @@ package main.src.controllers;
  */
 import java.util.Stack;
 
-public class EvaluateExpression {
+public class EvaluateExpression extends WorkspaceController {
     public static int evaluate(String expression)
     {
         char[] tokens = expression.toCharArray();
@@ -82,10 +82,7 @@ public class EvaluateExpression {
     {
         if (op2 == '(' || op2 == ')')
             return false;
-        if ((op1 == '*' || op1 == '/') && (op2 == '+' || op2 == '-'))
-            return false;
-        else
-            return true;
+        return (op1 != '*' && op1 != '/') || (op2 != '+' && op2 != '-');
     }
 
     // A utility method to apply an operator 'op' on operands 'a'
