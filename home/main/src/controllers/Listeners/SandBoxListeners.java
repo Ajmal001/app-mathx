@@ -1,5 +1,6 @@
 package main.src.controllers.Listeners;
 
+import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
@@ -12,7 +13,12 @@ import main.src.controllers.WorkspaceExtras.ResultEvaluator;
 
 import java.util.Map;
 
+
 public class SandBoxListeners {
+
+    @FXML
+    public StackPane commonPane;
+
 
     public void makeDraggable(StackPane operator) {
         //Sandbox Bounds
@@ -63,16 +69,10 @@ public class SandBoxListeners {
 
         });
 
-
         operator.setOnMouseReleased(mouseEvent -> {
             ResultEvaluator resultEvaluator = new ResultEvaluator();
             resultEvaluator.produceResultInput((Pane) operator.getParent());
         });
-
-
-
-
-//
 
     }
 

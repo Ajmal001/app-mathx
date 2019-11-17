@@ -35,8 +35,6 @@ public class CommonPaneListener {
     }
 
     public void produceCommonPane(StackPane stackPane, String question) {
-
-
         produceQuestionPane(questionPane, question);
         produceResultPane(resultPane);
         stackPane.getChildren().add(questionPane);

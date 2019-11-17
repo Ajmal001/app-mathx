@@ -33,3 +33,4 @@ private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
     - add a switch case to addLabelToSidePane
     - add a switch case to addOperatorToSidePane
     - add the sandBoxListeners for your operator
+

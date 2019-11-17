@@ -37,6 +37,7 @@ public class ResultEvaluator {
                 rawData.put(coordinate, expression.toString());
             }
             String expressionInput = sortbykey(rawData);
+            System.out.println(((StackPane) node).localToParent(((StackPane) node).getLayoutBounds()));
             System.out.println(expressionInput);
 
         }
