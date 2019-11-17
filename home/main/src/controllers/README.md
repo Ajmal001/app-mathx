@@ -46,6 +46,9 @@ controller
 
 **Grade**
 * GradeParent - Interface for all the grades
+* GradeOne - Implements `GradeParent`
+    * `produceWorkspace()` - produces workspace for a specific grade (one in this case)
+
 
 **Listeners**
 * CommonPaneListener
@@ -81,11 +84,11 @@ controller
     <br> Returns a HashMap <Node, Object> of all the TextFields, PasswordFields, TextAreas, CheckBoxes and Label in the `parent`
 
 * ExpressionEvaluator
-    * `sortByKey`
+    * `sortByKey()`
     <br/> Returns a sorted string that can be passed to `expressionEvaluator`
-    * `produceResult`
+    * `produceResult()`
     <br/> Fetches all the expression in the SandBox and produce result for each expression
 
 **Workspace Controller**
-* Create a `grade` object
-* Call `grade.produceWorkspace`
+* Create a `GradeParent` object according to the grade of the student
+* Call `grade.produceWorkspace()`
