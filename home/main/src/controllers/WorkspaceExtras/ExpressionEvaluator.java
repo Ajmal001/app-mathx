@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class ResultEvaluator {
+public class ExpressionEvaluator {
 
     private static String sortbykey(HashMap map) {
         ArrayList<Double> sortedKeys = new ArrayList<Double>(map.keySet());
@@ -19,7 +19,7 @@ public class ResultEvaluator {
         return expressionInput.toString();
     }
 
-    public void produceResultInput(Pane sandBox) {
+    public void evaluateResult(Pane sandBox) {
         HashMap expresssions;
         expresssions = Extractor.getAllExpressions(sandBox);
         HashMap expressionData;
