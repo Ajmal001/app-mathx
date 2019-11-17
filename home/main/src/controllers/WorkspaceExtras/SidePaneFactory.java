@@ -68,7 +68,7 @@ public class SidePaneFactory {
             StackPane newStackPane;
             newStackPane = new StackPane(operator.produceOperator(string));
             sandBoxListeners.makeDraggable(newStackPane);
-            sandBoxListeners.makeRemovable(newStackPane);
+            sandBoxListeners.makeDeletable(newStackPane);
             //This value x in (grade>x) is the grade after which students use expressions with more than one operator
             if (operator instanceof NumberOperator)
                 sandBoxListeners.makeJoinable(newStackPane);
