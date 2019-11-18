@@ -14,41 +14,41 @@ import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 public class GradeOne implements GradeParent {
 
     @Override
-    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane resultOrQuestionPane) {
+    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Number");
         String[] numberOperators = {"1", "2"};
         for (String operator : numberOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Number", 1);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Number", 1, commonPane);
         }
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Counter");
         String[] counterOperators = {"111"};
         for (String operator : counterOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Counter", 1);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Counter", 1, commonPane);
         }
 
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
         String[] unaryOperators = {"One"};
         for (String operator : unaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 1);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 1, commonPane);
         }
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
         String[] binaryOperators = {"+", "-"};
         for (String operator : binaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 1);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 1, commonPane);
         }
 
 
         CommonPaneListener commonPaneListener = new CommonPaneListener();
         String question = "What is the value of 2 + 4 ?";
-        commonPaneListener.produceCommonPane(resultOrQuestionPane, question);
-        resultOrQuestionPane.setOnMouseClicked(mouseEvent -> {
+        commonPaneListener.produceCommonPane(commonPane, question);
+        commonPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                commonPaneListener.switchPane(resultOrQuestionPane);
+                commonPaneListener.switchPane(sandBox, commonPane);
             }
         });
 

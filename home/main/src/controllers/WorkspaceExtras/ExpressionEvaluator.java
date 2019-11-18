@@ -2,6 +2,7 @@ package main.src.controllers.WorkspaceExtras;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import org.mariuszgromada.math.mxparser.Expression;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +24,7 @@ public class ExpressionEvaluator {
         return expressionInput.toString();
     }
 
-    public void produceResult(Pane sandBox) {
+    public void produceResult(Pane sandBox, StackPane commonPane) {
         HashMap expresssions;
         expresssions = Extractor.getAllExpressions(sandBox);
         HashMap expressionData;
@@ -41,8 +42,11 @@ public class ExpressionEvaluator {
                 rawData.put(coordinate, expression.toString());
             }
             String expressionInput = sortbykey(rawData);
-            System.out.println(((StackPane) node).localToParent(((StackPane) node).getLayoutBounds()));
             System.out.println(expressionInput);
+            Expression expression = new Expression(expressionInput);
+            String result = expressionInput + expression.calculate();
+            System.out.println(commonPane.getChildren());
+
 
         }
         System.out.println("________________________________");
