@@ -39,7 +39,7 @@ public class SidePaneFactory {
         sidePane.getChildren().addAll(label);
     }
 
-    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade) {
+    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade, StackPane commonPane) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
         ParentOperator operator;
@@ -72,15 +72,15 @@ public class SidePaneFactory {
             SandBoxListeners sandBoxListeners = new SandBoxListeners();
             StackPane newStackPane;
             newStackPane = new StackPane(operator.produceOperator(string));
-            sandBoxListeners.makeDraggable(newStackPane);
+            sandBoxListeners.makeDraggable(newStackPane, commonPane);
             sandBoxListeners.makeDeletable(newStackPane);
             //This value x in (grade>x) is the grade after which students use expressions with more than one operator
             if (operator instanceof NumberOperator)
-                sandBoxListeners.makeJoinable(newStackPane);
+                sandBoxListeners.makeJoinable(newStackPane, commonPane);
             if (operator instanceof UnaryOperator)
-                sandBoxListeners.makeJoinable(newStackPane);
+                sandBoxListeners.makeJoinable(newStackPane, commonPane);
             if (grade > 3) {
-                sandBoxListeners.makeJoinable(newStackPane);
+                sandBoxListeners.makeJoinable(newStackPane, commonPane);
             }
             sandBox.getChildren().addAll(newStackPane);
         });

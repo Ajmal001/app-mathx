@@ -1,6 +1,5 @@
 package main.src.controllers.Listeners;
 
-import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
@@ -19,11 +18,8 @@ import java.util.Map;
 
 public class SandBoxListeners {
 
-    @FXML
-    public StackPane commonPane;
 
-
-    public void makeDraggable(StackPane operator) {
+    public void makeDraggable(StackPane operator, StackPane commonPane) {
         //Sandbox Bounds
         int HorizontalBound = 1650;
         int VerticalBound = 520;
@@ -73,15 +69,15 @@ public class SandBoxListeners {
 
         operator.setOnMouseReleased(mouseEvent -> {
             ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-            expressionEvaluator.produceResult((Pane) operator.getParent());
+            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
         });
 
     }
 
-    public void makeJoinable(StackPane operator) {
+    public void makeJoinable(StackPane operator, StackPane commonPane) {
         operator.setOnMouseReleased(mouseEvent -> {
             ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-            expressionEvaluator.produceResult((Pane) operator.getParent());
+            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
 
             Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
 

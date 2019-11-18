@@ -29,7 +29,7 @@ public class MainClass extends Application {
         //   openSignUpWindow();
         //assignmentWindow();
         // view_assignmentWindow();
-        create_assignmentWindow();
+//        create_assignmentWindow();
     }
 
     public void openSignUpWindow() {

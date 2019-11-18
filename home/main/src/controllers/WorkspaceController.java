@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  */
 
 
-public class WorkspaceController extends AlertBox implements Initializable {
+public class WorkspaceController implements Initializable {
 
     @FXML
     private Pane sandBox;

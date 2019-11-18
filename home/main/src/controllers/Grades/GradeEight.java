@@ -14,18 +14,18 @@ import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 public class GradeEight implements GradeParent {
 
     @Override
-    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane resultOrQuestionPane) {
+    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
         String[] unaryOperators = {"log", "lg", "sin", ""};
         for (String operator : unaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 8);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 8, commonPane);
         }
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
         String[] binaryOperators = {"+", "-", "*"};
         for (String operator : binaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 8);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 8, commonPane);
         }
         CommonPaneListener commonPaneListener = new CommonPaneListener();
         //Change this string below to change the question
@@ -53,10 +53,10 @@ public class GradeEight implements GradeParent {
                 "between the day and the total number of quarters he had saved by the end of that day.\n" +
                 "Greg plotted each of the 19 data points and then connected them. Describe what\n" +
                 "Greg’s graph looked like.";
-        commonPaneListener.produceCommonPane(resultOrQuestionPane, question);
-        resultOrQuestionPane.setOnMouseClicked(mouseEvent -> {
+        commonPaneListener.produceCommonPane(commonPane, question);
+        commonPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                commonPaneListener.switchPane(resultOrQuestionPane);
+                commonPaneListener.switchPane(sandBox, commonPane);
             }
         });
         //Make Detachable
