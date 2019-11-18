@@ -10,10 +10,10 @@
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.LoginController">
-    <TextField fx:id="emTF" focusTraversable="false" layoutX="185.0" layoutY="123.0" prefHeight="27.0" prefWidth="228.0" promptText="Enter your Name" />
-    <PasswordField fx:id="pswdTF" focusTraversable="false" layoutX="188.0" layoutY="187.0" prefHeight="27.0" prefWidth="228.0" promptText="Enter password" />
-    <Button layoutX="270.0" layoutY="262.0" mnemonicParsing="false" onAction="#loginAction" text="Login" />
-    <CheckBox layoutX="230.0" layoutY="228.0" mnemonicParsing="false" text=" Keep me signed in" />
+    <Button fx:id="login" layoutX="270.0" layoutY="262.0" onAction="#loginAction" text="Login" />
+    <TextField fx:id="emTF"  layoutX="185.0" layoutY="123.0" prefHeight="27.0" prefWidth="228.0" promptText="Enter your Email" />
+    <PasswordField fx:id="pswdTF"  layoutX="188.0" layoutY="187.0" prefHeight="27.0" prefWidth="228.0" promptText="Enter password" />
+    <CheckBox layoutX="230.0" layoutY="228.0" text=" Keep me signed in" />
     <Hyperlink layoutX="243.0" layoutY="299.0" text="Forgot Password ?" />
     <Hyperlink fx:id="signup" layoutX="270.0" layoutY="324.0" text="Sign Up" textAlignment="CENTER" onAction="#signupAction" />
     <Label layoutX="260.0" layoutY="60.0" text="MathX">

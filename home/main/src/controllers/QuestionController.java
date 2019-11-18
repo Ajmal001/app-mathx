@@ -109,7 +109,7 @@ public class QuestionController implements Initializable {
 
 //Checking if Difficulty  is selected
         else if (diff.getValue() == null) {
-            showAlert("Please choose Diffculty of question");
+            showAlert("Please choose Difficulty of question");
             return;
         }
     }
