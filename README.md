@@ -108,3 +108,8 @@ java -jar --module-path /path/to/javafx/lib --add-modules javafx.controls,javafx
 
 * **Michael Findler**
 
+
+<br/>
+
+***Special Thanks to Mariusz Gromada for [MathParser](https://github.com/mariuszgromada/MathParser.org-mXparser)***
+(Used to evaluate expressions)
