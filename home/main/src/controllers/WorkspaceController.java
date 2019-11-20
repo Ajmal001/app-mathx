@@ -13,6 +13,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
+/**
+ * @author Karandeep Singh Grewal
+ */
+
+
 public class WorkspaceController implements Initializable {
 
     @FXML
@@ -24,9 +29,9 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int i = 8;
+        int studentGrade = 1;
         GradeParent grade = null;
-        switch (i) {
+        switch (studentGrade) {
             case 1:
                 grade = new GradeOne();
                 break;
@@ -38,13 +43,9 @@ public class WorkspaceController implements Initializable {
                 break;
 
         }
-        System.out.println("Producing Grade:" + i);
+        System.out.println("Producing Grade:" + studentGrade);
         grade.produceWorkspace(sandBox, sidePane, commonPane);
 
     }
 
-    public enum operatorType {
-        UNARY,
-        BINARY
-    }
 }

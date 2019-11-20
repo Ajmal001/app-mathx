@@ -6,7 +6,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import main.src.controllers.WorkspaceExtras.ExpressionEvaluator;
 
+/**
+ * @author Karandeep Singh Grewal
+ */
 
 public class CommonPaneListener {
     StackPane questionPane = new StackPane();
@@ -35,18 +39,20 @@ public class CommonPaneListener {
     }
 
     public void produceCommonPane(StackPane stackPane, String question) {
-
-
         produceQuestionPane(questionPane, question);
         produceResultPane(resultPane);
         stackPane.getChildren().add(questionPane);
     }
 
-    public void switchPane(StackPane stackPane) {
+    public void switchPane(Pane sandBox, StackPane stackPane) {
         //Switches StackPane(resultPane) to Pane(questionPane)
         if (stackPane.getChildren().toString().contains("StackPane")) {
             stackPane.getChildren().clear();
             stackPane.getChildren().addAll(resultPane);
+            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
+            expressionEvaluator.produceResult(sandBox, stackPane);
+
+
         } else {
             stackPane.getChildren().clear();
             stackPane.getChildren().addAll(questionPane);
