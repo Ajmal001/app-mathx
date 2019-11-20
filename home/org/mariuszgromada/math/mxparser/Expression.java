@@ -252,9 +252,6 @@ public class Expression {
      * checking (i.e. f -> g and g -> f)
      * or marking modified flags on the expressions
      * related to this expression.
-     *
-     *
-     *
      */
     private boolean recursionCallPending;
     /*=================================================
