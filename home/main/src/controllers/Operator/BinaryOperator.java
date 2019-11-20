@@ -12,19 +12,24 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
-public class BinaryOperator implements Operator {
+/**
+ * @author Karandeep Singh Grewal
+ */
+
+public class BinaryOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
 
         float shapeWidth = 165;
+
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
         rectangle.setOpacity(0.8);
         rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Color.TRANSPARENT);
+        rectangle.setStroke(Paint.valueOf("007AFF"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);

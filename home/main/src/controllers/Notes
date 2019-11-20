@@ -8,3 +8,29 @@ private static void addAllDescendents(Parent parent, ArrayList<Node> nodes) {
         }
     }
 
+//Adding a new grade
+ - Create a new class in /Grades
+ - GradeX
+    - It will implement the GradeParent
+    - Create `produceWorkspace` function for your grade
+    - Call SidePaneFactory.addLabelToSidePane for each type of operator
+    - make a string for all the operator for GradeX
+    - for each operator call SidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, operatorType(string), grade(int))
+    - Repeat the above three steps for each type of operator
+    - make a string for question
+    - call CommonPaneListeners.produceCommonPane(resultOrQuestionPane, question)
+    - resultOrQuestionPane.setOnMouseClicked - call commonPaneListeners.switchPane(resultorQuestionPane)
+ - WorkspaceController
+    - make a new case in WorkspaceController.initialize/switch(i)
+ - SidePaneFactory
+    - add the sandBoxListeners if there is any special sandBoxListener for your grade operator
+
+//Adding a new operator
+ - Make a new class in /Operator - ExampleOperator
+ - ExampleOperator
+    - It will implement /Operator/ParentOperator
+ - SidePaneFactory
+    - add a switch case to addLabelToSidePane
+    - add a switch case to addOperatorToSidePane
+    - add the sandBoxListeners for your operator
+

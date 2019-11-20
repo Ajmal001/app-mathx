@@ -5,14 +5,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import main.src.controllers.Listeners.SandBoxListeners;
 import main.src.controllers.Listeners.SidePaneListeners;
-import main.src.controllers.Operator.BinaryOperator;
-import main.src.controllers.Operator.Operator;
-import main.src.controllers.Operator.UnaryOperator;
+import main.src.controllers.Operator.*;
+
+/**
+ * @author Karandeep Singh Grewal
+ */
+
 
 public class SidePaneFactory {
 
     public void addLabelToSidePane(VBox sidePane, String labelName) {
-        Operator operator = null;
+        ParentOperator operator = null;
         switch (labelName) {
             case "Unary": {
                 operator = new UnaryOperator();
@@ -22,15 +25,24 @@ public class SidePaneFactory {
                 operator = new BinaryOperator();
                 break;
             }
+            case "Number": {
+                operator = new NumberOperator();
+                break;
+            }
+            case "Counter": {
+                operator = new CounterOperator();
+                break;
+            }
         }
-        Pane unaryLabel = operator.produceLabel();
-        sidePane.getChildren().addAll(unaryLabel);
+        assert operator != null;
+        Pane label = operator.produceLabel();
+        sidePane.getChildren().addAll(label);
     }
 
-    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType) {
+    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade, StackPane commonPane) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
-        Operator operator;
+        ParentOperator operator;
         switch (operatorType) {
             case "Unary": {
                 operator = new UnaryOperator();
@@ -38,6 +50,14 @@ public class SidePaneFactory {
             }
             case "Binary": {
                 operator = new BinaryOperator();
+                break;
+            }
+            case "Number": {
+                operator = new NumberOperator();
+                break;
+            }
+            case "Counter": {
+                operator = new CounterOperator();
                 break;
             }
             default:
@@ -52,7 +72,16 @@ public class SidePaneFactory {
             SandBoxListeners sandBoxListeners = new SandBoxListeners();
             StackPane newStackPane;
             newStackPane = new StackPane(operator.produceOperator(string));
-            sandBoxListeners.makeDraggable(newStackPane);
+            sandBoxListeners.makeDraggable(newStackPane, commonPane);
+            sandBoxListeners.makeDeletable(newStackPane);
+            //This value x in (grade>x) is the grade after which students use expressions with more than one operator
+            if (operator instanceof NumberOperator)
+                sandBoxListeners.makeJoinable(newStackPane, commonPane);
+            if (operator instanceof UnaryOperator)
+                sandBoxListeners.makeJoinable(newStackPane, commonPane);
+            if (grade > 3) {
+                sandBoxListeners.makeJoinable(newStackPane, commonPane);
+            }
             sandBox.getChildren().addAll(newStackPane);
         });
     }

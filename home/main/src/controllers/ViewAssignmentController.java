@@ -6,9 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ViewAssignmentController implements Initializable {
+
+
 
     private void showAlert(String message) {
 
@@ -40,5 +44,13 @@ public class ViewAssignmentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    List<String> displayQuestions(String Assignment){
+
+        List<String> questionslist = new ArrayList<>();
+
+
+        return questionslist;
     }
 }

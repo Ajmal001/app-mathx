@@ -12,12 +12,17 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
 
-public class UnaryOperator implements Operator {
+/**
+ * @author Karandeep Singh Grewal
+ */
+
+public class UnaryOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString) {
         StackPane stackPane = new StackPane();
         stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
+
         float shapeWidth = 110;
 
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
@@ -25,9 +30,9 @@ public class UnaryOperator implements Operator {
         rectangle.setArcWidth(50);
         rectangle.setOpacity(0.8);
         rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Color.WHITE);
+        rectangle.setStroke(Paint.valueOf("007AFF"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
-        rectangle.setStrokeType(StrokeType.INSIDE);
+        rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
 
         HBox hBox = new HBox();

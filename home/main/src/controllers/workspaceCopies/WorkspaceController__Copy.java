@@ -15,10 +15,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-
 /**
- * The Class WorkspaceController__Copy.
+ * @author Karandeep Singh Grewal
  */
+
 public class WorkspaceController__Copy implements Initializable {
 
     /** The rectangle. */
