@@ -34,8 +34,7 @@ public class GradeTwo implements GradeParent {
 
 
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-        String question = "1. Add any two numbers to get 6\n\n\n2. Give two numbers whose difference is 12\n\n\n3." +
-                "A number has nine ones, six tens and eight hundreds. What is the number?";
+        String question = "Click on the compare operator and fill in the blanks - 3 Times";
 
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {

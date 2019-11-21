@@ -20,8 +20,17 @@ public class MainClass extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+//        InputStream serviceAccount = new FileInputStream("/main/src/controllers/jsonFile.json");
 
+        InputStream serviceAccount = new FileInputStream(new File(getClass().getResource("src/controllers/jsonFile.json").getFile()));
+        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(credentials)
+                .setDatabaseUrl("https://ser515-team4.firebaseio.com")
+                .build();
+
+        FirebaseApp.initializeApp(options);
 
         asgnStage = primaryStage;
 //         openLoginWindow();
