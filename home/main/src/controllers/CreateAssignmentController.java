@@ -4,18 +4,11 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
@@ -23,7 +16,6 @@ import main.src.models.QuestionAnsModel;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
 public class CreateAssignmentController {
@@ -90,7 +82,7 @@ public class CreateAssignmentController {
 
         firebase.child("Assignment").push().setValue(assignmentModel);
 
-        System.out.println("Assignment pushed Successfully");
+//        System.out.println("Assignment pushed Successfully");
 
 
 
@@ -107,7 +99,7 @@ public class CreateAssignmentController {
 
         firebase.child("Grade").push().setValue(questionAns);
         showConfirm("Question Added successfully");
-        System.out.println("Question pushed Successfully");
+//        System.out.println("Question pushed Successfully");
     }
     /**
      * Use this method to display questions,answers for a particular grade
@@ -152,7 +144,7 @@ public class CreateAssignmentController {
     List<List<String>> displayQuestions(String grade) {
 
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
+        final String[] message = {null};
 
         List<List<String>> questionanslist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -164,7 +156,7 @@ public class CreateAssignmentController {
                     questionAnsModel = data.getValue(QuestionAnsModel.class);
                     questionAnsModel.setId(data.getKey());
                     questionAnsModelList.add(questionAnsModel);
-                    System.out.println("Size:" + questionAnsModelList.size());
+//                    System.out.println("Size:" + questionAnsModelList.size());
                 }
                 done.countDown();
             }

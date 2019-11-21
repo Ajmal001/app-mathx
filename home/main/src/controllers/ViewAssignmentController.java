@@ -59,7 +59,7 @@ public class ViewAssignmentController implements Initializable {
     List<String> displayQuestions(String Assignment){
 
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
+        final String[] message = {null};
 
 
 
@@ -96,7 +96,7 @@ public class ViewAssignmentController implements Initializable {
 //            System.out.println( questionids.get(i));
 
         CountDownLatch done2 = new CountDownLatch(1);
-        final String message2[] = {null};
+        final String[] message2 = {null};
 
 
         Firebase firebase2 = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -130,8 +130,8 @@ public class ViewAssignmentController implements Initializable {
         }
 
 
-        for(int i=0;i<questions.size();i++)
-            System.out.println( questions.get(i));
+//        for(int i=0;i<questions.size();i++)
+//            System.out.println( questions.get(i));
 
         return questions;
     }

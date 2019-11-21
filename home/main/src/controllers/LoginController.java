@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
 
 
     public LoginController() {
-        System.out.println("In Constructor");
+//        System.out.println("In Constructor");
         //Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
 
@@ -177,7 +177,7 @@ public class LoginController implements Initializable {
             return;
         } else {
 
-            System.out.println(teachersList.size());
+//            System.out.println(teachersList.size());
             String type = "";
             for (int i = 0; i < teachersList.size(); i++) {
                 TeacherSignUpModel model = teachersList.get(i);
@@ -188,7 +188,7 @@ public class LoginController implements Initializable {
                     studentModel = null;
                 }
             }
-            System.out.println(studentsList.size());
+//            System.out.println(studentsList.size());
             for (int i = 0; i < studentsList.size(); i++) {
                 StudentSignUpModel model = studentsList.get(i);
                 if (emTF.getText().equals(model.getAddress()) && pswdTF.getText().equals(model.getPassword())) {

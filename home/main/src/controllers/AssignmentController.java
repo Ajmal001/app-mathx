@@ -7,21 +7,11 @@ import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.*;
-import main.src.models.AssignmentModel;
-import main.src.models.QuestionAnsModel;
-import main.src.models.AssignmentModel;
-import main.src.models.QuestionAnsModel;
+import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import main.src.models.AssignmentModel;
-import main.src.models.QuestionAnsModel;
-import javafx.scene.control.Label;
-import main.src.models.AssignmentModel;
-import main.src.models.QuestionAnsModel;
-import javafx.scene.layout.VBox;
-import main.src.models.AssignmentModel;
-import main.src.models.QuestionAnsModel;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -74,7 +64,7 @@ public class AssignmentController implements Initializable {
     List<String> displayAssignments() {
 
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
+        final String[] message = {null};
 
         List<String> assignmentlist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -102,17 +92,17 @@ public class AssignmentController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < assignmentlist.size(); i++) {
-            System.out.println(assignmentlist.get(i));
-            System.out.println("====");
-/*
-             radioButtonAssign = new RadioButton();
-
-            radioButtonAssign.setText("wqe");
-            radioButtonAssign.setToggleGroup(toggleGroup);
-            asgn.getChildren().addAll(radioButtonAssign);
-*/
-        }
+//        for (int i = 0; i < assignmentlist.size(); i++) {
+////            System.out.println(assignmentlist.get(i));
+////            System.out.println("====");
+///*
+//             radioButtonAssign = new RadioButton();
+//
+//            radioButtonAssign.setText("wqe");
+//            radioButtonAssign.setToggleGroup(toggleGroup);
+//            asgn.getChildren().addAll(radioButtonAssign);
+//*/
+//        }
         return assignmentlist;
     }
 

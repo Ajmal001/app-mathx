@@ -78,7 +78,7 @@ public class ExpressionEvaluator {
                 expressionInput.replace("Equation:", "");
             }
             Expression expression = new Expression(expressionInput);
-            System.out.println(expressionInput);
+//            System.out.println(expressionInput);
             double result = (Math.round(expression.calculate() * 1000000));
             result = result / 1000000;
             double finalResult;

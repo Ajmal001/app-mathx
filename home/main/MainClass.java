@@ -1,5 +1,8 @@
 package main;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +12,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainClass extends Application {
 
@@ -33,12 +39,12 @@ public class MainClass extends Application {
         FirebaseApp.initializeApp(options);
 
         asgnStage = primaryStage;
-//         openLoginWindow();
-        //    openWorkSpaceWindow();
-//           openSignUpWindow();
-        assignmentWindow();
-        // view_assignmentWindow();
-        //  create_assignmentWindow();
+        openLoginWindow();
+//        openWorkSpaceWindow();
+//        openSignUpWindow();
+//        assignmentWindow();
+//        view_assignmentWindow();
+//        create_assignmentWindow();
     }
 
     public void openSignUpWindow() {

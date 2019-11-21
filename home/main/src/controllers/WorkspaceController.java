@@ -56,7 +56,7 @@ public class WorkspaceController implements Initializable {
                 break;
 
         }
-        System.out.println("Producing Grade:" + studentGrade);
+//        System.out.println("Producing Grade:" + studentGrade);
         grade.produceWorkspace(sandBox, sidePane, commonPane);
 
         homeButton.setOnMouseClicked(mouseEvent -> {

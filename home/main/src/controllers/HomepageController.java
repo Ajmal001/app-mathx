@@ -173,7 +173,7 @@ public class HomepageController {
 
             assignments.getData().add(new XYChart.Data<>(documentDataSolved.getId(), grade));
 
-            System.out.println(documentDataSolved.getData());
+//            System.out.println(documentDataSolved.getData());
 
         }
 
