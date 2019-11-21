@@ -12,17 +12,17 @@ package main.src.controllers;
  */
 
 import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import main.MainClass;
-import com.firebase.client.Firebase;
 import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
@@ -37,7 +37,11 @@ import java.util.regex.Pattern;
 /**
  * The Class LoginController.
  */
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
+
+    @FXML
+    private Button login;
+
 
     @FXML
     private Hyperlink signup;
@@ -56,13 +60,12 @@ public class LoginController implements Initializable{
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                for(DataSnapshot data: dataSnapshot.getChildren()){
-                    teacherModel=data.getValue(TeacherSignUpModel.class);
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    teacherModel = data.getValue(TeacherSignUpModel.class);
                     teacherModel.setId(data.getKey());
                     teachersList.add(teacherModel);
 
                 }
-
 
 
             }
@@ -72,16 +75,15 @@ public class LoginController implements Initializable{
             public void onCancelled(FirebaseError firebaseError) {
 
             }
-    });
+        });
 
         firebase.child("Student").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
 
-
-                for(DataSnapshot data: dataSnapshot.getChildren()){
-                    studentModel=data.getValue(StudentSignUpModel.class);
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    studentModel = data.getValue(StudentSignUpModel.class);
                     studentModel.setId(data.getKey());
                     studentsList.add(studentModel);
 
@@ -97,10 +99,9 @@ public class LoginController implements Initializable{
         });
 
 
-
     }
 
-            /**
+    /**
      * The email TF.
      */
     @FXML
@@ -144,7 +145,9 @@ public class LoginController implements Initializable{
         MainClass.loginStage.close();
 
     }
-    int returnValue=0;
+
+    int returnValue = 0;
+
     @FXML
     void loginAction(ActionEvent actionEvent) {
         String email = emTF.getText();
@@ -172,62 +175,55 @@ public class LoginController implements Initializable{
             showAlert("Please enter a Password ");
             pswdTF.requestFocus();
             return;
-        }
-
-
-
-        else {
+        } else {
 
             System.out.println(teachersList.size());
-            String type ="";
-            for (int i = 0; i <teachersList.size() ; i++) {
-                TeacherSignUpModel model=teachersList.get(i);
+            String type = "";
+            for (int i = 0; i < teachersList.size(); i++) {
+                TeacherSignUpModel model = teachersList.get(i);
                 if (emTF.getText().equals(model.getAddress()) && pswdTF.getText().equals(model.getPassword())) {
                     returnValue = 1;
-                    teacherModel=teachersList.get(i);
-                    type="Teacher";
+                    teacherModel = teachersList.get(i);
+                    type = "Teacher";
                     studentModel = null;
                 }
-        }
+            }
             System.out.println(studentsList.size());
-            for (int i = 0; i <studentsList.size() ; i++) {
-                StudentSignUpModel model=studentsList.get(i);
+            for (int i = 0; i < studentsList.size(); i++) {
+                StudentSignUpModel model = studentsList.get(i);
                 if (emTF.getText().equals(model.getAddress()) && pswdTF.getText().equals(model.getPassword())) {
                     returnValue = 1;
-                    studentModel=studentsList.get(i);
-                    type="Student";
+                    studentModel = studentsList.get(i);
+                    type = "Student";
                     teacherModel = null;
+                }
             }
-        }
-            if (returnValue==1 && type.equals("Teacher")){
-                showSuccess("Teacher"+ teacherModel.getName()+"Logged in Successfully");
+            if (returnValue == 1 && type.equals("Teacher")) {
+                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
+                //uncomment when done
+                new MainClass().view_assignmentWindow();
+                MainClass.loginStage.close();
+
+            } else if (returnValue == 1 && type.equals("Student")) {
+                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().openHomePageWindow();
                 MainClass.loginStage.close();
-
-            }else if(returnValue==1 && type.equals("Student")){
-                showSuccess("Student"+studentModel.getName()+"Logged in Successfully");
-                //uncomment when done
-                 new MainClass().openHomePageWindow();
-                 MainClass.loginStage.close();
-            }
-
-
-            else if (returnValue==0){
+            } else if (returnValue == 0) {
                 showAlert("Invalid Login Credentials ");
 
             }
 
 
+        }
+
 
     }
 
-
-}
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
     }
 
-        }
+}

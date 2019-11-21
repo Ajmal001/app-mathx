@@ -1,7 +1,9 @@
 package main;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -11,21 +13,33 @@ import java.io.IOException;
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage, loginStage, homePageStage, workspaceStage;
+    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage;
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+//        InputStream serviceAccount = new FileInputStream("/main/src/controllers/jsonFile.json");
 
+        InputStream serviceAccount = new FileInputStream(new File(getClass().getResource("src/controllers/jsonFile.json").getFile()));
+        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(credentials)
+                .setDatabaseUrl("https://ser515-team4.firebaseio.com")
+                .build();
 
-        loginStage = primaryStage;
-//        openLoginWindow();
-     //   openWorkSpaceWindow();
-          openSignUpWindow();
-        }
+        FirebaseApp.initializeApp(options);
+
+        asgnStage = primaryStage;
+//         openLoginWindow();
+        //    openWorkSpaceWindow();
+//           openSignUpWindow();
+        assignmentWindow();
+        // view_assignmentWindow();
+        //  create_assignmentWindow();
+    }
 
     public void openSignUpWindow() {
 
@@ -35,7 +49,7 @@ public class MainClass extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
             GridPane pane = loader.load();
             Scene scene = new Scene(pane);
-            signUpStage=new Stage();
+            signUpStage = new Stage();
             signUpStage.setScene(scene);
             signUpStage.show();
 
@@ -80,9 +94,7 @@ public class MainClass extends Application {
     }
 
     public void openWorkSpaceWindow() {
-
         try {
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/workspace.fxml"));
             BorderPane pane = loader.load();
             Scene scene = new Scene(pane, 1920, 1080);
@@ -91,12 +103,54 @@ public class MainClass extends Application {
             workspaceStage.setScene(scene);
             workspaceStage.resizableProperty().setValue(Boolean.FALSE);
             workspaceStage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
+    public void assignmentWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/assignment.fxml"));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            asgnStage = new Stage();
+            asgnStage.setTitle("Assignments");
+            asgnStage.setScene(scene);
+            asgnStage.resizableProperty().setValue(Boolean.FALSE);
+            asgnStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void view_assignmentWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/view_assignment.fxml"));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            view_asgnStage = new Stage();
+            view_asgnStage.setTitle("View Assignments");
+            view_asgnStage.setScene(scene);
+            view_asgnStage.resizableProperty().setValue(Boolean.FALSE);
+            view_asgnStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void create_assignmentWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/create_assignment.fxml"));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            create_asgnStage = new Stage();
+            create_asgnStage.setTitle("Create Assignment");
+            create_asgnStage.setScene(scene);
+            create_asgnStage.resizableProperty().setValue(Boolean.FALSE);
+            create_asgnStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

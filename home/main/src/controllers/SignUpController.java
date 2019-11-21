@@ -6,24 +6,33 @@ package main.src.controllers;
  * Copyright:    Copyright (c) 2019
  * Company:      Department of Computer Software Engineering, Arizona State University
  *
- * @author Bajaj Aditya, Mahapatra Manas
+ * @author Bajaj Aditya, Mahapatra Manas, Ria Mehta
  * @version 1.0
  * @modified 11/3/2019
  * @since 8/30/2019
  */
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.SetOptions;
+import com.google.cloud.firestore.WriteResult;
+import com.google.firebase.cloud.FirestoreClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import main.MainClass;
+import main.src.models.AssignmentModel;
 import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
 import java.net.URL;
-
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +41,8 @@ import java.util.regex.Pattern;
  * The Class SignUpController.
  */
 public class SignUpController implements Initializable {
+    public static AssignmentModel assignmentModel2 = new AssignmentModel();
+
 
     /** The name TF. */
     @FXML
@@ -78,7 +89,7 @@ public class SignUpController implements Initializable {
      * @param actionEvent the action event
      */
     @FXML
-    void registerAction(ActionEvent actionEvent) {
+    void registerAction(ActionEvent actionEvent) throws Exception {
         String name = nameTF.getText();
         String email = emailTF.getText();
         String pswd = pswdTF.getText();
@@ -194,9 +205,10 @@ public class SignUpController implements Initializable {
 
                 firebase.child(selectedRadiobutton.getText()).push().setValue(model);
 
-
             }
             //goto login
+            refreshList();
+
             new MainClass().openLoginWindow();
             MainClass.signUpStage.close();
 
@@ -205,10 +217,69 @@ public class SignUpController implements Initializable {
 
     }
 
+
+    List<String> showAssignments(String grade){
+
+        CountDownLatch done = new CountDownLatch(1);
+        final String message[] = {null};
+
+        List<String> assignmentlist = new ArrayList<>();
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    assignmentModel2 = data.getValue(AssignmentModel.class);
+                    assignmentModel2.setId(data.getKey());
+                    if(assignmentModel2.getGrade().equals(grade))
+                        assignmentlist.add(assignmentModel2.getAssignmentName());
+                }
+                done.countDown();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        try {
+            done.await(); //it will wait till the response is received from firebase.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        for(int i=0;i<assignmentlist.size();i++)
+            System.out.println( assignmentlist.get(i));
+
+        return assignmentlist;
+    }
+
+
+    //Ria Mehta
+    //Assigning list of assignments based on grade
+    public void refreshList() throws Exception {
+
+        Firestore db = FirestoreClient.getFirestore();
+        List<String> listAssign = showAssignments(grade.getValue().toString());
+        //Set unsubmitted assignments
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("Question 1", "");
+        docData.put("Question 2", "");
+        docData.put("Question 3", "");
+        for (int i = 0; i < listAssign.size(); i++) {
+            ApiFuture<WriteResult> future = db.collection("UserAssignmentStatus").document(emailTF.getText()).collection("NotSubmitted").document(listAssign.get(i)).set(docData, SetOptions.merge());
+            System.out.println(future.get().getUpdateTime());
+        }
+    }
+
+
     /**
      * Initialize.
      *
-     * @param url the url
+     * @param url            the url
      * @param resourceBundle the resource bundle
      */
     @Override

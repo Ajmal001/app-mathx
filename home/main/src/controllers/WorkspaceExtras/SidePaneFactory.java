@@ -6,13 +6,19 @@ import javafx.scene.layout.VBox;
 import main.src.controllers.Listeners.SandBoxListeners;
 import main.src.controllers.Listeners.SidePaneListeners;
 import main.src.controllers.Operator.BinaryOperator;
-import main.src.controllers.Operator.Operator;
+import main.src.controllers.Operator.CompareOperator;
+import main.src.controllers.Operator.ParentOperator;
 import main.src.controllers.Operator.UnaryOperator;
+
+/**
+ * @author Karandeep Singh Grewal
+ */
+
 
 public class SidePaneFactory {
 
     public void addLabelToSidePane(VBox sidePane, String labelName) {
-        Operator operator = null;
+        ParentOperator operator = null;
         switch (labelName) {
             case "Unary": {
                 operator = new UnaryOperator();
@@ -22,15 +28,21 @@ public class SidePaneFactory {
                 operator = new BinaryOperator();
                 break;
             }
+            case "Compare": {
+                operator = new CompareOperator();
+                break;
+            }
+
         }
-        Pane unaryLabel = operator.produceLabel();
-        sidePane.getChildren().addAll(unaryLabel);
+        assert operator != null;
+        Pane label = operator.produceLabel();
+        sidePane.getChildren().addAll(label);
     }
 
-    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade) {
+    public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade, StackPane commonPane) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
-        Operator operator;
+        ParentOperator operator;
         switch (operatorType) {
             case "Unary": {
                 operator = new UnaryOperator();
@@ -40,24 +52,24 @@ public class SidePaneFactory {
                 operator = new BinaryOperator();
                 break;
             }
+            case "Compare": {
+                operator = new CompareOperator();
+                break;
+            }
             default:
                 operator = new BinaryOperator();
         }
 
         StackPane stackPane;
-        stackPane = operator.produceOperator(string);
+        stackPane = operator.produceOperator(string, commonPane);
         sidePane.getChildren().addAll(stackPane);
 
         stackPane.setOnMouseClicked(e -> {
             SandBoxListeners sandBoxListeners = new SandBoxListeners();
             StackPane newStackPane;
-            newStackPane = new StackPane(operator.produceOperator(string));
-            sandBoxListeners.makeDraggable(newStackPane);
-            sandBoxListeners.makeRemovable(newStackPane);
-            //This value x in (grade>x) is the grade after which students use expressions with more than one operator
-            if (grade > 3) {
-                sandBoxListeners.makeJoinable(newStackPane);
-            }
+            newStackPane = new StackPane(operator.produceOperator(string, commonPane));
+            sandBoxListeners.makeDraggable(newStackPane, commonPane);
+            sandBoxListeners.makeDeletable(newStackPane);
             sandBox.getChildren().addAll(newStackPane);
         });
     }

@@ -7,13 +7,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import main.src.controllers.WorkspaceExtras.ExpressionEvaluator;
 import main.src.controllers.WorkspaceExtras.Extractor;
 
+import java.awt.*;
+import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * @author Karandeep Singh Grewal
+ */
 
 public class SandBoxListeners {
 
-    public void makeDraggable(StackPane operator) {
+
+    public void makeDraggable(StackPane operator, StackPane commonPane) {
         //Sandbox Bounds
         int HorizontalBound = 1650;
         int VerticalBound = 520;
@@ -61,26 +69,22 @@ public class SandBoxListeners {
 
         });
 
+        operator.setOnMouseReleased(mouseEvent -> {
+            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
+            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
 
-//
-//            HashMap expresssions;
-//            expresssions = (HashMap) Extractor.getAllExpressions(sandBox);
-//
-//            HashMap expressionData;
-//
-//            for (Object node : expresssions.keySet()) {
-//                expressionData = (HashMap) Extractor.getExpressionData((StackPane) node);
-//                for (Object temp : expressionData.entrySet()) {
-//                    System.out.println(temp);
-//                }
-//            }
-//            System.out.println("________________________________");
-//
 
+        });
+
+//        produceResultOnTextChange(operator);
     }
 
-    public void makeJoinable(StackPane operator) {
+
+    public void makeJoinable(StackPane operator, StackPane commonPane) {
         operator.setOnMouseReleased(mouseEvent -> {
+            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
+            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
+
             Map<Node, Object> nodes1 = Extractor.getAllTextFields(operator);
 
             Pane sandBox;
@@ -106,15 +110,24 @@ public class SandBoxListeners {
                         Rectangle tempRectangle;
                         tempRectangle = (Rectangle) tempStackPane.getChildren().get(0);
                         float tempRectangleWidth = (float) tempRectangle.getWidth();
-//                        tempRectangle.setWidth(tempRectangleWidth + operator.getWidth() - tempNodeWidth);
-                        tempRectangle.setWidth(500);
+                        System.out.println(nodeParent.getWidth() + " " + operator.getWidth());
                     }
             }
         });
     }
 
-    public void makeRemovable(StackPane operator) {
+    private void produceResultOnTextChange(StackPane operator) {
+        HashMap textFields;
+        textFields = (HashMap) Extractor.getAllTextFields(operator);
+        for (Object textfield : textFields.keySet()
+        ) {
+            if (textfield instanceof TextField) ((TextField) textfield).addTextListener(System.out::println);
+        }
+    }
+
+    public void makeDeletable(StackPane operator) {
         operator.setOnMouseClicked(mouseEvent -> {
+
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 Pane sandbox;
                 sandbox = (Pane) operator.getParent();
@@ -122,4 +135,6 @@ public class SandBoxListeners {
             }
         });
     }
+
+
 }

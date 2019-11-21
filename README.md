@@ -91,9 +91,9 @@ git clone https://github.com/SER515-Fall2019-Team4/app-mathx.git
 ```
 cd app-mathx/out/artifacts/app_mathx_jar/
 ```
-- Run the file
+- Run the file (replace `/path/to/javafx/lib` with the path to JavaFX/lib ) 
 ```
-java -jar app-mathx.jar
+java -jar --module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml app-mathx.jar
 ```
 
 ### Authors
@@ -108,3 +108,8 @@ java -jar app-mathx.jar
 
 * **Michael Findler**
 
+
+<br/>
+
+***Special Thanks to Mariusz Gromada for [MathParser](https://github.com/mariuszgromada/MathParser.org-mXparser)***
+(Used to evaluate expressions)
