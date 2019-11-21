@@ -1,6 +1,7 @@
 package main.src.controllers.Operator;
 
-import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -12,20 +13,20 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
-import javafx.scene.text.Text;
+
+import java.util.Random;
 
 /**
  * @author Karandeep Singh Grewal
  */
 
-public class UnaryOperator implements ParentOperator {
+public class CompareOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
-        stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
 
-        float shapeWidth = 150;
+        float shapeWidth = 200;
 
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
@@ -41,52 +42,47 @@ public class UnaryOperator implements ParentOperator {
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
 
-        Label operator = new Label(operatorString);
-        operator.setMinWidth(40);
-        operator.setAlignment(Pos.CENTER);
-        operator.setStyle("-fx-font-size: 14");
-        operator.setTextFill(Color.WHITE);
+        Label number1 = new Label(operatorString);
+        number1.setMinWidth(40);
+        number1.setAlignment(Pos.CENTER);
+        number1.setStyle("-fx-font-size: 14");
+        number1.setTextFill(Color.WHITE);
 
-        TextField input = new TextField();
-        if (operatorString.contains("gcd")) {
-            input.setText("( )");
-        }
-        input.textProperty().addListener((ov, prevText, currText) -> Platform.runLater(() -> {
-            Text text = new Text(currText);
-            text.setFont(input.getFont());
-            double width = text.getLayoutBounds().getWidth()
-                    + input.getPadding().getLeft() + input.getPadding().getRight()
-                    + 2d;
-            if (width < 30)
-                rectangle.setWidth(190);
-            input.setPrefWidth(width);
-            input.positionCaret(input.getCaretPosition());
-            rectangle.setWidth(110 + input.getWidth());
-        }));
+        TextField operator = new TextField();
+        operator.setMinWidth(30);
+        operator.setPrefWidth(30);
 
-//
-//        input.textProperty().addListener((observable, oldValue, newValue) -> {
-//            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-//            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
-//        });
+        final int LIMIT = 1;
+        operator.lengthProperty().addListener(new ChangeListener<>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    if (operator.getText().length() >= LIMIT) {
+                        operator.setText(operator.getText().substring(0, LIMIT));
+                    }
+                } else if (operator.getText().length() < LIMIT)
+                    rectangle.setWidth(190);
+            }
+        });
 
-        input.setMinWidth(60);
-        input.setPrefWidth(60);
+        Label number2 = new Label(operatorString);
+        number2.setMinWidth(40);
+        number2.setAlignment(Pos.CENTER);
+        number2.setStyle("-fx-font-size: 14");
+        number2.setTextFill(Color.WHITE);
+        hBox.getChildren().addAll(number1, operator, number2);
+        number1.setText(String.valueOf(new Random().nextInt(50)));
+        number2.setText(String.valueOf(new Random().nextInt(50)));
 
-
-
-
-        hBox.getChildren().addAll(operator, input);
         stackPane.getChildren().addAll(rectangle, hBox);
         return stackPane;
     }
-
 
     @Override
     public StackPane produceLabel() {
         StackPane labelPane = new StackPane();
         labelPane.setPrefSize(200, 30);
-        Label label = new Label("");
+        Label label = new Label("Compare");
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
         labelPane.getChildren().addAll(label);
         return labelPane;

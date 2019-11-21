@@ -5,9 +5,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import main.src.controllers.Grades.GradeEight;
-import main.src.controllers.Grades.GradeOne;
+import main.src.controllers.Grades.GradeFive;
 import main.src.controllers.Grades.GradeParent;
+import main.src.controllers.Grades.GradeTwo;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,14 +29,14 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int studentGrade = 1;
+        int studentGrade = 2;
         GradeParent grade = null;
         switch (studentGrade) {
-            case 1:
-                grade = new GradeOne();
+            case 2:
+                grade = new GradeTwo();
                 break;
-            case 8:
-                grade = new GradeEight();
+            case 5:
+                grade = new GradeFive();
                 break;
             default:
                 System.out.println("Unknown Grade");

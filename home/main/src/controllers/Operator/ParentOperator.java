@@ -9,7 +9,7 @@ import javafx.scene.layout.StackPane;
 
 public interface ParentOperator {
 
-    StackPane produceOperator(String operatorString);
+    StackPane produceOperator(String operatorString, StackPane commonPane);
 
     Pane produceLabel();
 }

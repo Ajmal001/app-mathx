@@ -24,9 +24,9 @@ public class MainClass extends Application {
 
 
         loginStage = primaryStage;
-        // openLoginWindow();
+//         openLoginWindow();
         openWorkSpaceWindow();
-        //   openSignUpWindow();
+//           openSignUpWindow();
         //assignmentWindow();
         // view_assignmentWindow();
 //        create_assignmentWindow();
