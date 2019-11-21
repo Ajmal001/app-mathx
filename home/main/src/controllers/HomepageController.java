@@ -13,46 +13,44 @@ package main.src.controllers;
 
 import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.*;
-import com.google.firebase.FirebaseApp;
+import com.google.cloud.firestore.DocumentReference;
+import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import main.MainClass;
 
-import java.io.InputStream;
 import java.io.FileInputStream;
-
-import javafx.scene.control.Label;
+import java.io.InputStream;
 
 /**
  * The Class HomepageController.
  */
 public class HomepageController {
 
-    /** The assignment elements. */
-//    @FXML private javafx.scene.control.ComboBox submittedAssignments;
-//    @FXML private javafx.scene.control.ComboBox notSubmittedAssignments;
-    @FXML
-    private javafx.scene.chart.BarChart assignmentComparisonChart;
+    public static ToggleGroup toggleGroup = new ToggleGroup();
     @FXML
     private VBox notSubmittedVBox;
     @FXML
     private VBox submittedVBox;
-    private RadioButton radioButtonAssign;
-    ToggleGroup toggleGroup = new ToggleGroup();
+    public RadioButton radioButtonAssign;
+    /**
+     * The assignment elements.
+     */
+
+
+    @FXML
+    private javafx.scene.chart.BarChart assignmentComparisonChart;
     @FXML private Label nameLabel;
     @FXML private Label emailLabel;
     @FXML private Label gradeLabel;
-
-
-
 
     /**
      * Initialize.
@@ -60,11 +58,9 @@ public class HomepageController {
      */
     @FXML
     public void initialize() {
-//        String labelHead=submittedAssignments.getText()+"\n\n\n";
         try {
             displaySubmittedAssignments();
-//            submittedAssignments.getSelectionModel().selectFirst();
-//            notSubmittedAssignments.getSelectionModel().selectFirst();
+
             compareAssignmentsOnBarChart();
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,14 +82,15 @@ public class HomepageController {
                 .setDatabaseUrl("https://ser515-team4.firebaseio.com")
                 .build();
 
-        FirebaseApp.initializeApp(options);
+
+//        FirebaseApp.initializeApp(options);
         Firestore db = FirestoreClient.getFirestore();
 
         /**
          * Logic for displaying list of assignments - submitted and not submitted
          */
 
-        String userName,userAddress,grade;
+        String userName, userAddress="",grade;
         if(LoginController.teacherModel!=null){
 
             userName = LoginController.teacherModel.getName();
@@ -111,11 +108,11 @@ public class HomepageController {
             userAddress = LoginController.studentModel.getAddress();
             emailLabel.setText(userAddress);
             grade = LoginController.studentModel.getGrade();
-            gradeLabel.setText(grade);
+            gradeLabel.setText("Grade-"+grade);
         }
 
 
-        String userEmail = "karandeep@gmail.com";
+        String userEmail = userAddress;
         Iterable<DocumentReference> docRefUpcoming = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApi;
         DocumentSnapshot documentData;
@@ -150,6 +147,7 @@ public class HomepageController {
         }
     }
 
+
     /**
      * Comparing grades of assignments on bar charts
      */
@@ -183,7 +181,6 @@ public class HomepageController {
 
         }
 
-
         assignmentComparisonChart.getData().addAll(assignments);
     }
 
@@ -191,22 +188,23 @@ public class HomepageController {
     /**
      * Workspace action.
      *
-     * @param actionEvent the action event
+     * @param actionEvent Open Workspace
      */
     @FXML
     void workspaceAction(ActionEvent actionEvent) {
-
+//        toggleGroup.getSelectedToggle().toString().split("'")[1];
         new MainClass().openWorkSpaceWindow();
-//        MainClass.homePageStage.close();
+        MainClass.homePageStage.close();
     }
 
     /**
      * Display.
      *
-     * @param event the event
+     * @param event Logout
      */
     @FXML
     public void display(ActionEvent event) {
+        //Logout button
         AlertBox.display();
     }
 }

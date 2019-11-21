@@ -10,8 +10,8 @@ package main.src.controllers;
  * @since        8/30/2019
  * @modified     11/3/2019
  */
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +20,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.MainClass;
-
-import java.io.IOException;
 
 
 /**
@@ -58,6 +56,7 @@ public class AlertBox {
         yesButton.setOnAction(e -> {
             window.close();
             MainClass.homePageStage.close();
+            new MainClass().openLoginWindow();
 
         });
 
