@@ -25,11 +25,11 @@ public class MainClass extends Application {
 
         loginStage = primaryStage;
 //         openLoginWindow();
-        openWorkSpaceWindow();
+        //    openWorkSpaceWindow();
 //           openSignUpWindow();
-        //assignmentWindow();
+        assignmentWindow();
         // view_assignmentWindow();
-//        create_assignmentWindow();
+        //  create_assignmentWindow();
     }
 
     public void openSignUpWindow() {

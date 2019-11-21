@@ -4,16 +4,29 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
 
+import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
 public class CreateAssignmentController {
@@ -24,14 +37,25 @@ public class CreateAssignmentController {
     @FXML
     private TextField ansTF;
 
-    /**
-     * The grade.
-     */
     @FXML
-    private ComboBox grade;
+    private static ComboBox grade;
+    @FXML
+    private VBox qs;
 
+    @FXML
+    private static ListView<String> l2;
+
+    private Checkbox cb;
+
+    /*
+    @FXML
+    private static void loadData() {
+        Label a = new Label("A");
+        Label b = new Label("B");
+        qs.getChildren().add(a);
+    }
+*/
     private void showAlert(String message) {
-
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Add Question Form Error");
         alert.setHeaderText(null);
@@ -41,7 +65,6 @@ public class CreateAssignmentController {
     }
 
     private void showConfirm(String message) {
-
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Question Added");
         alert.setHeaderText(null);
@@ -56,51 +79,42 @@ public class CreateAssignmentController {
      * Use this method to push questions to the DB
      * This Pushes grade,question and ans to firebase
      */
+    void pushQuestions(String grade, String question, String answer) {
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        QuestionAnsModel questionAns = new QuestionAnsModel();
+        questionAns.setGrade(grade);
+        questionAns.setQuestion(question);
+        questionAns.setAns(answer);
+        firebase.child("Grade").push().setValue(questionAns);
+        showConfirm("Question Added successfully");
+        System.out.println("Question pushed Successfully");
+    }
 
-    void pushAssignment(String assignmentName, String grade, List<String> questionId){
-
+    void pushAssignment(String assignmentName, String grade, List<String> questionId) {
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         AssignmentModel assignmentModel = new AssignmentModel();
         assignmentModel.setGrade(grade);
         assignmentModel.setAssignmentName(assignmentName);
         assignmentModel.setQuestions(questionId);
-
         firebase.child("Assignment").push().setValue(assignmentModel);
-
         System.out.println("Assignment pushed Successfully");
-
-
-
-
     }
-    void pushQuestions(String grade, String question, String answer) {
 
-        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
-        QuestionAnsModel questionAns = new QuestionAnsModel();
-
-        questionAns.setGrade(grade);
-        questionAns.setQuestion(question);
-        questionAns.setAns(answer);
-
-        firebase.child("Grade").push().setValue(questionAns);
-        showConfirm("Question Added successfully");
-        System.out.println("Question pushed Successfully");
-    }
     /**
      * Use this method to display questions,answers for a particular grade
      * This returns a list of questions and answers
      */
-
     /**
      * Add questions dynamically action.
      *
      * @param actionEvent the action event
      */
+
     @FXML
     void addqs(ActionEvent actionEvent) {
         String ques = quesTF.getText();
         String ans = ansTF.getText();
-
+        String gr = grade.getValue().toString();
 //Checking if Question is not empty
         if (ques.isEmpty()) {
             showAlert("Please enter a question");
@@ -112,17 +126,16 @@ public class CreateAssignmentController {
             showAlert("Please enter the Answer to your Question ");
             ansTF.requestFocus();
             return;
-        }/*
-        else if (grade.getValue() == null) {
+        } else if (grade.getValue() == null) {
             showAlert("Please choose a Grade");
             return;
-        }*/ else {
+        } else {
         /*
             push question to current list
             push question to question bucket on firebase
         */
             CreateAssignmentController ca = new CreateAssignmentController();
-            ca.pushQuestions("1", ques, ans);
+            ca.pushQuestions(gr, ques, ans);
         }
     }
 
@@ -174,40 +187,70 @@ public class CreateAssignmentController {
         return questionanslist;
     }
 
-
-    /** Uncomment the main method to test
-     *
-     */
-    /**
-     public static void main(String[] args) {
-
-
-        CreateAssignmentController createAssignmentController = new CreateAssignmentController();
-        createAssignmentController.pushQuestions("8","what is 5+18","23");
-
-
-
-     List<List<String>> result = createAssignmentController.displayQuestions("8");
-
-     System.out.println(result.size());
-
-     for (int i = 0; i < result.size(); i++) {
-
-     System.out.println("Question:" + result.get(i).get(0));
-     System.out.println("Answer:" + result.get(i).get(1));
-
-     }
-
-         List<String> questionid = new ArrayList<>();
-         questionid.add("id1");
-         questionid.add("id2");
-         questionid.add("id3");
-         createAssignmentController.pushAssignment("Assignment1","2",questionid);
-
-
+    public void loadData(ActionEvent actionEvent) {
+        Label b = new Label("B");
+        cb=new Checkbox("asd");
+        qs.getChildren().add(b);
 
     }
 
 
-    **/
+    /**
+     * Uncomment the main method to test
+     */
+ /*
+    public static void main(String[] args) {
+
+        CreateAssignmentController createAssignmentController = new CreateAssignmentController();
+        // createAssignmentController.pushQuestions("8","what is 5+18","23");
+
+                    grade.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                //    List<List<String>> result = createAssignmentController.displayQuestions(grade.getValue().toString());
+                //    ObservableList<String> items = FXCollections.observableArrayList (
+                //            "Single", "Double", "Suite", "Family App");
+                //    l1.setItems(items);
+
+            }
+        });
+/*
+ListView<String> list = new ListView<String>();
+        ObservableList<String> items = FXCollections.observableArrayList (
+                "Single", "Double", "Suite", "Family App");
+        l1.setItems(items);
+
+        grade.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+            }
+        });
+        grade.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                List<List<String>> result = createAssignmentController.displayQuestions(grade.getValue().toString());
+                scr1.setContent((Node) result);
+            }
+        });
+
+
+        System.out.println(result.size());
+
+        for (int i = 0; i < result.size(); i++) {
+
+            System.out.println("Question:" + result.get(i).get(0));
+            System.out.println("Answer:" + result.get(i).get(1));
+
+        }
+
+        List<String> questionid = new ArrayList<>();
+        questionid.add("id1");
+        questionid.add("id2");
+        questionid.add("id3");
+        createAssignmentController.pushAssignment("Assignment1", "2", questionid);
+
+    }
+*/
+
 }
