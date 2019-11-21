@@ -47,6 +47,11 @@ public class HomepageController {
     private VBox submittedVBox;
     private RadioButton radioButtonAssign;
     ToggleGroup toggleGroup = new ToggleGroup();
+    @FXML private Label nameLabel;
+    @FXML private Label emailLabel;
+    @FXML private Label gradeLabel;
+
+
 
 
     /**
@@ -87,6 +92,28 @@ public class HomepageController {
         /**
          * Logic for displaying list of assignments - submitted and not submitted
          */
+
+        String userName,userAddress,grade;
+        if(LoginController.teacherModel!=null){
+
+            userName = LoginController.teacherModel.getName();
+            nameLabel.setText(userName);
+            userAddress = LoginController.teacherModel.getAddress();
+            emailLabel.setText(userAddress);
+            grade = LoginController.teacherModel.getGrade();
+            gradeLabel.setText(grade);
+
+        }
+        else if(LoginController.studentModel!=null){
+
+            userName = LoginController.studentModel.getName();
+            nameLabel.setText(userName);
+            userAddress = LoginController.studentModel.getAddress();
+            emailLabel.setText(userAddress);
+            grade = LoginController.studentModel.getGrade();
+            gradeLabel.setText(grade);
+        }
+
 
         String userEmail = "karandeep@gmail.com";
         Iterable<DocumentReference> docRefUpcoming = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();

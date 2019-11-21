@@ -12,18 +12,25 @@ package main.src.controllers;
  * @since 8/30/2019
  */
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import main.MainClass;
+import main.src.models.AssignmentModel;
 import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
 import java.net.URL;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.CountDownLatch;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +39,7 @@ import java.util.regex.Pattern;
  * The Class SignUpController.
  */
 public class SignUpController implements Initializable {
+    public static AssignmentModel assignmentModel2 = new AssignmentModel();
 
     /** The name TF. */
     @FXML
@@ -215,4 +223,46 @@ public class SignUpController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    List<String> showAssignments(String grade){
+
+        CountDownLatch done = new CountDownLatch(1);
+        final String message[] = {null};
+
+        List<String> assignmentlist = new ArrayList<>();
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    assignmentModel2 = data.getValue(AssignmentModel.class);
+                    assignmentModel2.setId(data.getKey());
+                    if(assignmentModel2.getGrade().equals(grade))
+                      assignmentlist.add(assignmentModel2.getAssignmentName());
+                    //System.out.println("Size:" + assignmentlist.size());
+                }
+                done.countDown();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        try {
+            done.await(); //it will wait till the response is received from firebase.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        for(int i=0;i<assignmentlist.size();i++)
+            System.out.println( assignmentlist.get(i));
+
+        return assignmentlist;
+    }
+
+
 }
