@@ -201,7 +201,7 @@ public class LoginController implements Initializable {
             if (returnValue == 1 && type.equals("Teacher")) {
                 showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
-                new MainClass().view_assignmentWindow();
+                new MainClass().assignmentWindow();
                 MainClass.loginStage.close();
 
             } else if (returnValue == 1 && type.equals("Student")) {

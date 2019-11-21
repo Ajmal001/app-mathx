@@ -50,8 +50,9 @@ public class AlertBox {
         GridPane.setConstraints(label, 0,0);
 
         //Option Buttons
-        Button noButton = new Button("No");
+
         Button yesButton = new Button("Yes");
+        Button noButton = new Button("No");
         noButton.setOnAction(e -> window.close());
         yesButton.setOnAction(e -> {
             window.close();
@@ -69,7 +70,7 @@ public class AlertBox {
 //        StackPane.setAlignment(yesButton,Pos.BOTTOM_LEFT);
 //        StackPane.setAlignment(noButton, Pos.BASELINE_RIGHT);
 
-        Scene scene=new Scene(grid,250,80);
+        Scene scene = new Scene(grid, 270, 100);
         window.setScene(scene);
         window.showAndWait();
     }
