@@ -16,15 +16,12 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
 
 import java.awt.*;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
@@ -40,6 +37,7 @@ public class CreateAssignmentController {
     @FXML
     private static ComboBox grade;
     @FXML
+
     private VBox qs;
 
     @FXML
@@ -56,6 +54,7 @@ public class CreateAssignmentController {
     }
 */
     private void showAlert(String message) {
+
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Add Question Form Error");
         alert.setHeaderText(null);
@@ -65,6 +64,7 @@ public class CreateAssignmentController {
     }
 
     private void showConfirm(String message) {
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Question Added");
         alert.setHeaderText(null);
@@ -79,37 +79,46 @@ public class CreateAssignmentController {
      * Use this method to push questions to the DB
      * This Pushes grade,question and ans to firebase
      */
-    void pushQuestions(String grade, String question, String answer) {
-        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
-        QuestionAnsModel questionAns = new QuestionAnsModel();
-        questionAns.setGrade(grade);
-        questionAns.setQuestion(question);
-        questionAns.setAns(answer);
-        firebase.child("Grade").push().setValue(questionAns);
-        showConfirm("Question Added successfully");
-        System.out.println("Question pushed Successfully");
-    }
 
-    void pushAssignment(String assignmentName, String grade, List<String> questionId) {
+    void pushAssignment(String assignmentName, String grade, List<String> questionId){
+
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         AssignmentModel assignmentModel = new AssignmentModel();
         assignmentModel.setGrade(grade);
         assignmentModel.setAssignmentName(assignmentName);
         assignmentModel.setQuestions(questionId);
-        firebase.child("Assignment").push().setValue(assignmentModel);
-        System.out.println("Assignment pushed Successfully");
-    }
 
+        firebase.child("Assignment").push().setValue(assignmentModel);
+
+        System.out.println("Assignment pushed Successfully");
+
+
+
+
+    }
+    void pushQuestions(String grade, String question, String answer) {
+
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        QuestionAnsModel questionAns = new QuestionAnsModel();
+
+        questionAns.setGrade(grade);
+        questionAns.setQuestion(question);
+        questionAns.setAns(answer);
+
+        firebase.child("Grade").push().setValue(questionAns);
+        showConfirm("Question Added successfully");
+        System.out.println("Question pushed Successfully");
+    }
     /**
      * Use this method to display questions,answers for a particular grade
      * This returns a list of questions and answers
      */
+
     /**
      * Add questions dynamically action.
      *
      * @param actionEvent the action event
      */
-
     @FXML
     void addqs(ActionEvent actionEvent) {
         String ques = quesTF.getText();
@@ -135,7 +144,7 @@ public class CreateAssignmentController {
             push question to question bucket on firebase
         */
             CreateAssignmentController ca = new CreateAssignmentController();
-            ca.pushQuestions(gr, ques, ans);
+            ca.pushQuestions("1", ques, ans);
         }
     }
 
@@ -192,25 +201,15 @@ public class CreateAssignmentController {
         cb=new Checkbox("asd");
         qs.getChildren().add(b);
 
-    }
-
-
-    /**
-     * Uncomment the main method to test
+    /** Uncomment the main method to test
+     *
      */
- /*
-    public static void main(String[] args) {
+    /**
+     public static void main(String[] args) {
+
 
         CreateAssignmentController createAssignmentController = new CreateAssignmentController();
-        // createAssignmentController.pushQuestions("8","what is 5+18","23");
-
-                    grade.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                //    List<List<String>> result = createAssignmentController.displayQuestions(grade.getValue().toString());
-                //    ObservableList<String> items = FXCollections.observableArrayList (
-                //            "Single", "Double", "Suite", "Family App");
-                //    l1.setItems(items);
+        createAssignmentController.pushQuestions("8","what is 5+18","23");
 
             }
         });
@@ -249,8 +248,10 @@ ListView<String> list = new ListView<String>();
         questionid.add("id2");
         questionid.add("id3");
         createAssignmentController.pushAssignment("Assignment1", "2", questionid);
-
-    }
 */
+    }
+
+
+
 
 }

@@ -7,7 +7,13 @@ import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.Node;
+import javafx.scene.control.*;
+import main.src.models.AssignmentModel;
+import main.src.models.QuestionAnsModel;
+import main.src.models.AssignmentModel;
+import main.src.models.QuestionAnsModel;
+import javafx.scene.layout.VBox;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
 import javafx.scene.control.Label;
@@ -28,9 +34,11 @@ public class AssignmentController implements Initializable {
     public static AssignmentModel assignmentModel = new AssignmentModel();
 
     @FXML
-    private static VBox asgn;
+     static VBox asgn;
 
-    javafx.scene.control.Label x = new Label();
+    private  static RadioButton radioButtonAssign;
+    static ToggleGroup toggleGroup = new ToggleGroup();
+
 
     private void showAlert(String message) {
 
@@ -88,6 +96,7 @@ public class AssignmentController implements Initializable {
 
             }
         });
+
         try {
             done.await(); //it will wait till the response is received from firebase.
         } catch (InterruptedException e) {
@@ -95,16 +104,43 @@ public class AssignmentController implements Initializable {
         }
         for (int i = 0; i < assignmentlist.size(); i++) {
             System.out.println(assignmentlist.get(i));
-//            x.setText(assignmentlist.get(i));
- //           asgn.getChildren().add(x);
+            System.out.println("====");
+/*
+             radioButtonAssign = new RadioButton();
+
+            radioButtonAssign.setText("wqe");
+            radioButtonAssign.setToggleGroup(toggleGroup);
+            asgn.getChildren().addAll(radioButtonAssign);
+*/
         }
         return assignmentlist;
     }
+
 
     public static void main(String[] args) {
 
         AssignmentController as = new AssignmentController();
         as.displayAssignments();
+
+      //  List<String> qp=as.displayAssignments();
+//        Label x=new Label();
+//        Label b = new Label("B");
+        //    asgn.getChildren().add((Node) qp);
+
+        String s = "";
+/*
+        for (int i = 0; i < qp.size(); i++) {
+            //x.setText(new Label(qp.get(i)));
+         //   asgn.getChildren().add(b);
+         //   asgn.getChildren().add(new Label(qp.get(i)));
+            System.out.println(qp.get(i));
+            s+=qp.get(i);
+            s+='\n';
+        }
+        System.out.println(s);
+
+        */
+
     }
 
 

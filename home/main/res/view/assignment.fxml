@@ -15,7 +15,19 @@
          </font></Label>
       <ScrollPane layoutX="24.0" layoutY="91.0" prefHeight="283.0" prefWidth="273.0">
          <content>
-            <VBox fx:id="asgn" prefHeight="277.0" prefWidth="268.0" />
+            <VBox fx:id="asgn" prefHeight="277.0" prefWidth="268.0">
+               <children>
+                  <Label text="Assignment 1">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label text="Assignment 2">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children></VBox>
          </content>
       </ScrollPane>
       <Button layoutX="350.0" layoutY="188.0" mnemonicParsing="false" onAction="#create" text="Create New Assignment">
