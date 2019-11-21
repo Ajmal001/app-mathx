@@ -10,6 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
+import javafx.scene.control.Label;
+import main.src.models.AssignmentModel;
+import main.src.models.QuestionAnsModel;
+import javafx.scene.layout.VBox;
+import main.src.models.AssignmentModel;
+import main.src.models.QuestionAnsModel;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,6 +26,11 @@ import java.util.concurrent.CountDownLatch;
 public class AssignmentController implements Initializable {
 
     public static AssignmentModel assignmentModel = new AssignmentModel();
+
+    @FXML
+    private static VBox asgn;
+
+    javafx.scene.control.Label x = new Label();
 
     private void showAlert(String message) {
 
@@ -77,24 +88,23 @@ public class AssignmentController implements Initializable {
 
             }
         });
-
         try {
             done.await(); //it will wait till the response is received from firebase.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-        for(int i=0;i<assignmentlist.size();i++)
-            System.out.println( assignmentlist.get(i));
-
+        for (int i = 0; i < assignmentlist.size(); i++) {
+            System.out.println(assignmentlist.get(i));
+//            x.setText(assignmentlist.get(i));
+ //           asgn.getChildren().add(x);
+        }
         return assignmentlist;
     }
 
-
     public static void main(String[] args) {
-        AssignmentController ac =new AssignmentController();
-        ac.displayAssignments();
+
+        AssignmentController as = new AssignmentController();
+        as.displayAssignments();
     }
 
 
