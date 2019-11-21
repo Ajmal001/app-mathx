@@ -12,10 +12,10 @@ package main.src.controllers;
  */
 
 import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -23,7 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import main.MainClass;
-import com.firebase.client.Firebase;
 import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
@@ -202,7 +201,7 @@ public class LoginController implements Initializable {
             if (returnValue == 1 && type.equals("Teacher")) {
                 showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
-                new MainClass().openHomePageWindow();
+                new MainClass().view_assignmentWindow();
                 MainClass.loginStage.close();
 
             } else if (returnValue == 1 && type.equals("Student")) {

@@ -107,6 +107,10 @@ public class ExpressionEvaluator {
                 showAlert("Successful");
             }
 
+            if (expressionInput.contains("4^2") || expressionInput.contains("4*4")) {
+                showAlert("Successful");
+            }
+
             Bounds bounds = ((StackPane) node).localToScene(((StackPane) node).getLayoutBounds());
             //These numbers are adjustments done to view result parallel to the expression in the sandBox
             label.setLayoutX(bounds.getMinX() - 230);

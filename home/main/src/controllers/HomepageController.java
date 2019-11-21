@@ -12,11 +12,9 @@ package main.src.controllers;
  */
 
 import com.google.api.core.ApiFuture;
-import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,9 +24,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import main.MainClass;
-
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 /**
  * The Class HomepageController.
@@ -61,7 +56,6 @@ public class HomepageController {
         try {
             displaySubmittedAssignments();
 
-            compareAssignmentsOnBarChart();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,13 +68,13 @@ public class HomepageController {
     @FXML
     private void displaySubmittedAssignments() throws Exception {
 
-        InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
-
-        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(credentials)
-                .setDatabaseUrl("https://ser515-team4.firebaseio.com")
-                .build();
+//        InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/jsonFile.json");
+//
+//        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+//        FirebaseOptions options = new FirebaseOptions.Builder()
+//                .setCredentials(credentials)
+//                .setDatabaseUrl("https://ser515-team4.firebaseio.com")
+//                .build();
 
 
 //        FirebaseApp.initializeApp(options);
@@ -109,6 +103,8 @@ public class HomepageController {
             emailLabel.setText(userAddress);
             grade = LoginController.studentModel.getGrade();
             gradeLabel.setText("Grade-"+grade);
+            compareAssignmentsOnBarChart();
+
         }
 
 
