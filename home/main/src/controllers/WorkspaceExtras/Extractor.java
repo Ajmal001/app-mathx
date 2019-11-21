@@ -68,5 +68,24 @@ public class Extractor {
         return hashMap;
     }
 
+    public static <T extends Pane> Map<Object, String> getAllAnswers(T parent) {
+        return getAllAnswers(parent, new HashMap<>());
+    }
+
+    private static <T extends Pane> Map<Object, String> getAllAnswers(T parent, Map<Object, String> map) {
+        for (Node node : parent.getChildren()) {
+            // Nodes - You can add more.
+            if (node instanceof Label) {
+                map.put(node, ((Label) node).getText());
+            }
+            // Recursive.
+            if (node instanceof Pane) {
+                getAllAnswers((Pane) node, map);
+            }
+
+        }
+        return map;
+    }
+
 
 }

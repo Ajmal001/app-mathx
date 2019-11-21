@@ -44,7 +44,7 @@ public class ExpressionEvaluator {
     private void showAlert(String answer) {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Correct Answer");
+        alert.setTitle("Submission");
         alert.setHeaderText(null);
         alert.setContentText(answer);
         alert.showAndWait();
@@ -97,6 +97,15 @@ public class ExpressionEvaluator {
                 else
                     label.setText("False");
             label.setStyle("-fx-font-size: 30");
+            HashMap answers = (HashMap) Extractor.getAllAnswers(resultPane);
+            int counter = 0;
+            for (Object str : answers.entrySet()) {
+                if (str.toString().contains("True"))
+                    counter++;
+            }
+            if (counter > 2) {
+                showAlert("Successful");
+            }
 
             Bounds bounds = ((StackPane) node).localToScene(((StackPane) node).getLayoutBounds());
             //These numbers are adjustments done to view result parallel to the expression in the sandBox
