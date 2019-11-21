@@ -2,8 +2,8 @@
 controller
 │
 └───Grades
-│   ├── GradeOne
-│   ├── GradeEight
+│   ├── GradeTwo
+│   ├── GradeFive
 │   └── GradeParent     (Interface)
 │
 │
@@ -15,10 +15,9 @@ controller
 │
 │───Operator
 │   ├── BinaryOperator
-│   ├── CounterOperator
-│   ├── NumberOperator
+│   ├── CompareOperator
 │   ├── ParentOperator
-│   └── unitUnaryOperator
+│   └── UnaryOperator
 │
 │───workspaceCopies
 │   └── WorkspaceController_Copy    (Backup)
@@ -46,8 +45,8 @@ controller
 
 **Grade**
 * GradeParent - Interface for all the grades
-* GradeOne - Implements `GradeParent`
-    * `produceWorkspace()` - produces workspace for a specific grade (one in this case)
+* GradeTwo - Implements `GradeParent`
+    * `produceWorkspace()` - produces workspace for a specific grade (two in this case)
 
 
 **Listeners**
