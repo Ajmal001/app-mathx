@@ -1,5 +1,8 @@
 package main;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +12,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainClass extends Application {
 
@@ -20,12 +25,21 @@ public class MainClass extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+        InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
 
+        GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(credentials)
+                .setDatabaseUrl("https://ser515-team4.firebaseio.com")
+                .build();
+
+        FirebaseApp.initializeApp(options);
 
         loginStage = primaryStage;
-//         openLoginWindow();
-        openWorkSpaceWindow();
+        openLoginWindow();
+//        openWorkSpaceWindow();
+//        openHomePageWindow();
 //           openSignUpWindow();
         //assignmentWindow();
         // view_assignmentWindow();
