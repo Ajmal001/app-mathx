@@ -6,12 +6,14 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -24,12 +26,25 @@ public class CreateAssignmentController {
     @FXML
     private TextField ansTF;
 
-    /**
-     * The grade.
-     */
     @FXML
-    private ComboBox grade;
+    private static ComboBox grade;
+    @FXML
 
+    private VBox qs;
+
+    @FXML
+    private static ListView<String> l2;
+
+    private Checkbox cb;
+
+    /*
+    @FXML
+    private static void loadData() {
+        Label a = new Label("A");
+        Label b = new Label("B");
+        qs.getChildren().add(a);
+    }
+*/
     private void showAlert(String message) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -67,7 +82,7 @@ public class CreateAssignmentController {
 
         firebase.child("Assignment").push().setValue(assignmentModel);
 
-        System.out.println("Assignment pushed Successfully");
+//        System.out.println("Assignment pushed Successfully");
 
 
 
@@ -84,7 +99,7 @@ public class CreateAssignmentController {
 
         firebase.child("Grade").push().setValue(questionAns);
         showConfirm("Question Added successfully");
-        System.out.println("Question pushed Successfully");
+//        System.out.println("Question pushed Successfully");
     }
     /**
      * Use this method to display questions,answers for a particular grade
@@ -100,7 +115,7 @@ public class CreateAssignmentController {
     void addqs(ActionEvent actionEvent) {
         String ques = quesTF.getText();
         String ans = ansTF.getText();
-
+        String gr = grade.getValue().toString();
 //Checking if Question is not empty
         if (ques.isEmpty()) {
             showAlert("Please enter a question");
@@ -112,11 +127,10 @@ public class CreateAssignmentController {
             showAlert("Please enter the Answer to your Question ");
             ansTF.requestFocus();
             return;
-        }/*
-        else if (grade.getValue() == null) {
+        } else if (grade.getValue() == null) {
             showAlert("Please choose a Grade");
             return;
-        }*/ else {
+        } else {
         /*
             push question to current list
             push question to question bucket on firebase
@@ -130,7 +144,7 @@ public class CreateAssignmentController {
     List<List<String>> displayQuestions(String grade) {
 
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
+        final String[] message = {null};
 
         List<List<String>> questionanslist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -142,7 +156,7 @@ public class CreateAssignmentController {
                     questionAnsModel = data.getValue(QuestionAnsModel.class);
                     questionAnsModel.setId(data.getKey());
                     questionAnsModelList.add(questionAnsModel);
-                    System.out.println("Size:" + questionAnsModelList.size());
+//                    System.out.println("Size:" + questionAnsModelList.size());
                 }
                 done.countDown();
             }
@@ -174,6 +188,10 @@ public class CreateAssignmentController {
         return questionanslist;
     }
 
+    public void loadData(ActionEvent actionEvent) {
+        Label b = new Label("B");
+        cb=new Checkbox("asd");
+        qs.getChildren().add(b);
 
     /** Uncomment the main method to test
      *
@@ -185,29 +203,47 @@ public class CreateAssignmentController {
         CreateAssignmentController createAssignmentController = new CreateAssignmentController();
         createAssignmentController.pushQuestions("8","what is 5+18","23");
 
+            }
+        });
+/*
+ListView<String> list = new ListView<String>();
+        ObservableList<String> items = FXCollections.observableArrayList (
+                "Single", "Double", "Suite", "Family App");
+        l1.setItems(items);
+
+        grade.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
+            }
+        });
+        grade.valueProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observableValue, Object o, Object t1) {
+                List<List<String>> result = createAssignmentController.displayQuestions(grade.getValue().toString());
+                scr1.setContent((Node) result);
+            }
+        });
 
 
-     List<List<String>> result = createAssignmentController.displayQuestions("8");
+        System.out.println(result.size());
 
-     System.out.println(result.size());
+        for (int i = 0; i < result.size(); i++) {
 
-     for (int i = 0; i < result.size(); i++) {
+            System.out.println("Question:" + result.get(i).get(0));
+            System.out.println("Answer:" + result.get(i).get(1));
 
-     System.out.println("Question:" + result.get(i).get(0));
-     System.out.println("Answer:" + result.get(i).get(1));
+        }
 
-     }
-
-         List<String> questionid = new ArrayList<>();
-         questionid.add("id1");
-         questionid.add("id2");
-         questionid.add("id3");
-         createAssignmentController.pushAssignment("Assignment1","2",questionid);
-
-
-
+        List<String> questionid = new ArrayList<>();
+        questionid.add("id1");
+        questionid.add("id2");
+        questionid.add("id3");
+        createAssignmentController.pushAssignment("Assignment1", "2", questionid);
+*/
     }
 
 
-    **/
+
+
 }

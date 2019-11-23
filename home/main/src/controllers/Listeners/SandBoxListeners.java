@@ -10,6 +10,7 @@ import javafx.scene.shape.Rectangle;
 import main.src.controllers.WorkspaceExtras.ExpressionEvaluator;
 import main.src.controllers.WorkspaceExtras.Extractor;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -70,9 +71,13 @@ public class SandBoxListeners {
         operator.setOnMouseReleased(mouseEvent -> {
             ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
             expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
+
+
         });
 
+//        produceResultOnTextChange(operator);
     }
+
 
     public void makeJoinable(StackPane operator, StackPane commonPane) {
         operator.setOnMouseReleased(mouseEvent -> {
@@ -104,15 +109,24 @@ public class SandBoxListeners {
                         Rectangle tempRectangle;
                         tempRectangle = (Rectangle) tempStackPane.getChildren().get(0);
                         float tempRectangleWidth = (float) tempRectangle.getWidth();
-//                        tempRectangle.setWidth(tempRectangleWidth + operator.getWidth() - tempNodeWidth);
-                        tempRectangle.setWidth(500);
+//                        System.out.println(nodeParent.getWidth() + " " + operator.getWidth());
                     }
             }
         });
     }
 
+    private void produceResultOnTextChange(StackPane operator) {
+        HashMap textFields;
+        textFields = (HashMap) Extractor.getAllTextFields(operator);
+//        for (Object textfield : textFields.keySet()
+//        ) {
+//            if (textfield instanceof TextField) ((TextField) textfield).addTextListener(System.out::println);
+//        }
+    }
+
     public void makeDeletable(StackPane operator) {
         operator.setOnMouseClicked(mouseEvent -> {
+
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
                 Pane sandbox;
                 sandbox = (Pane) operator.getParent();
@@ -120,4 +134,6 @@ public class SandBoxListeners {
             }
         });
     }
+
+
 }

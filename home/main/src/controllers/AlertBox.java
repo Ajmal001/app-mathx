@@ -10,8 +10,8 @@ package main.src.controllers;
  * @since        8/30/2019
  * @modified     11/3/2019
  */
+
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,8 +20,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.MainClass;
-
-import java.io.IOException;
 
 
 /**
@@ -52,12 +50,14 @@ public class AlertBox {
         GridPane.setConstraints(label, 0,0);
 
         //Option Buttons
-        Button noButton = new Button("No");
+
         Button yesButton = new Button("Yes");
+        Button noButton = new Button("No");
         noButton.setOnAction(e -> window.close());
         yesButton.setOnAction(e -> {
             window.close();
             MainClass.homePageStage.close();
+            new MainClass().openLoginWindow();
 
         });
 
@@ -70,7 +70,7 @@ public class AlertBox {
 //        StackPane.setAlignment(yesButton,Pos.BOTTOM_LEFT);
 //        StackPane.setAlignment(noButton, Pos.BASELINE_RIGHT);
 
-        Scene scene=new Scene(grid,250,80);
+        Scene scene = new Scene(grid, 270, 100);
         window.setScene(scene);
         window.showAndWait();
     }

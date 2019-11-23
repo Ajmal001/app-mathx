@@ -11,40 +11,26 @@ import main.src.controllers.WorkspaceExtras.SidePaneFactory;
  * @author Karandeep Singh Grewal
  */
 
-public class GradeOne implements GradeParent {
+public class GradeFive implements GradeParent {
 
     @Override
     public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
-
-        sidePaneFactory.addLabelToSidePane(sidePane, "Number");
-        String[] numberOperators = {"1", "2"};
-        for (String operator : numberOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Number", 1, commonPane);
-        }
-
-        sidePaneFactory.addLabelToSidePane(sidePane, "Counter");
-        String[] counterOperators = {"111"};
-        for (String operator : counterOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Counter", 1, commonPane);
-        }
-
-
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
-        String[] unaryOperators = {"One"};
+        String[] unaryOperators = {"gcd", ""};
         for (String operator : unaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 1, commonPane);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 8, commonPane);
         }
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
-        String[] binaryOperators = {"+", "-"};
+        String[] binaryOperators = {"+", "-", "*", "/", "^"};
         for (String operator : binaryOperators) {
-            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 1, commonPane);
+            sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 8, commonPane);
         }
-
-
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-        String question = "What is the value of 2 + 4 ?";
+        //Change this string below to change the question
+        String question = "\n3. Two wires are 12m and 16m long. The wires are to be cut into pieces of equal length. Find the maximum length of each piece." +
+                "\n  If you use 4 wires of the resultant length, what will be the area of shape formed? ";
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {

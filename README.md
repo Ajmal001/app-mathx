@@ -1,4 +1,4 @@
-# MathMathX
+# MathX
 Project to help youngsters learning to form valid mathematical expressions.
 
 ## Getting Started
