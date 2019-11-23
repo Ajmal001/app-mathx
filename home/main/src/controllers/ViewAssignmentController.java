@@ -71,7 +71,7 @@ public class ViewAssignmentController implements Initializable {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     assignmentModel2 = data.getValue(AssignmentModel.class);
                     assignmentModel2.setId(data.getKey());
-                    if(assignmentModel2.getAssignmentName().equals("Assignment1")){
+                    if(assignmentModel2.getAssignmentName().equals(Assignment)){
 
                         questionids = assignmentModel2.getQuestions();
                     }
