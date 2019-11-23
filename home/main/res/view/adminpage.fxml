@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollBar?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,20 +20,31 @@
       <Label layoutX="272.0" layoutY="52.0" text="Students" />
       <Label layoutX="466.0" layoutY="52.0" text="Teachers" />
       <Label layoutX="52.0" layoutY="52.0" text="New Registrations" />
-      <ComboBox fx:id="registrationList" layoutX="30.0" layoutY="78.0" onAction="#displayInfo" prefHeight="27.0" prefWidth="150.0" />
-      <ComboBox fx:id="studentsList" layoutX="225.0" layoutY="78.0" onAction="#displayStudentInfo" prefHeight="27.0" prefWidth="150.0" />
-      <ComboBox fx:id="teachersList" layoutX="420.0" layoutY="78.0" onAction="#displayTeacherInfo" prefHeight="27.0" prefWidth="150.0" />
       <Button fx:id="authorizeButton" layoutX="30.0" layoutY="225.0" mnemonicParsing="false" onAction="#authorize" text="Authorize" />
       <Button fx:id="declineButton" layoutX="116.0" layoutY="225.0" mnemonicParsing="false" onAction="#decline" text="Decline" />
-      <TextArea fx:id="registrationInfoDisplay" layoutX="30.0" layoutY="112.0" prefHeight="100.0" prefWidth="150.0" />
-      <TextArea fx:id="studentInfoDisplay" layoutX="225.0" layoutY="112.0" prefHeight="100.0" prefWidth="150.0" />
-      <Button fx:id="rescindButtonStudent" layoutX="225.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeStudentAccess" prefHeight="27.0" prefWidth="150.0" text="Rescind Access" />
-      <Button fx:id="rescindButtonTeacher" layoutX="420.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeTeacherAccess" prefHeight="27.0" prefWidth="150.0" text="Rescind Access" />
-      <TextArea fx:id="teacherInfoDisplay" layoutX="420.0" layoutY="112.0" prefHeight="100.0" prefWidth="150.0" />
+      <Button fx:id="unauthorizeButtonStudent" layoutX="225.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeStudentAccess" prefHeight="27.0" prefWidth="150.0" text="Unauthorize" />
+      <Button fx:id="unauthorizeButtonTeacher" layoutX="420.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeTeacherAccess" prefHeight="27.0" prefWidth="150.0" text="Unauthorize" />
       <Separator layoutX="8.0" layoutY="278.0" prefHeight="3.0" prefWidth="583.0" />
-      <Label layoutX="30.0" layoutY="292.0" text="Activity Log" />
-      <TextArea layoutX="30.0" layoutY="318.0" prefHeight="60.0" prefWidth="540.0" />
-      <ScrollBar layoutX="30.0" layoutY="378.0" prefHeight="17.0" prefWidth="540.0" />
-      <ScrollBar layoutX="553.0" layoutY="318.0" orientation="VERTICAL" prefHeight="60.0" prefWidth="17.0" />
+      <Label layoutX="30.0" layoutY="292.0" text="Details" />
+      <ScrollPane layoutX="30.0" layoutY="78.0" prefHeight="136.0" prefWidth="135.0">
+         <content>
+            <VBox fx:id="newRegistrationView" onMouseClicked="#selectNewRegistration" prefHeight="134.0" prefWidth="150.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="30.0" layoutY="320.0" prefHeight="61.0" prefWidth="541.0">
+        <content>
+          <AnchorPane fx:id="viewDetails" minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="542.0" />
+        </content>
+      </ScrollPane>
+      <ScrollPane layoutX="234.0" layoutY="78.0" prefHeight="136.0" prefWidth="135.0">
+         <content>
+            <VBox fx:id="studentsView" onMouseClicked="#selectStudent" prefHeight="137.0" prefWidth="139.0" />
+         </content>
+      </ScrollPane>
+      <ScrollPane layoutX="429.0" layoutY="78.0" prefHeight="136.0" prefWidth="135.0">
+         <content>
+            <VBox fx:id="teachersView" onMouseClicked="#selectTeacher" prefHeight="138.0" prefWidth="133.0" />
+         </content>
+      </ScrollPane>
    </children>
 </Pane>
