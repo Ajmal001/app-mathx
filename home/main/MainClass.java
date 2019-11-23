@@ -19,7 +19,7 @@ import java.io.InputStream;
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage;
+    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage, practStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -39,26 +39,38 @@ public class MainClass extends Application {
         FirebaseApp.initializeApp(options);
 
         asgnStage = primaryStage;
-        openLoginWindow();
+        // openLoginWindow();
+        //   listWindow();
 //        openWorkSpaceWindow();
 //        openSignUpWindow();
-//        assignmentWindow();
-//        view_assignmentWindow();
+        assignmentWindow();
+        //       view_assignmentWindow();
 //        create_assignmentWindow();
     }
 
-    public void openSignUpWindow() {
 
+    public void listWindow() {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/ListViewUi.fxml"));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            practStage = new Stage();
+            practStage.setScene(scene);
+            practStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 
+    public void openSignUpWindow() {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
             GridPane pane = loader.load();
             Scene scene = new Scene(pane);
             signUpStage = new Stage();
             signUpStage.setScene(scene);
             signUpStage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
