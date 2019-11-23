@@ -103,7 +103,7 @@ public class HomepageController {
             emailLabel.setText(userAddress);
             grade = LoginController.studentModel.getGrade();
             gradeLabel.setText("Grade-"+grade);
-            compareAssignmentsOnBarChart();
+            compareAssignmentsOnBarChart(userAddress);
 
         }
 
@@ -148,11 +148,11 @@ public class HomepageController {
      * Comparing grades of assignments on bar charts
      */
 
-    void compareAssignmentsOnBarChart() throws Exception {
+    void compareAssignmentsOnBarChart(String userAddress) throws Exception {
 
         Firestore db = FirestoreClient.getFirestore();
 
-        String userEmail = "karandeep@gmail.com";
+        String userEmail = userAddress;
 
         Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApiSolved;

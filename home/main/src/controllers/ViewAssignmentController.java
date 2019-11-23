@@ -76,18 +76,22 @@ public class ViewAssignmentController implements Initializable {
 
     /**
      * Initialize.
-     * <p>
-     * //     * @param url            the url
-     * //    * @param resourceBundle the resource bundle
+     *
+//     * @param url            the url
+//     * @param resourceBundle the resource bundle
      */
 
     List<String> displayQuestions(String Assignment) {
         CountDownLatch done = new CountDownLatch(1);
         final String[] message = {null};
+
+
+
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     assignmentModel2 = data.getValue(AssignmentModel.class);
                     assignmentModel2.setId(data.getKey());
@@ -101,8 +105,10 @@ public class ViewAssignmentController implements Initializable {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
+
             }
         });
+
         try {
             done.await(); //it will wait till the response is received from firebase.
         } catch (InterruptedException e) {
@@ -113,15 +119,19 @@ public class ViewAssignmentController implements Initializable {
 
         CountDownLatch done2 = new CountDownLatch(1);
         final String[] message2 = {null};
+
+
         Firebase firebase2 = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase2.child("Grade").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     questionAnsModel2 = data.getValue(QuestionAnsModel.class);
                     questionAnsModel2.setId(data.getKey());
                     if (questionids.contains(questionAnsModel2.getId())) {
                         questions.add(questionAnsModel2.getQuestion());
+
                     }
                     //System.out.println("Size:" + assignmentlist.size());
                 }
@@ -130,8 +140,10 @@ public class ViewAssignmentController implements Initializable {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
+
             }
         });
+
         try {
             done2.await(); //it will wait till the response is received from firebase.
         } catch (InterruptedException e) {
@@ -141,6 +153,7 @@ public class ViewAssignmentController implements Initializable {
             System.out.println(questions.get(i));
         return questions;
     }
+
 
 //    public static void main(String[] args) {
 //
