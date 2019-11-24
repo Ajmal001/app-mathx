@@ -15,7 +15,7 @@
                 <Font name="Sawasdee" size="24.0"/>
             </font>
         </Label>
-        <Button layoutX="350.0" layoutY="188.0" mnemonicParsing="false" onAction="#create" text="Create New Assignment">
+        <Button text="Create New Assignment" layoutX="350.0" layoutY="188.0" mnemonicParsing="false" onAction="#create">
             <font>
                 <Font name="Sawasdee" size="18.0"/>
             </font>
