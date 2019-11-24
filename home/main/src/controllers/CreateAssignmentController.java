@@ -27,10 +27,8 @@ import main.src.models.QuestionAnsModel;
 
 import java.awt.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
 public class CreateAssignmentController implements Initializable {
@@ -133,6 +131,7 @@ public class CreateAssignmentController implements Initializable {
         final String message[] = {null};
         List<List<String>> questionanslist = new ArrayList<>();
         List<String> Qlist = new ArrayList<>();
+        Set<String> set = new HashSet<String>();
 
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase.child("Grade").addValueEventListener(new ValueEventListener() {
@@ -159,12 +158,16 @@ public class CreateAssignmentController implements Initializable {
         for (int i = 0; i < questionAnsModelList.size(); i++) {
             QuestionAnsModel questionAns = questionAnsModelList.get(i);
             if (questionAns.getGrade().equals(grade)) {
-                List<String> list = new ArrayList<>();
-                list.add(questionAns.getQuestion());
+                //List<String> list = new ArrayList<>();
+                //list.add(questionAns.getQuestion());
                 //      list.add(questionAns.getAns());
-                Qlist.add(questionAns.getQuestion());
+                //Qlist.add(questionAns.getQuestion());
+                set.add(questionAns.getQuestion());
             }
         }
+
+            Qlist.addAll(set);
+        
         System.out.println(Qlist);
         return Qlist;
 
