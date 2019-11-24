@@ -25,7 +25,9 @@ public class SandBoxListeners {
         int HorizontalBound = 1650;
         int VerticalBound = 520;
 
-        operator.setOnMouseEntered(mouseEvent -> operator.setCursor(Cursor.MOVE));
+        operator.setOnMouseEntered(mouseEvent -> {
+            operator.setCursor(Cursor.MOVE);
+        });
 
         //Adjust drag for instant drag
         final double[] deltaX = new double[1];
@@ -34,7 +36,6 @@ public class SandBoxListeners {
             deltaX[0] = operator.getLayoutX() - mouseEvent.getSceneX();
             deltaY[0] = operator.getLayoutY() - mouseEvent.getSceneY();
         });
-
 
         //No drag out of bounds
         operator.setOnMouseDragged(mouseEvent -> {
@@ -71,11 +72,8 @@ public class SandBoxListeners {
         operator.setOnMouseReleased(mouseEvent -> {
             ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
             expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
-
-
         });
 
-//        produceResultOnTextChange(operator);
     }
 
 

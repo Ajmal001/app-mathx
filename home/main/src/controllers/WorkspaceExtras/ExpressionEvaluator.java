@@ -1,10 +1,15 @@
 package main.src.controllers.WorkspaceExtras;
 
+import javafx.animation.PauseTransition;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.util.Duration;
 import org.mariuszgromada.math.mxparser.Expression;
 
 import java.util.ArrayList;
@@ -114,10 +119,29 @@ public class ExpressionEvaluator {
             Bounds bounds = ((StackPane) node).localToScene(((StackPane) node).getLayoutBounds());
             //These numbers are adjustments done to view result parallel to the expression in the sandBox
             label.setLayoutX(bounds.getMinX() - 230);
-            label.setLayoutY((bounds.getMinY() - 30) * 0.99);
+            label.setLayoutY((bounds.getMinY() - 60));
             label.setStyle("-fx-border-color: black; -fx-label-padding: 10; -fx-border-radius: 5; -fx-border-width: 2");
+            label.setOnMouseClicked(mouseEvent -> {
+                final Clipboard clipboard = Clipboard.getSystemClipboard();
+                final ClipboardContent content = new ClipboardContent();
+                content.putString(label.getText());
+//                Stage popup = new Stage();
+//                popup.initStyle(StageStyle.UNDECORATED);
+//                popup.s(Color.WHITE);
+//
+//                popup.setX(mouseEvent.getSceneX());
+//                popup.setY(mouseEvent.getSceneY());
+//                delay.setOnFinished(e -> popup.hide());
+//                popup.show();
+//                delay.play();
 
-
+                PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+                Tooltip tooltip = new Tooltip("Result Copied: " + label.getText());
+                tooltip.show(label, mouseEvent.getSceneX(), mouseEvent.getSceneY());
+                delay.setOnFinished(e -> tooltip.hide());
+                delay.play();
+                clipboard.setContent(content);
+            });
         }
     }
 }
