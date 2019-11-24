@@ -4,12 +4,17 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import main.MainClass;
 import main.src.models.AssignmentModel;
-import main.src.models.QuestionAnsModel;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,6 +23,14 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
 public class AssignmentController implements Initializable {
+
+    @FXML
+    private ListView<String> listBoxMain;
+
+    @FXML
+    private VBox VBoxMain;
+
+    static String asgn;
 
     public static AssignmentModel assignmentModel = new AssignmentModel();
 
@@ -36,6 +49,7 @@ public class AssignmentController implements Initializable {
      *
      * @param actionEvent the action event
      */
+
     @FXML
     void create(ActionEvent actionEvent) {
 
@@ -47,22 +61,30 @@ public class AssignmentController implements Initializable {
      * @param url            the url
      * @param resourceBundle the resource bundle
      */
+    ObservableList<String> assign = FXCollections.observableArrayList(displayAssignments());
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        listBoxMain.setItems(assign);
+        listBoxMain.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                System.out.println(t1);
+                AssignmentController.asgn = t1;
+                new MainClass().view_assignmentWindow();
 
+            }
+        });
     }
 
     List<String> displayAssignments() {
-
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
-
+        final String[] message = {null};
         List<String> assignmentlist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     assignmentModel = data.getValue(AssignmentModel.class);
                     assignmentModel.setId(data.getKey());
@@ -74,28 +96,18 @@ public class AssignmentController implements Initializable {
 
             @Override
             public void onCancelled(FirebaseError firebaseError) {
-
             }
         });
-
         try {
             done.await(); //it will wait till the response is received from firebase.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-        for(int i=0;i<assignmentlist.size();i++)
-            System.out.println( assignmentlist.get(i));
-
         return assignmentlist;
     }
 
-
     public static void main(String[] args) {
-        AssignmentController ac =new AssignmentController();
-        ac.displayAssignments();
+        AssignmentController as = new AssignmentController();
+        as.displayAssignments();
     }
-
-
 }

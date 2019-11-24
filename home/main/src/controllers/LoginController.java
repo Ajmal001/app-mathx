@@ -12,10 +12,10 @@ package main.src.controllers;
  */
 
 import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -23,7 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import main.MainClass;
-import com.firebase.client.Firebase;
 import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
@@ -53,7 +52,7 @@ public class LoginController implements Initializable {
 
 
     public LoginController() {
-        System.out.println("In Constructor");
+//        System.out.println("In Constructor");
         //Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
 
@@ -178,7 +177,7 @@ public class LoginController implements Initializable {
             return;
         } else {
 
-            System.out.println(teachersList.size());
+//            System.out.println(teachersList.size());
             String type = "";
             for (int i = 0; i < teachersList.size(); i++) {
                 TeacherSignUpModel model = teachersList.get(i);
@@ -189,7 +188,7 @@ public class LoginController implements Initializable {
                     studentModel = null;
                 }
             }
-            System.out.println(studentsList.size());
+//            System.out.println(studentsList.size());
             for (int i = 0; i < studentsList.size(); i++) {
                 StudentSignUpModel model = studentsList.get(i);
                 if (emTF.getText().equals(model.getAddress()) && pswdTF.getText().equals(model.getPassword())) {
@@ -202,7 +201,7 @@ public class LoginController implements Initializable {
             if (returnValue == 1 && type.equals("Teacher")) {
                 showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
-                new MainClass().openHomePageWindow();
+                new MainClass().assignmentWindow();
                 MainClass.loginStage.close();
 
             } else if (returnValue == 1 && type.equals("Student")) {

@@ -38,6 +38,11 @@ public class WorkspaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         int studentGrade = 2;
+        if (LoginController.studentModel.getGrade() != null) {
+            studentGrade = Integer.parseInt(LoginController.studentModel.getGrade());
+        }
+
+
         GradeParent grade = null;
         switch (studentGrade) {
             case 2:
@@ -51,7 +56,7 @@ public class WorkspaceController implements Initializable {
                 break;
 
         }
-        System.out.println("Producing Grade:" + studentGrade);
+//        System.out.println("Producing Grade:" + studentGrade);
         grade.produceWorkspace(sandBox, sidePane, commonPane);
 
         homeButton.setOnMouseClicked(mouseEvent -> {

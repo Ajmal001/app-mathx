@@ -10,7 +10,6 @@ import javafx.scene.shape.Rectangle;
 import main.src.controllers.WorkspaceExtras.ExpressionEvaluator;
 import main.src.controllers.WorkspaceExtras.Extractor;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,7 +109,7 @@ public class SandBoxListeners {
                         Rectangle tempRectangle;
                         tempRectangle = (Rectangle) tempStackPane.getChildren().get(0);
                         float tempRectangleWidth = (float) tempRectangle.getWidth();
-                        System.out.println(nodeParent.getWidth() + " " + operator.getWidth());
+//                        System.out.println(nodeParent.getWidth() + " " + operator.getWidth());
                     }
             }
         });
@@ -119,10 +118,10 @@ public class SandBoxListeners {
     private void produceResultOnTextChange(StackPane operator) {
         HashMap textFields;
         textFields = (HashMap) Extractor.getAllTextFields(operator);
-        for (Object textfield : textFields.keySet()
-        ) {
-            if (textfield instanceof TextField) ((TextField) textfield).addTextListener(System.out::println);
-        }
+//        for (Object textfield : textFields.keySet()
+//        ) {
+//            if (textfield instanceof TextField) ((TextField) textfield).addTextListener(System.out::println);
+//        }
     }
 
     public void makeDeletable(StackPane operator) {

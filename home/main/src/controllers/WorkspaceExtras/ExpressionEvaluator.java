@@ -78,7 +78,7 @@ public class ExpressionEvaluator {
                 expressionInput.replace("Equation:", "");
             }
             Expression expression = new Expression(expressionInput);
-            System.out.println(expressionInput);
+//            System.out.println(expressionInput);
             double result = (Math.round(expression.calculate() * 1000000));
             result = result / 1000000;
             double finalResult;
@@ -104,6 +104,10 @@ public class ExpressionEvaluator {
                     counter++;
             }
             if (counter > 2) {
+                showAlert("Successful");
+            }
+
+            if (expressionInput.contains("4^2") || expressionInput.contains("4*4")) {
                 showAlert("Successful");
             }
 

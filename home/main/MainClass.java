@@ -12,13 +12,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage;
+    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage, practStage;
 
     public static void main(String[] args) {
         launch(args);
@@ -26,8 +27,9 @@ public class MainClass extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        InputStream serviceAccount = new FileInputStream("/Users/riamehta/IdeaProjects/app-mathx/home/main/src/controllers/ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json");
+//        InputStream serviceAccount = new FileInputStream("/main/src/controllers/jsonFile.json");
 
+        InputStream serviceAccount = new FileInputStream(new File(getClass().getResource("src/controllers/jsonFile.json").getFile()));
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(credentials)
@@ -36,28 +38,39 @@ public class MainClass extends Application {
 
         FirebaseApp.initializeApp(options);
 
-        loginStage = primaryStage;
-        openLoginWindow();
+        asgnStage = primaryStage;
+        // openLoginWindow();
+        //   listWindow();
 //        openWorkSpaceWindow();
-//        openHomePageWindow();
-//           openSignUpWindow();
-        //assignmentWindow();
-        // view_assignmentWindow();
+//        openSignUpWindow();
+        assignmentWindow();
+        //       view_assignmentWindow();
 //        create_assignmentWindow();
     }
 
-    public void openSignUpWindow() {
 
+    public void listWindow() {
         try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/ListViewUi.fxml"));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            practStage = new Stage();
+            practStage.setScene(scene);
+            practStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
 
+    public void openSignUpWindow() {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
             GridPane pane = loader.load();
             Scene scene = new Scene(pane);
             signUpStage = new Stage();
             signUpStage.setScene(scene);
             signUpStage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

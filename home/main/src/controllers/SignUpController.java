@@ -221,7 +221,7 @@ public class SignUpController implements Initializable {
     List<String> showAssignments(String grade){
 
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
+        final String[] message = {null};
 
         List<String> assignmentlist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -251,8 +251,8 @@ public class SignUpController implements Initializable {
         }
 
 
-        for(int i=0;i<assignmentlist.size();i++)
-            System.out.println( assignmentlist.get(i));
+//        for(int i=0;i<assignmentlist.size();i++)
+//            System.out.println( assignmentlist.get(i));
 
         return assignmentlist;
     }
@@ -271,7 +271,7 @@ public class SignUpController implements Initializable {
         docData.put("Question 3", "");
         for (int i = 0; i < listAssign.size(); i++) {
             ApiFuture<WriteResult> future = db.collection("UserAssignmentStatus").document(emailTF.getText()).collection("NotSubmitted").document(listAssign.get(i)).set(docData, SetOptions.merge());
-            System.out.println(future.get().getUpdateTime());
+//            System.out.println(future.get().getUpdateTime());
         }
     }
 
