@@ -16,12 +16,18 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import main.MainClass;
 import main.src.models.AdminModel;
 import main.src.models.StudentSignUpModel;
@@ -265,4 +271,29 @@ public class LoginController implements Initializable {
 
     }
 
+    public void adminClick(ActionEvent actionEvent) {
+        WebView myWebView = new WebView();
+        WebEngine engine = myWebView.getEngine();
+
+
+        engine.load("https://ser515-team4.firebaseio.com/");
+        VBox vBox = new VBox();
+//        Button button = new Button("Logout");
+//        button.setOnAction(new EventHandler<ActionEvent>() {
+//            @Override
+//            public void handle(ActionEvent event) {
+//                new MainClass().openLoginWindow();
+//                MainClass.loginStage.close();
+//            }
+//        });
+
+        vBox.getChildren().addAll(myWebView);
+        Scene scene = new Scene(vBox, 1380, 768);
+
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+//        MainClass.loginStage.setScene(scene);
+//        MainClass.loginStage.show();
+    }
 }
