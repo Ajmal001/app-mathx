@@ -37,7 +37,7 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        int studentGrade = 5;
+        int studentGrade = 2;
         if (LoginController.studentModel.getGrade() != null) {
             studentGrade = Integer.parseInt(LoginController.studentModel.getGrade());
         }

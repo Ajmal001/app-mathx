@@ -30,7 +30,8 @@ public class GradeTwo implements GradeParent {
         }
 
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-        String question = "Click on the compare operator and fill in the blanks - 3 Times";
+        String question = "1. Two + Two? <TEXTFIELD> <PROMPT:Answer:PROMPT> <SEP>" +
+                "\n2. Five - Three? <TEXTFIELD> <PROMPT:Answer:PROMPT>";
 
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {

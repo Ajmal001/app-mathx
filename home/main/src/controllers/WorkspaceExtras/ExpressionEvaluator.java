@@ -122,25 +122,17 @@ public class ExpressionEvaluator {
             label.setLayoutY((bounds.getMinY() - 60));
             label.setStyle("-fx-border-color: black; -fx-label-padding: 10; -fx-border-radius: 5; -fx-border-width: 2");
             label.setOnMouseClicked(mouseEvent -> {
-                final Clipboard clipboard = Clipboard.getSystemClipboard();
-                final ClipboardContent content = new ClipboardContent();
-                content.putString(label.getText());
-//                Stage popup = new Stage();
-//                popup.initStyle(StageStyle.UNDECORATED);
-//                popup.s(Color.WHITE);
-//
-//                popup.setX(mouseEvent.getSceneX());
-//                popup.setY(mouseEvent.getSceneY());
-//                delay.setOnFinished(e -> popup.hide());
-//                popup.show();
-//                delay.play();
-
-                PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
-                Tooltip tooltip = new Tooltip("Result Copied: " + label.getText());
-                tooltip.show(label, mouseEvent.getSceneX(), mouseEvent.getSceneY());
-                delay.setOnFinished(e -> tooltip.hide());
-                delay.play();
-                clipboard.setContent(content);
+                if (mouseEvent.getClickCount() == 2) {
+                    final Clipboard clipboard = Clipboard.getSystemClipboard();
+                    final ClipboardContent content = new ClipboardContent();
+                    content.putString(label.getText());
+                    PauseTransition delay = new PauseTransition(Duration.seconds(0.5));
+                    Tooltip tooltip = new Tooltip("Result Copied: " + label.getText());
+                    tooltip.show(label, mouseEvent.getSceneX(), mouseEvent.getSceneY());
+                    delay.setOnFinished(e -> tooltip.hide());
+                    delay.play();
+                    clipboard.setContent(content);
+                }
             });
         }
     }
