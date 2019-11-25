@@ -41,9 +41,9 @@ public class MainClass extends Application {
         asgnStage = primaryStage;
 //         openLoginWindow();
         //   listWindow();
-        openWorkSpaceWindow();
+//        openWorkSpaceWindow();
 //        openSignUpWindow();
-//        assignmentWindow();
+        assignmentWindow();
 //               view_assignmentWindow();
 //        create_assignmentWindow();
     }

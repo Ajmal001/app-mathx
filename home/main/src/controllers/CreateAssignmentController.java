@@ -207,7 +207,46 @@ public class CreateAssignmentController implements Initializable {
             }
         }
         Qlist.addAll(set);
-        System.out.println(Qlist);
+       // System.out.println(Qlist);
+        return Qlist;
+    }
+
+    List<String> displayQuestionsId(String grade) {
+        CountDownLatch done = new CountDownLatch(1);
+        final String message[] = {null};
+        List<String> questionanslist = new ArrayList<>();
+        List<String> Qlist = new ArrayList<>();
+        Set<String> set = new HashSet<String>();
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        firebase.child("Grade").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    questionAnsModel = data.getValue(QuestionAnsModel.class);
+                    questionAnsModel.setId(data.getKey());
+                    questionAnsModelList.add(questionAnsModel);
+                    //    System.out.println("Size:" + questionAnsModelList.size());
+                }
+                done.countDown();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+        try {
+            done.await(); //it will wait till the response is received from firebase.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < questionAnsModelList.size(); i++) {
+            QuestionAnsModel questionAns = questionAnsModelList.get(i);
+            if (questionAns.getGrade().equals(grade)) {
+                set.add(questionAns.getId());
+            }
+        }
+        Qlist.addAll(set);
+        // System.out.println(Qlist);
         return Qlist;
     }
 
@@ -241,10 +280,15 @@ public class CreateAssignmentController implements Initializable {
 
 
 
- /*
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        CreateAssignmentController cm = new CreateAssignmentController();
+        System.out.println("Displaying questions");
+        System.out.println(cm.displayQuestions("1"));
+
+        System.out.println("Displaying questions");
+        System.out.println(cm.displayQuestionsId("1"));
     }
-*/
+
 
 }
