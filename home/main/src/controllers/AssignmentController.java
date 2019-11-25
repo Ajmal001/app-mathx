@@ -53,6 +53,9 @@ public class AssignmentController implements Initializable {
     @FXML
     void create(ActionEvent actionEvent) {
 
+        new MainClass().create_assignmentWindow();
+        MainClass.asgnStage.close();
+
     }
 
     /**

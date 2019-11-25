@@ -40,7 +40,6 @@
         <PasswordField fx:id="pswdTF" layoutX="176.0" layoutY="188.0" promptText="Enter password"/>
         <PasswordField fx:id="rpswdTF" layoutX="176.0" layoutY="224.0" promptText="Re-enter Password"/>
 
-
         <HBox alignment="CENTER" layoutX="114.0" layoutY="267.0" prefHeight="28.0" prefWidth="278.0" spacing="20.0">
             <RadioButton mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" selected="true" text="Student">
                 <font>

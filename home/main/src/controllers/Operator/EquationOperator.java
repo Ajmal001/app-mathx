@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
@@ -18,7 +17,7 @@ import javafx.scene.text.Text;
  * @author Karandeep Singh Grewal
  */
 
-public class UnaryOperator implements ParentOperator {
+public class EquationOperator implements ParentOperator {
     @Override
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
@@ -30,8 +29,8 @@ public class UnaryOperator implements ParentOperator {
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
-        rectangle.setFill(Paint.valueOf("#FF9500"));
-        rectangle.setStroke(Paint.valueOf("#FF9500"));
+        rectangle.setFill(Paint.valueOf("#248A3D"));
+        rectangle.setStroke(Paint.valueOf("#248A3D"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
@@ -40,20 +39,11 @@ public class UnaryOperator implements ParentOperator {
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
 
-        Label operator = new Label(operatorString);
-        operator.setMinWidth(40);
-        operator.setAlignment(Pos.CENTER);
-        operator.setStyle("-fx-font-size: 14");
-        operator.setTextFill(Color.WHITE);
-
         TextField input = new TextField();
-        input.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
         input.setMinWidth(60);
         input.setPrefWidth(60);
+        input.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
 
-        if (operatorString.contains("gcd")) {
-            input.setText("( )");
-        }
         input.textProperty().addListener((ov, prevText, currText) -> Platform.runLater(() -> {
             Text text = new Text(currText);
             text.setFont(input.getFont());
@@ -68,7 +58,7 @@ public class UnaryOperator implements ParentOperator {
         }));
 
 
-        hBox.getChildren().addAll(operator, input);
+        hBox.getChildren().addAll(input);
         stackPane.getChildren().addAll(rectangle, hBox);
         return stackPane;
     }

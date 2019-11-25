@@ -44,27 +44,39 @@ public class SignUpController implements Initializable {
     public static AssignmentModel assignmentModel2 = new AssignmentModel();
 
 
-    /** The name TF. */
+    /**
+     * The name TF.
+     */
     @FXML
     private TextField nameTF;
 
-    /** The email TF. */
+    /**
+     * The email TF.
+     */
     @FXML
     private TextField emailTF;
 
-    /** The pswd TF. */
+    /**
+     * The pswd TF.
+     */
     @FXML
     private TextField pswdTF;
 
-    /** The rpswd TF. */
+    /**
+     * The rpswd TF.
+     */
     @FXML
     private TextField rpswdTF;
 
-    /** The grade. */
+    /**
+     * The grade.
+     */
     @FXML
     private ComboBox grade;
 
-    /** The User. */
+    /**
+     * The User.
+     */
     @FXML
     private ToggleGroup User;
 
@@ -211,14 +223,10 @@ public class SignUpController implements Initializable {
 
             new MainClass().openLoginWindow();
             MainClass.signUpStage.close();
-
         }
-
-
     }
 
-
-    List<String> showAssignments(String grade){
+    List<String> showAssignments(String grade) {
 
         CountDownLatch done = new CountDownLatch(1);
         final String[] message = {null};
@@ -232,7 +240,7 @@ public class SignUpController implements Initializable {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     assignmentModel2 = data.getValue(AssignmentModel.class);
                     assignmentModel2.setId(data.getKey());
-                    if(assignmentModel2.getGrade().equals(grade))
+                    if (assignmentModel2.getGrade().equals(grade))
                         assignmentlist.add(assignmentModel2.getAssignmentName());
                 }
                 done.countDown();
