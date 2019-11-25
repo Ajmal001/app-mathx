@@ -22,6 +22,7 @@ public class MainClass extends Application {
     public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage, practStage;
 
     public static void main(String[] args) {
+        System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
         launch(args);
     }
 
@@ -43,8 +44,9 @@ public class MainClass extends Application {
         //   listWindow();
 //        openWorkSpaceWindow();
 //        openSignUpWindow();
-        assignmentWindow();
-//               view_assignmentWindow();
+//        assignmentWindow();
+        //       view_assignmentWindow();
+
 //        create_assignmentWindow();
     }
 
@@ -87,6 +89,22 @@ public class MainClass extends Application {
             loginStage = new Stage();
             loginStage.setScene(scene);
             loginStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void openAdminWindow() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/adminpage.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            adminStage = new Stage();
+            adminStage.setScene(scene);
+            adminStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();

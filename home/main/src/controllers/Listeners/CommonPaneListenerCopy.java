@@ -8,12 +8,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import main.src.controllers.WorkspaceExtras.ExpressionEvaluator;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Karandeep Singh Grewal
  */
 
-public class CommonPaneListener {
+public class CommonPaneListenerCopy {
     StackPane questionPane = new StackPane();
     Pane resultPane = new Pane();
 
@@ -28,11 +29,16 @@ public class CommonPaneListener {
         vBox.setPadding(new Insets(10));
         for (String currentQuestion : questionArray
         ) {
-            System.out.println(currentQuestion);
-            String temp = currentQuestion.substring(currentQuestion.indexOf("<HINT:") + 6, currentQuestion.indexOf(":HINT>"));
-            String[] prompts = temp.split(",");
-            int numberOfAnswers = prompts.length;
-            Label questionLabel = new Label(currentQuestion.substring(0, currentQuestion.indexOf("<HINT:")));
+            String[] prompts = new String[0];
+            int promptStatus = 0;
+            if (currentQuestion.contains("PROMPT")) {
+                String temp = currentQuestion.substring(currentQuestion.indexOf("<PROMPT:"), currentQuestion.lastIndexOf(":PROMPT>"));
+                prompts = temp.replace("<PROMPT:", "").replace(":PROMPT>", "").split(",");
+                promptStatus = 1;
+                currentQuestion = currentQuestion.substring(0, currentQuestion.indexOf("<PROMPT:"));
+            }
+            int numberOfAnswers = StringUtils.countMatches(currentQuestion, "<TEXTFIELD>");
+            Label questionLabel = new Label(currentQuestion.replace("<TEXTFIELD>", ""));
             questionLabel.setStyle("-fx-font-size: 20");
             questionPane.setBackground(new Background(new BackgroundFill(Color.valueOf("#F5F5F5"), CornerRadii.EMPTY, Insets.EMPTY)));
             vBox.getChildren().addAll(questionLabel);
@@ -40,16 +46,18 @@ public class CommonPaneListener {
                 TextField answer = new TextField();
                 answer.setMinWidth(50);
                 answer.setPrefWidth(50);
-                answer.setPromptText(prompts[tempCount]);
+                if (promptStatus == 1) {
+                    answer.setPromptText(prompts[tempCount]);
+                }
                 answer.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD;-fx-background-color: #FFFFFF;-fx-border-color: #BBBBBB;-fx-border-radius: 5;" +
                         "-fx-background-radius: 5; -fx-opacity: 1;-fx-text-fill: #000000");
                 vBox.getChildren().add(answer);
             }
+
         }
         ScrollPane scrollPane = new ScrollPane(vBox);
-        scrollPane.setMaxHeight(480);
-        scrollPane.setMaxWidth(1650);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setMaxHeight(520);
+        scrollPane.setMaxWidth(1670);
         questionPane.getChildren().add(scrollPane);
     }
 

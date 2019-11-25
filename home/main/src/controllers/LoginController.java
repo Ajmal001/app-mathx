@@ -5,7 +5,7 @@ package main.src.controllers;
  * Copyright:    Copyright (c) 2019
  * Company:      Department of Computer Software Engineering, Arizona State University.
  *
- * @author Mahapatra Manas, Bajaj Aditya
+ * @author Mahapatra Manas, Bajaj Aditya, Sheran Dass
  * @version 1.0
  * @modified 11/3/2019
  * @since 8/30/2019
@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
 import main.MainClass;
+import main.src.models.AdminModel;
 import main.src.models.StudentSignUpModel;
 import main.src.models.TeacherSignUpModel;
 
@@ -47,14 +48,33 @@ public class LoginController implements Initializable {
     private Hyperlink signup;
     List<TeacherSignUpModel> teachersList = new ArrayList<>();
     List<StudentSignUpModel> studentsList = new ArrayList<>();
+    List<AdminModel> adminList = new ArrayList<>();
     public static TeacherSignUpModel teacherModel = new TeacherSignUpModel();
     public static StudentSignUpModel studentModel = new StudentSignUpModel();
+    public static AdminModel adminModel = new AdminModel();
 
 
     public LoginController() {
 //        System.out.println("In Constructor");
         //Firebase firebase=new Firebase("https://mathx-eea50.firebaseio.com/");
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+
+        firebase.child("Admin").addListenerForSingleValueEvent(new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    adminModel = data.getValue(AdminModel.class);
+                    adminModel.setId(data.getKey());
+                    adminList.add(adminModel);
+
+                }
+
+
+            }
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
 
         firebase.child("Teacher").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -176,9 +196,18 @@ public class LoginController implements Initializable {
             pswdTF.requestFocus();
             return;
         } else {
-
-//            System.out.println(teachersList.size());
             String type = "";
+            for(int i = 0; i < adminList.size(); i++){
+                AdminModel model = adminList.get(i);
+                if (emTF.getText().equals(model.getAddress()) && pswdTF.getText().equals(model.getPassword())) {
+                    returnValue = 1;
+                    adminModel = adminList.get(i);
+                    type = "Admin";
+                    studentModel = null;
+                    teacherModel = null;
+                }
+            }
+//            System.out.println(teachersList.size());
             for (int i = 0; i < teachersList.size(); i++) {
                 TeacherSignUpModel model = teachersList.get(i);
                 if (emTF.getText().equals(model.getAddress()) && pswdTF.getText().equals(model.getPassword())) {
@@ -186,6 +215,7 @@ public class LoginController implements Initializable {
                     teacherModel = teachersList.get(i);
                     type = "Teacher";
                     studentModel = null;
+                    adminModel = null;
                 }
             }
 //            System.out.println(studentsList.size());
@@ -196,9 +226,14 @@ public class LoginController implements Initializable {
                     studentModel = studentsList.get(i);
                     type = "Student";
                     teacherModel = null;
+                    adminModel = null;
                 }
             }
-            if (returnValue == 1 && type.equals("Teacher")) {
+            if (returnValue == 1 && type.equals("Admin")) {
+                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
+                new MainClass().openAdminWindow();
+                MainClass.loginStage.close();
+            } else if (returnValue == 1 && type.equals("Teacher")) {
                 showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().assignmentWindow();
@@ -223,6 +258,10 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+
+    }
+
+    public static void main(String[] args) {
 
     }
 
