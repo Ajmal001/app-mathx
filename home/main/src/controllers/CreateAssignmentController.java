@@ -109,16 +109,16 @@ public class CreateAssignmentController implements Initializable {
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Add Question Form Error");
+        alert.setTitle("Add Question Error");
         alert.setHeaderText(null);
         //   alert.setHeaderText("Required Fields Empty");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
-    private void showConfirm(String message) {
+    private void showConfirm(String message,String title) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Question Added");
+        alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
@@ -135,7 +135,7 @@ public class CreateAssignmentController implements Initializable {
         questionAns.setQuestion(question);
         questionAns.setAns(answer);
         firebase.child("Grade").push().setValue(questionAns);
-        showConfirm("Question Added successfully");
+        showConfirm("Question Added successfully", "Question Added");
         System.out.println("Question pushed Successfully");
     }
 
@@ -208,7 +208,8 @@ public class CreateAssignmentController implements Initializable {
             }
         }
         Qlist.addAll(set);
-       // System.out.println(Qlist);
+
+        // System.out.println(Qlist);
         return Qlist;
     }
 
@@ -313,7 +314,11 @@ public class CreateAssignmentController implements Initializable {
 
             pushAssignment(name, grade.getValue().toString(),questionid);
 
-            showAlert("Assignment pushed");
+            new MainClass().assignmentWindow();
+            MainClass.create_asgnStage.close();
+
+            showConfirm("Assignment Created","Assignment Created");
+
         }
 
     }
@@ -332,7 +337,7 @@ public class CreateAssignmentController implements Initializable {
 
 
 
-
+ /*
     public static void main(String[] args) {
         CreateAssignmentController cm = new CreateAssignmentController();
         System.out.println("Displaying questions");
@@ -344,6 +349,6 @@ public class CreateAssignmentController implements Initializable {
         System.out.println("Displaying hashmap");
         System.out.println(cm.mapping("1"));
     }
-
+*/
 
 }
