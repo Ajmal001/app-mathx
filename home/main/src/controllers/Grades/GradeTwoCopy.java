@@ -11,7 +11,7 @@ import main.src.controllers.WorkspaceExtras.SidePaneFactory;
  * @author Karandeep Singh Grewal
  */
 
-public class GradeTwo implements GradeParent {
+public class GradeTwoCopy implements GradeParent {
 
     @Override
     public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane) {
@@ -30,9 +30,8 @@ public class GradeTwo implements GradeParent {
         }
 
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-        String question = "1. Two + Two? <HINT: , , , , , , , , , , , ,:HINT> <SEP>" +
-                "\n2. Five - Three? <HINT:Answer1,Answer2:HINT><SEP>" +
-                "\n3. Find area and circumference <HINT:Area,Circumference :HINT>";
+        String question = "1. Two + Two? <TEXTFIELD> <PROMPT:Answer:PROMPT> <SEP>" +
+                "\n2. Five - Three? <TEXTFIELD> <PROMPT:Answer:PROMPT>";
 
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {

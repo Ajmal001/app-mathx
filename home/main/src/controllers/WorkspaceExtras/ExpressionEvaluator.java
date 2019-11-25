@@ -2,6 +2,7 @@ package main.src.controllers.WorkspaceExtras;
 
 import javafx.animation.PauseTransition;
 import javafx.geometry.Bounds;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -118,8 +119,10 @@ public class ExpressionEvaluator {
 
             Bounds bounds = ((StackPane) node).localToScene(((StackPane) node).getLayoutBounds());
             //These numbers are adjustments done to view result parallel to the expression in the sandBox
-            label.setLayoutX(bounds.getMinX() - 230);
-            label.setLayoutY((bounds.getMinY() - 60));
+            label.setLayoutX(bounds.getMinX() - 270);
+            label.setPrefWidth(bounds.getWidth());
+            label.setAlignment(Pos.CENTER);
+            label.setLayoutY((bounds.getMinY() - 40) * 0.95);
             label.setStyle("-fx-border-color: black; -fx-label-padding: 10; -fx-border-radius: 5; -fx-border-width: 2");
             label.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getClickCount() == 2) {
