@@ -1,14 +1,13 @@
 package main.src.controllers.WorkspaceExtras;
 
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import main.src.controllers.Listeners.SandBoxListeners;
 import main.src.controllers.Listeners.SidePaneListeners;
-import main.src.controllers.Operator.BinaryOperator;
-import main.src.controllers.Operator.CompareOperator;
-import main.src.controllers.Operator.ParentOperator;
-import main.src.controllers.Operator.UnaryOperator;
+import main.src.controllers.Operator.*;
 
 /**
  * @author Karandeep Singh Grewal
@@ -30,6 +29,10 @@ public class SidePaneFactory {
             }
             case "Compare": {
                 operator = new CompareOperator();
+                break;
+            }
+            case "Equation": {
+                operator = new EquationOperator();
                 break;
             }
 
@@ -56,10 +59,14 @@ public class SidePaneFactory {
                 operator = new CompareOperator();
                 break;
             }
+            case "Equation": {
+                operator = new EquationOperator();
+                break;
+            }
             default:
-                operator = new BinaryOperator();
+                throw new IllegalStateException("Unexpected value: " + operatorType);
         }
-
+        assert operator != null;
         StackPane stackPane;
         stackPane = operator.produceOperator(string, commonPane);
         sidePane.getChildren().addAll(stackPane);
@@ -68,6 +75,11 @@ public class SidePaneFactory {
             SandBoxListeners sandBoxListeners = new SandBoxListeners();
             StackPane newStackPane;
             newStackPane = new StackPane(operator.produceOperator(string, commonPane));
+            DropShadow dropShadow = new DropShadow();
+            dropShadow.setRadius(8.0);
+            dropShadow.setOffsetY(3);
+            dropShadow.setColor(Color.color(0.5, 0.5, 0.5));
+            newStackPane.setEffect(dropShadow);
             sandBoxListeners.makeDraggable(newStackPane, commonPane);
             sandBoxListeners.makeDeletable(newStackPane);
             sandBox.getChildren().addAll(newStackPane);

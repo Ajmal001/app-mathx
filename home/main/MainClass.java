@@ -17,6 +17,7 @@ import java.io.InputStream;
 
 public class MainClass extends Application {
 
+
     public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage, practStage, adminStage;
 
     public static void main(String[] args) {
@@ -48,6 +49,7 @@ public class MainClass extends Application {
 //        openSignUpWindow();
 //        assignmentWindow();
         //       view_assignmentWindow();
+
 //        create_assignmentWindow();
 //        openAdminWindow();
     }

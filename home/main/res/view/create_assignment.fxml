@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,7 +15,9 @@
 <AnchorPane prefHeight="550.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.999-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.CreateAssignmentController">
     <children>
-        <Button layoutX="210.0" layoutY="500.0" mnemonicParsing="false" text="Create" textAlignment="CENTER">
+
+        <Button fx:id="create" onAction="#createA" layoutX="210.0" layoutY="500.0" mnemonicParsing="false" text="Create"
+                textAlignment="CENTER">
             <font>
                 <Font name="Sawasdee" size="16.0"/>
             </font>
@@ -24,36 +25,46 @@
 
         <HBox layoutX="126.0" layoutY="70.0" prefHeight="29.0" prefWidth="274.0" spacing="10.0">
             <children>
-                <TextField prefHeight="25.0" prefWidth="180.0" promptText="Enter Name of Assignment"/>
-                <ComboBox fx:id="grade" onAction="#loadData" prefHeight="25.0" prefWidth="74.0" promptText="Grade"  >
+                <TextField fx:id="nameTF" prefHeight="25.0" prefWidth="180.0" promptText="Enter Name of Assignment"/>
+                <ComboBox fx:id="grade" onAction="#setQ" prefHeight="25.0" prefWidth="74.0" promptText="Grade">
                     <items>
                         <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="1"/>
                             <String fx:value="2"/>
                             <String fx:value="5"/>
                         </FXCollections>
                     </items>
-
                 </ComboBox>
             </children>
         </HBox>
+
         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="150.0" layoutY="20.0" text="Create Assignment">
             <font>
                 <Font name="Sawasdee" size="24.0"/>
             </font>
         </Label>
+
         <VBox layoutX="268.0" layoutY="115.0" prefHeight="84.0" prefWidth="218.0" spacing="10.0">
             <children>
                 <TextField fx:id="quesTF" promptText="Enter a Question"/>
                 <TextField fx:id="ansTF" promptText="Enter Answer"/>
             </children>
         </VBox>
+
         <Button alignment="BASELINE_RIGHT" contentDisplay="RIGHT" layoutX="340.0" layoutY="187.0" onAction="#addqs"
                 text="Add Question" textAlignment="RIGHT"/>
-        <ListView fx:id="l2" layoutX="269.0" layoutY="226.0" prefHeight="261.0" prefWidth="212.0"/>
-        <ScrollPane layoutX="22.0" layoutY="114.0" prefHeight="373.0" prefWidth="218.0">
-            <content>
-                <VBox fx:id="qs" prefHeight="367.0" prefWidth="210.0"/>
-            </content>
-        </ScrollPane>
+
+        <VBox fx:id="VBoxMain" layoutX="26.0" layoutY="112.0" prefHeight="375.0" prefWidth="211.0">
+            <children>
+                <ListView fx:id="listBoxMain" prefHeight="374.0" prefWidth="211.0"/>
+            </children>
+        </VBox>
+
+        <VBox fx:id="VBoxMain2" layoutX="268.0" layoutY="230.0" prefHeight="255.0" prefWidth="218.0">
+            <children>
+                <ListView fx:id="listBoxQ" prefHeight="255.0" prefWidth="218.0"/>
+            </children>
+        </VBox>
+
     </children>
 </AnchorPane>

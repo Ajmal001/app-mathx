@@ -31,9 +31,8 @@ public class CompareOperator implements ParentOperator {
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
-        rectangle.setOpacity(0.8);
         rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Paint.valueOf("007AFF"));
+        rectangle.setStroke(Paint.valueOf("#007AFF"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
@@ -48,19 +47,20 @@ public class CompareOperator implements ParentOperator {
         number1.setStyle("-fx-font-size: 14");
         number1.setTextFill(Color.WHITE);
 
-        TextField operator = new TextField();
-        operator.setMinWidth(30);
-        operator.setPrefWidth(30);
+        TextField input = new TextField();
+        input.setMinWidth(30);
+        input.setPrefWidth(30);
+        input.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
 
         final int LIMIT = 1;
-        operator.lengthProperty().addListener(new ChangeListener<>() {
+        input.lengthProperty().addListener(new ChangeListener<>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
                 if (newValue.intValue() > oldValue.intValue()) {
-                    if (operator.getText().length() >= LIMIT) {
-                        operator.setText(operator.getText().substring(0, LIMIT));
+                    if (input.getText().length() >= LIMIT) {
+                        input.setText(input.getText().substring(0, LIMIT));
                     }
-                } else if (operator.getText().length() < LIMIT)
+                } else if (input.getText().length() < LIMIT)
                     rectangle.setWidth(190);
             }
         });
@@ -70,7 +70,7 @@ public class CompareOperator implements ParentOperator {
         number2.setAlignment(Pos.CENTER);
         number2.setStyle("-fx-font-size: 14");
         number2.setTextFill(Color.WHITE);
-        hBox.getChildren().addAll(number1, operator, number2);
+        hBox.getChildren().addAll(number1, input, number2);
         number1.setText(String.valueOf(new Random().nextInt(50)));
         number2.setText(String.valueOf(new Random().nextInt(50)));
 
