@@ -19,6 +19,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" vgap="10"
+          stylesheets="/main/res/css/homepage.css"
           xmlns="http://javafx.com/javafx/8.0.999-ea" fx:controller="main.src.controllers.HomepageController">
     <columnConstraints>
         <ColumnConstraints />
@@ -38,21 +39,20 @@
             </font>
         </Label>
 
-        <Label fx:id="nameLabel" layoutX="1083.0" layoutY="14.0" prefHeight="43.0" prefWidth="183.0" text="Ria Mehta">
-
-        </Label>
+        <Label fx:id="nameLabel" layoutX="1083.0" layoutY="14.0" prefHeight="43.0" prefWidth="183.0" text="Ria Mehta"/>
         <Label fx:id="emailLabel" layoutX="1083.0" layoutY="44.0" prefHeight="43.0" prefWidth="183.0" text="rnmehta1@asu.edu" />
         <Label fx:id="gradeLabel" layoutX="1083.0" layoutY="74.0" prefHeight="43.0" prefWidth="183.0" text="Grade - 2nd" />
-        <Button layoutX="1083.0" layoutY="188.0" mnemonicParsing="false" onAction="#display" prefHeight="43.0" prefWidth="130.0" text="Logout" />
+        <Button layoutX="1083.0" layoutY="188.0" onAction="#display" prefHeight="43.0" prefWidth="130.0" text="Logout"/>
         <Label layoutX="38.0" layoutY="23.0" prefHeight="51.0" prefWidth="248.0" text="MathX">
             <font>
                 <Font name="Helvetica Bold" size="43.0" />
-            </font></Label>
-        <Button layoutX="1083.0" layoutY="123.0" styleClass="button button2" onAction="#workspaceAction"
+            </font>
+        </Label>
+        <Button layoutX="1083.0" layoutY="123.0" styleClass="buttonW" onAction="#workspaceAction"
                 prefHeight="43.0" prefWidth="130.0" text="Workspace"/>
 <!--        <ComboBox fx:id="submittedAssignments" layoutX="73.0" layoutY="209.0" prefHeight="27.0" prefWidth="173.0" />-->
 
-        <Label layoutX="88.0" layoutY="158.0" prefHeight="51.0" prefWidth="183.0" text="Submitted Assignments" visible="true">
+        <Label layoutX="88.0" layoutY="158.0" prefHeight="51.0" prefWidth="183.0" text="Submitted Assignments">
             <font>
                 <Font name="Helvetica Bold" size="13.0" />
             </font>
