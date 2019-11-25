@@ -39,7 +39,7 @@ public class AdminpageController implements Initializable {
         WebEngine engine = myWebView.getEngine();
 
 
-        engine.load("https://mathx-eea50.firebaseio.com/");
+        engine.load("https://ser515-team4.firebaseio.com/");
         VBox vBox = new VBox();
         vBox.getChildren().addAll(myWebView);
         Scene scene = new Scene(vBox, 1380, 768);
