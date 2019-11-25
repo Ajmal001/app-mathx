@@ -37,19 +37,19 @@ public class MainClass extends Application {
 
         FirebaseApp.initializeApp(options);
 
-        adminStage = primaryStage;
+        loginStage = primaryStage;
 
 
 
 
-//         openLoginWindow();
+         openLoginWindow();
         //   listWindow();
         //openWorkSpaceWindow();
 //        openSignUpWindow();
 //        assignmentWindow();
         //       view_assignmentWindow();
 //        create_assignmentWindow();
-        openAdminWindow();
+//        openAdminWindow();
     }
 
 
