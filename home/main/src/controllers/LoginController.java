@@ -5,7 +5,7 @@ package main.src.controllers;
  * Copyright:    Copyright (c) 2019
  * Company:      Department of Computer Software Engineering, Arizona State University.
  *
- * @author Mahapatra Manas, Bajaj Aditya
+ * @author Mahapatra Manas, Bajaj Aditya, Sheran Dass
  * @version 1.0
  * @modified 11/3/2019
  * @since 8/30/2019
