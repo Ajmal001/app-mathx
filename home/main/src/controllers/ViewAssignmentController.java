@@ -88,7 +88,7 @@ public class ViewAssignmentController implements Initializable {
                     assignmentModel2 = data.getValue(AssignmentModel.class);
                     assignmentModel2.setId(data.getKey());
                     if (assignmentModel2.getAssignmentName().equals(asgn)) {
-                        questionids = assignmentModel2.getQuestions();
+                        questionids = assignmentModel2.getQuestionId();
                     }
                     //System.out.println("Size:" + assignmentlist.size());
                 }

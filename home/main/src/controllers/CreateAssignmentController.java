@@ -74,6 +74,7 @@ public class CreateAssignmentController implements Initializable {
                 System.out.println("place 1 " + s + "--" + t1);
                 if (t1 != null) {
                     asgn.add(t1);
+
                 }
                 System.out.println(asgn);
                 listBoxQ.setItems(asgn);
@@ -211,6 +212,46 @@ public class CreateAssignmentController implements Initializable {
         return Qlist;
     }
 
+    HashMap<String,String> mapping(String grade) {
+        CountDownLatch done = new CountDownLatch(1);
+
+        List<String> Qlist = new ArrayList<>();
+        HashMap<String,String> map = new HashMap<>();
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        firebase.child("Grade").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    questionAnsModel = data.getValue(QuestionAnsModel.class);
+                    questionAnsModel.setId(data.getKey());
+                    questionAnsModelList.add(questionAnsModel);
+                    //    System.out.println("Size:" + questionAnsModelList.size());
+                }
+                done.countDown();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+        try {
+            done.await(); //it will wait till the response is received from firebase.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < questionAnsModelList.size(); i++) {
+            QuestionAnsModel questionAns = questionAnsModelList.get(i);
+            if (questionAns.getGrade().equals(grade)) {
+                map.put(questionAns.getQuestion(),questionAns.getId());
+            }
+
+        }
+
+        for(String s: map.keySet())
+            System.out.println("key:"+s+"value:"+map.get(s));
+
+        return map;
+    }
     List<String> displayQuestionsId(String grade) {
         CountDownLatch done = new CountDownLatch(1);
         final String message[] = {null};
@@ -260,19 +301,30 @@ public class CreateAssignmentController implements Initializable {
             showAlert("Please add some questions");
             return;
         } else {
-            pushAssignment(name, grade.getValue().toString(), asgn);
+            List<String> questionid = new ArrayList<>();
+
+            HashMap<String,String> hashMap = mapping(grade.getValue().toString());
+            for(String s: hashMap.keySet()){
+                System.out.println("key:"+s+"value:"+hashMap.get(s));
+                if(asgn.contains(s))
+                    questionid.add(hashMap.get(s));
+            }
+
+
+            pushAssignment(name, grade.getValue().toString(),questionid);
 
             showAlert("Assignment pushed");
         }
 
     }
 
+
     void pushAssignment(String assignmentName, String grade, List<String> questionId) {
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         AssignmentModel assignmentModel = new AssignmentModel();
         assignmentModel.setGrade(grade);
         assignmentModel.setAssignmentName(assignmentName);
-        assignmentModel.setQuestions(questionId);
+        assignmentModel.setQuestionId(questionId);
         firebase.child("Assignment").push().setValue(assignmentModel);
         System.out.println("Assignment pushed Successfully");
     }
@@ -286,8 +338,11 @@ public class CreateAssignmentController implements Initializable {
         System.out.println("Displaying questions");
         System.out.println(cm.displayQuestions("1"));
 
-        System.out.println("Displaying questions");
+        System.out.println("Displaying questionsID");
         System.out.println(cm.displayQuestionsId("1"));
+
+        System.out.println("Displaying hashmap");
+        System.out.println(cm.mapping("1"));
     }
 
 

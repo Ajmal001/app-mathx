@@ -49,11 +49,11 @@ public class AssignmentModel {
         this.grade = grade;
     }
 
-    public List<String> getQuestions() {
-        return questionId;
-    }
-
-    public void setQuestions(List<String> questions) {
-        this.questionId = questions;
-    }
+//    public List<String> getQuestions() {
+//        return questionId;
+//    }
+//
+//    public void setQuestions(List<String> questions) {
+//        this.questionId = questions;
+//    }
 }
