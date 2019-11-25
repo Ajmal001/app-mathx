@@ -2,49 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.AdminpageController">
    <children>
-      <Label layoutX="14.0" layoutY="14.0" text="MathMathX">
+      <Label layoutX="26.0" layoutY="25.0" text="MathMathX">
+         <font>
+            <Font name="Comic Sans MS" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="85.0" layoutY="119.0" text="Welcome Admin !">
          <font>
             <Font name="Comic Sans MS" size="18.0" />
          </font>
       </Label>
-      <Separator layoutX="8.0" layoutY="42.0" prefHeight="0.0" prefWidth="583.0" />
-      <Label layoutX="272.0" layoutY="52.0" text="Students" />
-      <Label layoutX="466.0" layoutY="52.0" text="Teachers" />
-      <Label layoutX="52.0" layoutY="52.0" text="New Registrations" />
-      <Button fx:id="authorizeButton" layoutX="30.0" layoutY="225.0" mnemonicParsing="false" onAction="#authorize" text="Authorize" />
-      <Button fx:id="declineButton" layoutX="116.0" layoutY="225.0" mnemonicParsing="false" onAction="#decline" text="Decline" />
-      <Button fx:id="unauthorizeButtonStudent" layoutX="225.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeStudentAccess" prefHeight="27.0" prefWidth="150.0" text="Unauthorize" />
-      <Button fx:id="unauthorizeButtonTeacher" layoutX="420.0" layoutY="225.0" mnemonicParsing="false" onAction="#removeTeacherAccess" prefHeight="27.0" prefWidth="150.0" text="Unauthorize" />
-      <Separator layoutX="8.0" layoutY="278.0" prefHeight="3.0" prefWidth="583.0" />
-      <Label layoutX="30.0" layoutY="292.0" text="Details" />
-      <ScrollPane layoutX="30.0" layoutY="78.0" prefHeight="136.0" prefWidth="135.0">
-         <content>
-            <VBox fx:id="newRegistrationView" onMouseClicked="#selectNewRegistration" prefHeight="134.0" prefWidth="150.0" />
-         </content>
-      </ScrollPane>
-      <ScrollPane layoutX="30.0" layoutY="320.0" prefHeight="61.0" prefWidth="541.0">
-        <content>
-          <AnchorPane fx:id="viewDetails" minHeight="0.0" minWidth="0.0" prefHeight="60.0" prefWidth="542.0" />
-        </content>
-      </ScrollPane>
-      <ScrollPane layoutX="234.0" layoutY="78.0" prefHeight="136.0" prefWidth="135.0">
-         <content>
-            <VBox fx:id="studentsView" onMouseClicked="#selectStudent" prefHeight="137.0" prefWidth="139.0" />
-         </content>
-      </ScrollPane>
-      <ScrollPane layoutX="429.0" layoutY="78.0" prefHeight="136.0" prefWidth="135.0">
-         <content>
-            <VBox fx:id="teachersView" onMouseClicked="#selectTeacher" prefHeight="138.0" prefWidth="133.0" />
-         </content>
-      </ScrollPane>
+      <Separator layoutX="14.0" layoutY="60.0" prefHeight="9.0" prefWidth="569.0" />
+      <Button fx:id="adminButton" layoutX="269.0" layoutY="118.0" mnemonicParsing="false" onAction="#adminClick" text="Firebase" />
+      <Button fx:id="logoutButton" layoutX="362.0" layoutY="117.0" mnemonicParsing="false" onAction="#adminLogout" text="Logout" />
    </children>
 </Pane>
