@@ -28,7 +28,8 @@ public class WorkspaceController implements Initializable {
     public StackPane commonPane;
     @FXML
     private Label homeButton;
-
+    @FXML
+    private Label submitButton;
     @FXML
     private VBox sidePane;
 
@@ -37,11 +38,11 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         int studentGrade = 2;
         if (LoginController.studentModel.getGrade() != null) {
             studentGrade = Integer.parseInt(LoginController.studentModel.getGrade());
         }
-
 
         GradeParent grade = null;
         switch (studentGrade) {
@@ -56,7 +57,7 @@ public class WorkspaceController implements Initializable {
                 break;
 
         }
-//        System.out.println("Producing Grade:" + studentGrade);
+
         grade.produceWorkspace(sandBox, sidePane, commonPane);
 
         homeButton.setOnMouseClicked(mouseEvent -> {
@@ -64,9 +65,17 @@ public class WorkspaceController implements Initializable {
             MainClass.workspaceStage.close();
         });
 
-        resetButton.setOnMouseClicked(mouseEvent -> {
-            new MainClass().openWorkSpaceWindow();
-            MainClass.workspaceStage.close();
+        submitButton.setOnMouseClicked(mouseEvent -> {
+            if (commonPane.getChildren().get(0) instanceof StackPane) {
+                StackPane questionPane = null;
+                if (commonPane.getChildren().get(0) instanceof StackPane) {
+                    questionPane = (StackPane) commonPane.getChildren().get(0);
+                }
+                System.out.println(questionPane.getChildren());
+
+            } else {
+                System.out.println("Switch to Result Pane");
+            }
         });
 
     }
