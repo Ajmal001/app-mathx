@@ -47,25 +47,22 @@ public class WorkspaceController implements Initializable {
     @FXML
     private VBox sidePane;
 
-    @FXML
-    private Label resetButton;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String assignment = "Assignment 80";
+//        String assignment = "";
+//
+//        HashMap<String, String> hashmap = displayQuestions(assignment);
+//        String questions = "";
+//        int questionNumber = 1;
+//        for (String s : hashmap.keySet()) {
+//            questions = questions + s;
+//        }
+//        System.out.println(questions);
 
-        HashMap<String, String> hashmap = displayQuestions(assignment);
-        String questions = "";
-        int questionNumber = 1;
-        for (String s : hashmap.keySet()) {
-            questions = questions + s;
-        }
-        System.out.println(questions);
-//            System.out.println("question:" + s + "ans:" + hashmap.get(s));
-
-        String question = "\n3. Two wires are 12m and 16m long. The wires are to be cut into pieces of equal length. Find the maximum length of each piece.<HINT: :HINT> <SEP>" +
-                "\n 4. If you use 4 wires of the resultant length, what will be the area of shape formed? <HINT: :HINT>";
+        String question = "\n1. Two wires are 12m and 16m long. The wires are to be cut into pieces of equal length. Find the maximum length of each piece.<HINT:Maximum Length :HINT> <SEP>" +
+                "\n 2. If you use 4 wires of the resultant length, what will be the area of shape formed? <HINT:Shape :HINT> <SEP>" +
+                "\n 3. You have a square of side 10cm. Find its circumference and area. <HINT:Area,Circumference:HINT>";
 
 
         int studentGrade = 2;
