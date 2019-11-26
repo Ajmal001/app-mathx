@@ -40,9 +40,9 @@ public class MainClass extends Application {
         FirebaseApp.initializeApp(options);
 
         asgnStage = primaryStage;
-//        openLoginWindow();
+        openLoginWindow();
         //   listWindow();
-        openWorkSpaceWindow();
+//        openWorkSpaceWindow();
 //        openSignUpWindow();
 //        assignmentWindow();
         //       view_assignmentWindow();

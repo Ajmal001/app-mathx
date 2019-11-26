@@ -4,24 +4,32 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import main.MainClass;
 import main.src.controllers.Grades.GradeFive;
 import main.src.controllers.Grades.GradeParent;
 import main.src.controllers.Grades.GradeTwo;
+import main.src.controllers.WorkspaceExtras.Extractor;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 
@@ -46,24 +54,35 @@ public class WorkspaceController implements Initializable {
     private Label submitButton;
     @FXML
     private VBox sidePane;
+    @FXML
+    private Label assignmentName;
+
+    private static String sortbykey(HashMap map) {
+        ArrayList<Double> sortedKeys = new ArrayList<Double>(map.keySet());
+        Collections.sort(sortedKeys);
+        StringBuilder expressionInput = new StringBuilder();
+        for (Double x : sortedKeys) {
+            expressionInput.append(map.get(x));
+            expressionInput.append(" ,");
+        }
+        return expressionInput.toString();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        String assignment = "";
-//
-//        HashMap<String, String> hashmap = displayQuestions(assignment);
-//        String questions = "";
-//        int questionNumber = 1;
-//        for (String s : hashmap.keySet()) {
-//            questions = questions + s;
-//        }
-//        System.out.println(questions);
+//        String assignment = HomepageController.selectedAssignment;
+        String assignment = "November 25 - Grade 2";
+        assignmentName.setText("Assignment: " + assignment);
 
-        String question = "\n1. Two wires are 12m and 16m long. The wires are to be cut into pieces of equal length. Find the maximum length of each piece.<HINT:Maximum Length :HINT> <SEP>" +
-                "\n 2. If you use 4 wires of the resultant length, what will be the area of shape formed? <HINT:Shape :HINT> <SEP>" +
-                "\n 3. You have a square of side 10cm. Find its circumference and area. <HINT:Area,Circumference:HINT>";
-
+        HashMap<String, String> hashmap = displayQuestions(assignment);
+        StringBuilder question = new StringBuilder();
+        StringBuilder answers = new StringBuilder();
+        int questionNumber = 1;
+        for (String string : hashmap.keySet()) {
+            question.append("\n").append(questionNumber++).append(". ").append(string).append("<SEP>");
+            answers.append(hashmap.get(string).replaceAll(" ", "")).append(" ,");
+        }
 
         int studentGrade = 2;
         if (LoginController.studentModel.getGrade() != null) {
@@ -84,24 +103,93 @@ public class WorkspaceController implements Initializable {
 
         }
 
-        grade.produceWorkspace(sandBox, sidePane, commonPane, question);
+        grade.produceWorkspace(sandBox, sidePane, commonPane, question.toString());
 
         homeButton.setOnMouseClicked(mouseEvent -> {
             new MainClass().openHomePageWindow();
             MainClass.workspaceStage.close();
         });
 
+        String finalAnswers = answers.toString();
         submitButton.setOnMouseClicked(mouseEvent -> {
             if (commonPane.getChildren().get(0) instanceof StackPane) {
-                StackPane questionPane = null;
-                if (commonPane.getChildren().get(0) instanceof StackPane) {
-                    questionPane = (StackPane) commonPane.getChildren().get(0);
-                }
-                System.out.println(questionPane.getChildren());
+                StackPane questionPane;
+                questionPane = (StackPane) commonPane.getChildren().get(0);
+                Map map = (Extractor.getAllInputs((VBox) (((ScrollPane) questionPane.getChildren().get(0)).getContent())));
+                String[] answerSet = sortbykey((HashMap) map).split(",");
+                Alert submitConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to submit now?");
+                submitConfirmation.setHeaderText("Submit Assignment");
+                submitConfirmation.initStyle(StageStyle.UNDECORATED);
+                submitConfirmation.getDialogPane().setPrefSize(480, 200);
+                if (submitConfirmation.showAndWait().toString().contains("OK")) {
+                    StringBuilder userAnswers = new StringBuilder();
+                    for (Object node : answerSet
+                    ) {
+                        userAnswers.append(((String) node).replaceAll(" ", "")).append(" ,");
+                    }
+//                    System.out.println(userAnswers+" > "+ finalAnswers);
+                    String[] userAnswersArray = userAnswers.toString().split(",");
+                    String[] finalAnswersArray = finalAnswers.split(",");
+                    int totalPoints = finalAnswersArray.length;
+//                    System.out.println(totalPoints);
+                    int unattempted = 0;
+                    int userPoints = 0;
+                    if (userAnswersArray.length == finalAnswersArray.length) {
+                        for (int index = 0; index < userAnswersArray.length; index++) {
+                            if (userAnswersArray[index].equals(finalAnswersArray[index])) {
+                                userPoints += 1;
+                            }
+                            if (userAnswersArray[index].equals(" ")) {
+                                unattempted += 1;
+                            }
+                        }
+                        Pane root = new Pane();
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setTitle("Result");
+                        stage.setWidth(500);
+                        stage.setHeight(500);
+                        ObservableList<PieChart.Data> pieChartData =
+                                FXCollections.observableArrayList(
+                                        new PieChart.Data("Wrong", totalPoints - unattempted - userPoints),
+                                        new PieChart.Data("Unattempted", unattempted),
+                                        new PieChart.Data("Correct", userPoints));
+                        final PieChart chart = new PieChart(pieChartData);
+                        chart.setTitle("You got " + userPoints + " out of " + totalPoints);
+                        chart.setStartAngle(0);
+                        final Label caption = new Label("");
+                        for (final PieChart.Data data : chart.getData()) {
+                            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+                                    e -> {
+                                        double total = 0;
+                                        for (PieChart.Data d : chart.getData()) {
+                                            total += d.getPieValue();
+                                        }
+                                        caption.setTranslateX(e.getSceneX() + 5);
+                                        caption.setTranslateY(e.getSceneY() + 5);
+                                        caption.setTextFill(Color.valueOf("FFFFFF"));
+                                        String text = String.format("%d", ((int) data.getPieValue()));
+                                        caption.setText(text);
+                                    }
+                            );
+                        }
+                        root.getChildren().addAll(chart, caption);
+                        stage.setScene(scene);
+                        stage.show();
+                        MainClass.workspaceStage.close();
+                        stage.setOnCloseRequest(windowEvent -> new MainClass().openHomePageWindow());
 
+                    }
+                }
             } else {
-                System.out.println("Switch to Result Pane");
+                Alert switchPaneAlert = new Alert(Alert.AlertType.INFORMATION, "Please switch to question section to submit the assignment.");
+                switchPaneAlert.setHeaderText("Unable to submit");
+                switchPaneAlert.getDialogPane().setPrefSize(480, 200);
+                switchPaneAlert.initStyle(StageStyle.UNDECORATED);
+                switchPaneAlert.show();
             }
+
+
         });
 
     }

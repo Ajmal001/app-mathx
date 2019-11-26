@@ -36,7 +36,7 @@ public class HomepageController {
     @FXML
     private VBox submittedVBox;
     public RadioButton radioButtonAssign;
-    public String selectedAssignment = "Assignment 1";
+    public static String selectedAssignment = "Assignment 1";
     /**
      * The assignment elements.
      */
@@ -190,10 +190,9 @@ public class HomepageController {
     @FXML
     void workspaceAction(ActionEvent actionEvent) {
         selectedAssignment = toggleGroup.getSelectedToggle().toString().split("'")[1];
-        if (toggleGroup.getSelectedToggle() != null) {
             new MainClass().openWorkSpaceWindow();
             MainClass.homePageStage.close();
-        }
+
 
     }
 

@@ -16,7 +16,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -236,17 +235,17 @@ public class LoginController implements Initializable {
                 }
             }
             if (returnValue == 1 && type.equals("Admin")) {
-                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
+//                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
                 new MainClass().openAdminWindow();
                 MainClass.loginStage.close();
             } else if (returnValue == 1 && type.equals("Teacher")) {
-                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
+//                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().assignmentWindow();
                 MainClass.loginStage.close();
 
             } else if (returnValue == 1 && type.equals("Student")) {
-                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
+//                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().openHomePageWindow();
                 MainClass.loginStage.close();
@@ -277,23 +276,10 @@ public class LoginController implements Initializable {
 
 
         engine.load("https://ser515-team4.firebaseio.com/");
-        VBox vBox = new VBox();
-//        Button button = new Button("Logout");
-//        button.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                new MainClass().openLoginWindow();
-//                MainClass.loginStage.close();
-//            }
-//        });
-
-        vBox.getChildren().addAll(myWebView);
-        Scene scene = new Scene(vBox, 1380, 768);
-
+        VBox vBox = new VBox(myWebView);
+        Scene scene = new Scene(vBox, 1200, 600);
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
-//        MainClass.loginStage.setScene(scene);
-//        MainClass.loginStage.show();
     }
 }

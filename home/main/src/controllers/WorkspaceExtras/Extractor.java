@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,30 +38,29 @@ public class Extractor {
         return map;
     }
 
-    public static <T extends StackPane> Map<Node, Object> getAllInputs(T parent) {
-        return getAllTextFields(parent, new HashMap<>());
+    public static <T extends Pane> Map<Double, String> getAllInputs(T parent) {
+        return getAllInputs(parent, new HashMap<>());
     }
 
 
-    private static <T extends StackPane> Map<Node, Object> getAllInputs(T parent, Map<Node, Object> map) {
+    private static <T extends Pane> Map<Double, String> getAllInputs(T parent, Map<Double, String> map) {
         for (Node node : parent.getChildren()) {
 
             //DO NOT MODIFY THIS
             if (node instanceof TextField) {
-                map.put(node, node.localToScene(node.getBoundsInLocal()));
+                map.put(node.localToScene(node.getBoundsInLocal()).getMinY(), ((TextField) node).getText());
             }
 
             //DO NOT MODIFY THIS
             // Recursive.
-            if (node instanceof StackPane) {
-                getAllInputs((StackPane) node, map);
+            if (node instanceof Pane) {
+                getAllInputs((Pane) node, map);
             }
 
         }
 
         return map;
     }
-
 
     public static <T extends Pane> Map<Double, String> getExpressionData(T parent) {
         return getExpressionData(parent, new HashMap<>());

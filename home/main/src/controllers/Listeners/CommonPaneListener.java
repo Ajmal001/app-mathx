@@ -17,7 +17,6 @@ public class CommonPaneListener {
     StackPane questionPane = new StackPane();
     Pane resultPane = new Pane();
 
-
     public void produceQuestionPane(StackPane questionPane, String question) {
         questionPane.setAlignment(Pos.TOP_LEFT);
         Label tempLabel = new Label("Questions");
@@ -62,24 +61,23 @@ public class CommonPaneListener {
         resultPane.setBackground(new Background(new BackgroundFill(Color.valueOf("E5E5E5"), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
-    public void produceCommonPane(StackPane stackPane, String question) {
+    public void produceCommonPane(StackPane commonPane, String question) {
         produceQuestionPane(questionPane, question);
         produceResultPane(resultPane);
-        stackPane.getChildren().add(questionPane);
+        commonPane.getChildren().add(questionPane);
+
     }
 
-    public void switchPane(Pane sandBox, StackPane stackPane) {
+    public void switchPane(Pane sandBox, StackPane commonPane) {
         //Switches StackPane(resultPane) to Pane(questionPane)
-        if (stackPane.getChildren().toString().contains("StackPane")) {
-            stackPane.getChildren().clear();
-            stackPane.getChildren().addAll(resultPane);
+        if (commonPane.getChildren().toString().contains("StackPane")) {
+            commonPane.getChildren().clear();
+            commonPane.getChildren().addAll(resultPane);
             ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-            expressionEvaluator.produceResult(sandBox, stackPane);
-
-
+            expressionEvaluator.produceResult(sandBox, commonPane);
         } else {
-            stackPane.getChildren().clear();
-            stackPane.getChildren().addAll(questionPane);
+            commonPane.getChildren().clear();
+            commonPane.getChildren().addAll(questionPane);
         }
     }
 }

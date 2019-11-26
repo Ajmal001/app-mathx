@@ -62,7 +62,6 @@ public class ExpressionEvaluator {
         expresssions = Extractor.getAllExpressions(sandBox);
         HashMap expressionData;
         if (commonPane.getChildren().toString().contains("StackPane") == false) {
-
             resultPane = (Pane) commonPane.getChildren().get(0);
             resultPane.getChildren().clear();
         }
@@ -103,20 +102,6 @@ public class ExpressionEvaluator {
                 else
                     label.setText("False");
             label.setStyle("-fx-font-size: 30");
-            HashMap answers = (HashMap) Extractor.getAllAnswers(resultPane);
-            int counter = 0;
-            for (Object str : answers.entrySet()) {
-                if (str.toString().contains("True"))
-                    counter++;
-            }
-            if (counter > 2) {
-                showAlert("Successful");
-            }
-
-            if (expressionInput.contains("4^2") || expressionInput.contains("4*4")) {
-                showAlert("Successful");
-            }
-
             Bounds bounds = ((StackPane) node).localToScene(((StackPane) node).getLayoutBounds());
             //These numbers are adjustments done to view result parallel to the expression in the sandBox
             label.setLayoutX(bounds.getMinX() - 270);
