@@ -16,7 +16,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -236,17 +235,17 @@ public class LoginController implements Initializable {
                 }
             }
             if (returnValue == 1 && type.equals("Admin")) {
-                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
+//                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
                 new MainClass().openAdminWindow();
                 MainClass.loginStage.close();
             } else if (returnValue == 1 && type.equals("Teacher")) {
-                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
+//                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().assignmentWindow();
                 MainClass.loginStage.close();
 
             } else if (returnValue == 1 && type.equals("Student")) {
-                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
+//                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().openHomePageWindow();
                 MainClass.loginStage.close();
