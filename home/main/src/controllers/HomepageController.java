@@ -267,7 +267,9 @@ public class HomepageController {
      */
     @FXML
     void workspaceAction(ActionEvent actionEvent) {
+//        if(toggleGroup.getSelectedToggle()!=null)
         selectedAssignment = toggleGroup.getSelectedToggle().toString().split("'")[1];
+        System.out.println(selectedAssignment);
         new MainClass().openWorkSpaceWindow();
         MainClass.homePageStage.close();
 
