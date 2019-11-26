@@ -38,8 +38,10 @@ public class CommonPaneListener {
             vBox.getChildren().addAll(questionLabel);
             for (int tempCount = 0; tempCount < numberOfAnswers; tempCount++) {
                 TextField answer = new TextField();
-                answer.setMinWidth(50);
-                answer.setPrefWidth(50);
+                answer.setMinWidth(200);
+                answer.setPrefWidth(200);
+                answer.setMaxWidth(200);
+                answer.setPadding(new Insets(10));
                 answer.setPromptText(prompts[tempCount]);
                 answer.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD;-fx-background-color: #FFFFFF;-fx-border-color: #BBBBBB;-fx-border-radius: 5;" +
                         "-fx-background-radius: 5; -fx-opacity: 1;-fx-text-fill: #000000");

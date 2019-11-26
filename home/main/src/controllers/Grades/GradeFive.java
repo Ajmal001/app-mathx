@@ -14,7 +14,7 @@ import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 public class GradeFive implements GradeParent {
 
     @Override
-    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane) {
+    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane, String question) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Equation");
@@ -36,8 +36,6 @@ public class GradeFive implements GradeParent {
         }
         CommonPaneListener commonPaneListener = new CommonPaneListener();
         //Change this string below to change the question
-        String question = "\n3. Two wires are 12m and 16m long. The wires are to be cut into pieces of equal length. Find the maximum length of each piece." +
-                "\n  If you use 4 wires of the resultant length, what will be the area of shape formed? ";
 
 
         commonPaneListener.produceCommonPane(commonPane, question);

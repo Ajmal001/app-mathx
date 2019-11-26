@@ -53,12 +53,21 @@ public class WorkspaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String assignment = "Assignment 90";
+        String assignment = "Assignment 80";
 
         HashMap<String, String> hashmap = displayQuestions(assignment);
-        System.out.println("Printing Q and A pair");
-        for (String s : hashmap.keySet())
-            System.out.println("question:" + s + "ans:" + hashmap.get(s));
+        String questions = "";
+        int questionNumber = 1;
+        for (String s : hashmap.keySet()) {
+            questions = questions + s;
+        }
+        System.out.println(questions);
+//            System.out.println("question:" + s + "ans:" + hashmap.get(s));
+
+        String question = "\n3. Two wires are 12m and 16m long. The wires are to be cut into pieces of equal length. Find the maximum length of each piece.<HINT: :HINT> <SEP>" +
+                "\n 4. If you use 4 wires of the resultant length, what will be the area of shape formed? <HINT: :HINT>";
+
+
         int studentGrade = 2;
         if (LoginController.studentModel.getGrade() != null) {
             studentGrade = Integer.parseInt(LoginController.studentModel.getGrade());
@@ -78,7 +87,7 @@ public class WorkspaceController implements Initializable {
 
         }
 
-        grade.produceWorkspace(sandBox, sidePane, commonPane);
+        grade.produceWorkspace(sandBox, sidePane, commonPane, question);
 
         homeButton.setOnMouseClicked(mouseEvent -> {
             new MainClass().openHomePageWindow();
@@ -114,7 +123,6 @@ public class WorkspaceController implements Initializable {
                     if (assignmentModelw.getAssignmentName().equals(Assignment)) {
                         questionidsw = assignmentModelw.getQuestionId();
                     }
-                    //System.out.println("Size:" + assignmentlist.size());
                 }
                 done.countDown();
             }
@@ -128,8 +136,6 @@ public class WorkspaceController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < questionidsw.size(); i++)
-            System.out.println("===" + questionidsw.get(i));
 
         CountDownLatch done2 = new CountDownLatch(1);
         final String[] message2 = {null};
@@ -144,7 +150,6 @@ public class WorkspaceController implements Initializable {
                         questionsw.add(questionAnsModelw.getQuestion());
                         map.put(questionAnsModelw.getQuestion(), questionAnsModelw.getAns());
                     }
-                    //System.out.println("Size:" + assignmentlist.size());
                 }
                 done2.countDown();
             }
@@ -158,9 +163,6 @@ public class WorkspaceController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < questionsw.size(); i++)
-            System.out.println(questionsw.get(i));
-        System.out.println("****" + questionsw);
         return map;
 
     }
