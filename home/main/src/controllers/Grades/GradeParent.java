@@ -9,5 +9,5 @@ import javafx.scene.layout.VBox;
  */
 
 public interface GradeParent {
-    void produceWorkspace(Pane sandbox, VBox expressionPane, StackPane resultOrQuestionPane);
+    void produceWorkspace(Pane sandbox, VBox expressionPane, StackPane resultOrQuestionPane, String question);
 }

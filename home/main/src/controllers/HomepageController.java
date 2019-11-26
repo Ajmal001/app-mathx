@@ -178,7 +178,7 @@ public class HomepageController {
         Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApiSolved;
         DocumentSnapshot documentDataSolved;
-        assignmentComparisonChart.setTitle("Comparison of Assignments graded");
+        assignmentComparisonChart.setTitle("Comparison: Graded Assignments");
         assignmentComparisonChart.getXAxis().setLabel("Assignments");
         assignmentComparisonChart.getYAxis().setLabel("Grades out of 10");
         XYChart.Series<String, Number> assignments = new XYChart.Series<>();

@@ -14,7 +14,7 @@ import main.src.controllers.WorkspaceExtras.SidePaneFactory;
 public class GradeTwoCopy implements GradeParent {
 
     @Override
-    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane) {
+    public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane, String question) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
 
         sidePaneFactory.addLabelToSidePane(sidePane, "Compare");
@@ -30,9 +30,6 @@ public class GradeTwoCopy implements GradeParent {
         }
 
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-        String question = "1. Two + Two? <TEXTFIELD> <PROMPT:Answer:PROMPT> <SEP>" +
-                "\n2. Five - Three? <TEXTFIELD> <PROMPT:Answer:PROMPT>";
-
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
