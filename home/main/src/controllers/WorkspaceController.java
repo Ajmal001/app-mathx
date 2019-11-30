@@ -71,8 +71,7 @@ public class WorkspaceController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-//        String assignment = HomepageController.selectedAssignment;
-        String assignment = "November 25 - Grade 2";
+        String assignment = HomepageController.selectedAssignment;
         assignmentName.setText("Assignment: " + assignment);
 
         HashMap<String, String> hashmap = displayQuestions(assignment);
@@ -127,11 +126,9 @@ public class WorkspaceController implements Initializable {
                     ) {
                         userAnswers.append(((String) node).replaceAll(" ", "")).append(" ,");
                     }
-//                    System.out.println(userAnswers+" > "+ finalAnswers);
                     String[] userAnswersArray = userAnswers.toString().split(",");
                     String[] finalAnswersArray = finalAnswers.split(",");
                     int totalPoints = finalAnswersArray.length;
-//                    System.out.println(totalPoints);
                     int unattempted = 0;
                     int userPoints = 0;
                     if (userAnswersArray.length == finalAnswersArray.length) {
