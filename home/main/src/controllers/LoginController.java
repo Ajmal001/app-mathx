@@ -167,7 +167,7 @@ public class LoginController implements Initializable {
 
 
         new MainClass().openSignUpWindow();
-        MainClass.loginStage.close();
+//        MainClass.loginStage.close();
 
     }
 

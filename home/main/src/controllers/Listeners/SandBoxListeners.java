@@ -39,6 +39,8 @@ public class SandBoxListeners {
 
         //No drag out of bounds
         operator.setOnMouseDragged(mouseEvent -> {
+            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
+            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
 
             operator.toFront();
             //Left
@@ -67,11 +69,6 @@ public class SandBoxListeners {
             }
 
 
-        });
-
-        operator.setOnMouseReleased(mouseEvent -> {
-            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
         });
 
     }

@@ -8,8 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="500.0" prefWidth="400.0"
-            style="-fx-background-color: FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1"
+<AnchorPane prefHeight="500.0" prefWidth="893.0" style="-fx-background-color: FFFFFF;"
+            xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="main.src.controllers.ViewAssignmentController">
     <children>
         <Label fx:id="nameTF" layoutX="115.0" layoutY="33.0">
@@ -17,7 +17,7 @@
                 <Font name="Sawasdee" size="24.0"/>
             </font>
         </Label>
-        <Button layoutX="170.0" layoutY="441.0" mnemonicParsing="false" onAction="#back"
+        <Button layoutX="415.0" layoutY="441.0" mnemonicParsing="false" onAction="#back"
                 style="-fx-background-color: #007AFF; -fx-text-fill: FFFFFF; -fx-label-padding: 3;" text="Back">
             <font>
                 <Font name="Sawasdee" size="14.0"/>
@@ -29,7 +29,7 @@
                 <Cursor fx:constant="HAND"/>
             </cursor>
         </Button>
-        <VBox fx:id="VBoxMain" layoutX="16.0" layoutY="86.0" prefHeight="340.0" prefWidth="369.0">
+        <VBox fx:id="VBoxMain" layoutX="16.0" layoutY="86.0" prefHeight="340.0" prefWidth="859.0">
             <children>
                 <ListView fx:id="listBoxMain" prefHeight="338.0" prefWidth="274.0"
                           style="-fx-background-color: F9F9F9;"/>

@@ -4,11 +4,11 @@
 }
 
 .text-field {
-    -fx-background-color: rgba(250, 250, 250, 0.3);
+    -fx-background-color: rgba(250, 250, 250, 0.4);
 }
 
 .text-field:focused {
-    -fx-background-color: rgba(250, 250, 250, 0.5);
+    -fx-background-color: rgba(250, 250, 250, 0.6);
 }
 
 .scroll-bar:horizontal .increment-button,
