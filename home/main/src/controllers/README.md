@@ -16,11 +16,10 @@ controller
 │───Operator
 │   ├── BinaryOperator
 │   ├── CompareOperator
+│   ├── EquationOperator
 │   ├── ParentOperator
 │   └── UnaryOperator
-│
-│───workspaceCopies
-│   └── WorkspaceController_Copy    (Backup)
+
 │
 │───WorkspaceExtras
 │   ├── Extractor
@@ -28,13 +27,14 @@ controller
 │   ├── ResultEvaluator
 │   └── SidePaneFactory   
 │ 
+├── Adminpage Controller
 ├── Alertbox
 ├── Assignment Controller
 ├── CreateAssignmentController
 ├── EvaluateExpression
 ├── HomepageController
+├── jsonFile.json
 ├── LoginController
-├── Notes
 ├── QuestionController
 ├── README.md
 ├── ser515-team4-firebase-adminsdk-vb9rb-90250893a1.json
@@ -92,3 +92,27 @@ controller
 * Create a `GradeParent` object according to the grade of the student
 * Call `grade.produceWorkspace()`
 
+**Adding a new grade to the software**
+ - Create a new class in `Grades` Folder
+ - Suppose you are making a grade - GradeX
+    - It will implement the `Grades/GradeParent`
+    - Create `produceWorkspace` function for your grade
+    - Call `SidePaneFactory.addLabelToSidePane` for each type of operator
+    - Make a string for all the operator for GradeX
+    - For each operator call `SidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, operatorType(string), grade(int))`
+    - Repeat the above three steps for each type of operator
+    - Call `CommonPaneListeners.produceCommonPane(resultOrQuestionPane, question)`
+    - `ResultOrQuestionPane.setOnMouseClicked` - call `commonPaneListeners.switchPane(resultorQuestionPane)`
+ - WorkspaceController
+    - make a new case in `WorkspaceController.initialize/switch(i)`
+ - SidePaneFactory
+    - add the `sandBoxListeners` if there is any special sandBoxListener for your grade operator
+
+**Adding a new operator**
+ - Make a new class in `Operator` Folder - ExampleOperator
+ - `ExampleOperator`
+    - It will implement `Operator/ParentOperator`
+ - `SidePaneFactory`
+    - add a switch case to `addLabelToSidePane`
+    - add a switch case to `addOperatorToSidePane`
+    - add the `sandBoxListeners` for your operator
