@@ -38,11 +38,12 @@ import java.util.concurrent.CountDownLatch;
  */
 
 
+@SuppressWarnings("unchecked")
 public class WorkspaceController implements Initializable {
-    public static AssignmentModel assignmentModelw = new AssignmentModel();
-    public static QuestionAnsModel questionAnsModelw = new QuestionAnsModel();
-    List<String> questionidsw;
-    List<String> questionsw = new ArrayList<>();
+    private static AssignmentModel assignmentModelw = new AssignmentModel();
+    private static QuestionAnsModel questionAnsModelw = new QuestionAnsModel();
+    private List<String> questionidsw;
+    private List<String> questionsw = new ArrayList<>();
 
     @FXML
     private Pane sandBox;
@@ -57,6 +58,7 @@ public class WorkspaceController implements Initializable {
     @FXML
     private Label assignmentName;
 
+    //Sorts the hashmap by its keys
     private static String sortbykey(HashMap map) {
         ArrayList<Double> sortedKeys = new ArrayList<Double>(map.keySet());
         Collections.sort(sortedKeys);
@@ -70,10 +72,9 @@ public class WorkspaceController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         String assignment = HomepageController.selectedAssignment;
         assignmentName.setText("Assignment: " + assignment);
-
+        //get the questions from the database
         HashMap<String, String> hashmap = displayQuestions(assignment);
         StringBuilder question = new StringBuilder();
         StringBuilder answers = new StringBuilder();
@@ -88,6 +89,7 @@ public class WorkspaceController implements Initializable {
             studentGrade = Integer.parseInt(LoginController.studentModel.getGrade());
         }
 
+        //create the grade object
         GradeParent grade = null;
         switch (studentGrade) {
             case 2:
@@ -102,6 +104,8 @@ public class WorkspaceController implements Initializable {
 
         }
 
+        //start creating the workspace
+        assert grade != null;
         grade.produceWorkspace(sandBox, sidePane, commonPane, question.toString());
 
         homeButton.setOnMouseClicked(mouseEvent -> {
@@ -109,6 +113,7 @@ public class WorkspaceController implements Initializable {
             MainClass.workspaceStage.close();
         });
 
+        //Check answers and give points
         String finalAnswers = answers.toString();
         submitButton.setOnMouseClicked(mouseEvent -> {
             if (commonPane.getChildren().get(0) instanceof StackPane) {
@@ -191,7 +196,8 @@ public class WorkspaceController implements Initializable {
 
     }
 
-    HashMap<String, String> displayQuestions(String Assignment) {
+    //fetches the questions from the database
+    private HashMap<String, String> displayQuestions(String Assignment) {
         HashMap<String, String> map = new HashMap<>();
         CountDownLatch done = new CountDownLatch(1);
         final String[] message = {null};

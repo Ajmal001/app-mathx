@@ -23,6 +23,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * @author Manas
+ * @author Aditya Bajaj
+ */
+
+
 public class ViewAssignmentController implements Initializable {
 
     @FXML
@@ -49,6 +55,7 @@ public class ViewAssignmentController implements Initializable {
         nameTF.setText(asgn);
         System.out.println(asgn);
     }
+
     private void showAlert(String message) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);

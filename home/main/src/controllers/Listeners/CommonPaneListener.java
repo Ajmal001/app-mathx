@@ -14,10 +14,11 @@ import main.src.controllers.WorkspaceExtras.ExpressionEvaluator;
  */
 
 public class CommonPaneListener {
-    StackPane questionPane = new StackPane();
-    Pane resultPane = new Pane();
+    private StackPane questionPane = new StackPane();
+    private Pane resultPane = new Pane();
 
-    public void produceQuestionPane(StackPane questionPane, String question) {
+    //produces the question pane
+    private void produceQuestionPane(StackPane questionPane, String question) {
         questionPane.setAlignment(Pos.TOP_LEFT);
         Label tempLabel = new Label("Questions");
         tempLabel.setStyle("-fx-font-size: 24;");
@@ -35,14 +36,14 @@ public class CommonPaneListener {
             questionLabel.setStyle("-fx-font-size: 20");
             questionPane.setBackground(new Background(new BackgroundFill(Color.valueOf("#F5F5F5"), CornerRadii.EMPTY, Insets.EMPTY)));
             vBox.getChildren().addAll(questionLabel);
-            for (int tempCount = 0; tempCount < numberOfAnswers; tempCount++) {
+            for (String prompt : prompts) {
                 TextField answer = new TextField();
                 answer.setMinWidth(200);
                 answer.setPrefWidth(200);
                 answer.setMaxWidth(200);
                 answer.setPadding(new Insets(10));
-                answer.setPromptText(prompts[tempCount]);
-                answer.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD;-fx-background-color: #FFFFFF;-fx-border-color: #BBBBBB;-fx-border-radius: 5;" +
+                answer.setPromptText(prompt);
+                answer.setStyle("-fx-font-weight: BOLD;-fx-background-color: #FFFFFF;-fx-border-color: #BBBBBB;-fx-border-radius: 5;" +
                         "-fx-background-radius: 5; -fx-opacity: 1;-fx-text-fill: #000000");
                 vBox.getChildren().add(answer);
             }
@@ -54,6 +55,7 @@ public class CommonPaneListener {
         questionPane.getChildren().add(scrollPane);
     }
 
+    //produce the result pane
     private void produceResultPane(Pane resultPane) {
         Label tempLabel = new Label("Result");
         tempLabel.setStyle("-fx-font-size: 24;");
@@ -61,6 +63,7 @@ public class CommonPaneListener {
         resultPane.setBackground(new Background(new BackgroundFill(Color.valueOf("E5E5E5"), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    //adds the produced question pane and result pane to the common pane
     public void produceCommonPane(StackPane commonPane, String question) {
         produceQuestionPane(questionPane, question);
         produceResultPane(resultPane);
@@ -68,8 +71,8 @@ public class CommonPaneListener {
 
     }
 
+    //switch question and result pane when common pane is right clicked
     public void switchPane(Pane sandBox, StackPane commonPane) {
-        //Switches StackPane(resultPane) to Pane(questionPane)
         if (commonPane.getChildren().toString().contains("StackPane")) {
             commonPane.getChildren().clear();
             commonPane.getChildren().addAll(resultPane);

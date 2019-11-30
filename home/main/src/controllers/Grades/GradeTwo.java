@@ -17,20 +17,22 @@ public class GradeTwo implements GradeParent {
     public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane, String question) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
 
+        //Adds one compare operator for grade 2
         sidePaneFactory.addLabelToSidePane(sidePane, "Compare");
         String[] comparison = {""};
         for (String operator : comparison) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Compare", 2, commonPane);
         }
 
+        //adds addition and subtraction operator for grade 2
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
         String[] binaryOperators = {"+", "-"};
         for (String operator : binaryOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 2, commonPane);
         }
 
+        //adds the result and question pane for grade 2
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {

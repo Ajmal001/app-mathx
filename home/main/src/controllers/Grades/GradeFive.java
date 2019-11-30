@@ -17,27 +17,29 @@ public class GradeFive implements GradeParent {
     public void produceWorkspace(Pane sandBox, VBox sidePane, StackPane commonPane, String question) {
         SidePaneFactory sidePaneFactory = new SidePaneFactory();
 
+        //adds one equation operator for grade 5
         sidePaneFactory.addLabelToSidePane(sidePane, "Equation");
         String[] equationOperators = {""};
         for (String operator : equationOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Equation", 2, commonPane);
         }
 
+        //adds GCD operator for grade 5
         sidePaneFactory.addLabelToSidePane(sidePane, "Unary");
         String[] unaryOperators = {"gcd"};
         for (String operator : unaryOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Unary", 8, commonPane);
         }
 
+        //adds algebric operators for grade 5
         sidePaneFactory.addLabelToSidePane(sidePane, "Binary");
         String[] binaryOperators = {"+", "-", "*", "/", "^"};
         for (String operator : binaryOperators) {
             sidePaneFactory.addOperatorToSidePane(sandBox, sidePane, operator, "Binary", 8, commonPane);
         }
+
+        //produces the common question and result pane for grade 5
         CommonPaneListener commonPaneListener = new CommonPaneListener();
-        //Change this string below to change the question
-
-
         commonPaneListener.produceCommonPane(commonPane, question);
         commonPane.setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {

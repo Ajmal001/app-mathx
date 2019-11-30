@@ -1,7 +1,5 @@
 package main.src.controllers.Operator;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -22,6 +20,7 @@ import java.util.Random;
 
 public class CompareOperator implements ParentOperator {
     @Override
+    //produces the operator to compare two numbers as > or < or =
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
@@ -53,16 +52,13 @@ public class CompareOperator implements ParentOperator {
         input.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
 
         final int LIMIT = 1;
-        input.lengthProperty().addListener(new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                if (newValue.intValue() > oldValue.intValue()) {
-                    if (input.getText().length() >= LIMIT) {
-                        input.setText(input.getText().substring(0, LIMIT));
-                    }
-                } else if (input.getText().length() < LIMIT)
-                    rectangle.setWidth(190);
-            }
+        input.lengthProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.intValue() > oldValue.intValue()) {
+                if (input.getText().length() >= LIMIT) {
+                    input.setText(input.getText().substring(0, LIMIT));
+                }
+            } else if (input.getText().length() < LIMIT)
+                rectangle.setWidth(190);
         });
 
         Label number2 = new Label(operatorString);
@@ -71,6 +67,7 @@ public class CompareOperator implements ParentOperator {
         number2.setStyle("-fx-font-size: 14");
         number2.setTextFill(Color.WHITE);
         hBox.getChildren().addAll(number1, input, number2);
+        //random numbers are put into the compare operator
         number1.setText(String.valueOf(new Random().nextInt(50)));
         number2.setText(String.valueOf(new Random().nextInt(50)));
 

@@ -45,7 +45,7 @@ public class HomepageController {
     @FXML
     private VBox submittedVBox;
     public RadioButton radioButtonAssign;
-    public static String selectedAssignment = new String("Assignment 1");
+    public static String selectedAssignment = "Assignment 1";
     /**
      * The assignment elements.
      */

@@ -23,6 +23,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
+
+/**
+ * @author Manas
+ * @author Aditya Bajaj
+ */
+
 public class AssignmentController implements Initializable {
 
     @FXML

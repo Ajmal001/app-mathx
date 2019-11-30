@@ -16,6 +16,7 @@ import main.src.controllers.Operator.*;
 
 public class SidePaneFactory {
 
+    //adds label to the side pane
     public void addLabelToSidePane(VBox sidePane, String labelName) {
         ParentOperator operator = null;
         switch (labelName) {
@@ -42,6 +43,7 @@ public class SidePaneFactory {
         sidePane.getChildren().addAll(label);
     }
 
+    //adds operators to the side pane
     public void addOperatorToSidePane(Pane sandBox, VBox sidePane, String string, String operatorType, int grade, StackPane commonPane) {
         SidePaneListeners sidePaneListeners = new SidePaneListeners();
 
@@ -66,7 +68,6 @@ public class SidePaneFactory {
             default:
                 throw new IllegalStateException("Unexpected value: " + operatorType);
         }
-        assert operator != null;
         StackPane stackPane;
         stackPane = operator.produceOperator(string, commonPane);
         sidePane.getChildren().addAll(stackPane);

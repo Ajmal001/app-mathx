@@ -12,8 +12,11 @@ import java.util.Map;
  * @author Karandeep Singh Grewal
  */
 
+@SuppressWarnings({"WeakerAccess", "unchecked"})
 public class Extractor {
 
+
+    //returns all the text fields in a pane as a hashmap <textField, location>
     public static <T extends Pane> Map<Node, Object> getAllTextFields(T parent) {
         return getAllTextFields(parent, new HashMap<>());
     }
@@ -38,6 +41,7 @@ public class Extractor {
         return map;
     }
 
+    //returns all the text fields in a pane as a hashmap <location (X), text in the textField>
     public static <T extends Pane> Map<Double, String> getAllInputs(T parent) {
         return getAllInputs(parent, new HashMap<>());
     }
@@ -62,6 +66,7 @@ public class Extractor {
         return map;
     }
 
+    //returns all the text fields or labels in a pane as a hashmap <Location (X), text>
     public static <T extends Pane> Map<Double, String> getExpressionData(T parent) {
         return getExpressionData(parent, new HashMap<>());
     }
@@ -84,6 +89,7 @@ public class Extractor {
         return map;
     }
 
+    //returns all the text nodes in a pane as a hashmap <node, location>
     public static HashMap getAllExpressions(Pane parent) {
         HashMap hashMap = new HashMap<>();
         for (Node node : parent.getChildren()) {
@@ -92,6 +98,7 @@ public class Extractor {
         return hashMap;
     }
 
+    //returns all the labels in a pane as a hashmap <label, text>
     public static <T extends Pane> Map<Object, String> getAllAnswers(T parent) {
         return getAllAnswers(parent, new HashMap<>());
     }
