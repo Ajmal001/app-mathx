@@ -13,12 +13,8 @@ package main.src.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import com.firebase.client.Firebase;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import main.MainClass;
-
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -83,10 +79,6 @@ public class QuestionController implements Initializable {
     void addquestion(ActionEvent actionEvent) {
         String ques = quesTF.getText();
         String ans = ansTF.getText();
-        String g = (String) grade.getValue();
-        String d = (String) diff.getValue();
-
-
 //Checking if question is not empty
         if (ques.isEmpty()) {
             showAlert("Please enter your name");
