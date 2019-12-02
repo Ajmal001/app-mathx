@@ -19,6 +19,7 @@ import javafx.scene.text.Text;
 
 public class EquationOperator implements ParentOperator {
     @Override
+    //produces the operator of equation type - solves most of the equation inputs
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
         stackPane.setPrefSize(200, 50);

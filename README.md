@@ -68,7 +68,7 @@ git clone https://github.com/SER515-Fall2019-Team4/app-mathx.git
     - &#8600; `+` Add new configuration &#8594; `Application`
         - Change `Name` as you like. This will be your configuration name.
         - Set `Main Class` as `main.MainClass` 
-        - Set vm-options as `--module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml`
+        - Set vm-options as `--module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml,javafx.web`
         
         *Replace `/path/to/javafx/lib*` with the path where you extracted the OpenJavaFX*
     - **`Apply`**
@@ -95,6 +95,7 @@ cd app-mathx/out/artifacts/app_mathx_jar/
 ```
 java -jar --module-path /path/to/javafx/lib --add-modules javafx.controls,javafx.fxml app-mathx.jar
 ```
+***You may refer to another README file at https://github.com/SER515-Fall2019-Team4/app-mathx/tree/master/home/main/src/controllers for more information about the project structure***
 
 ### Authors
 

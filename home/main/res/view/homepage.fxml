@@ -16,9 +16,11 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.999-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.src.controllers.HomepageController">
+<?import javafx.scene.text.*?>
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="center" hgap="10" stylesheets="/main/res/css/common.css"
+          vgap="10" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="main.src.controllers.HomepageController">
     <columnConstraints>
         <ColumnConstraints />
     </columnConstraints>
@@ -26,12 +28,12 @@
         <RowConstraints />
     </rowConstraints>
 
-    <Pane prefHeight="720.0" prefWidth="1280.0">
+    <Pane prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: FFFFFF;">
         <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
         </opaqueInsets>
 
-        <Label layoutX="415.0" layoutY="158.0" prefHeight="51.0" prefWidth="158.0" text="Upcoming Assignments">
+        <Label layoutX="395.0" layoutY="158.0" prefHeight="51.0" prefWidth="158.0" text="Upcoming Assignments">
             <font>
                 <Font name="Helvetica Bold" size="13.0" />
             </font>
@@ -42,21 +44,41 @@
         </Label>
         <Label fx:id="emailLabel" layoutX="1083.0" layoutY="44.0" prefHeight="43.0" prefWidth="183.0" text="rnmehta1@asu.edu" />
         <Label fx:id="gradeLabel" layoutX="1083.0" layoutY="74.0" prefHeight="43.0" prefWidth="183.0" text="Grade - 2nd" />
-        <Button layoutX="1083.0" layoutY="188.0" mnemonicParsing="false" onAction="#display" prefHeight="43.0" prefWidth="130.0" text="Logout" />
-        <Label layoutX="38.0" layoutY="23.0" prefHeight="51.0" prefWidth="248.0" text="MathX">
+        <Button layoutX="1083.0" layoutY="188.0" mnemonicParsing="false" onAction="#display" prefHeight="43.0"
+                prefWidth="130.0" style="-fx-background-color: #007AFF; -fx-background-radius: 10;" text="Logout"
+                textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="13.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
+        <Label layoutX="50.0" layoutY="25.0" prefHeight="51.0" prefWidth="248.0" text="MathX">
             <font>
                 <Font name="Helvetica Bold" size="43.0" />
             </font></Label>
-        <Button layoutX="1083.0" layoutY="123.0" mnemonicParsing="false" onAction="#workspaceAction" prefHeight="43.0" prefWidth="130.0" text="Workspace" />
+        <Button layoutX="1083.0" layoutY="123.0" mnemonicParsing="false" onAction="#workspaceAction" prefHeight="43.0"
+                prefWidth="130.0"
+                style="-fx-background-color: #007AFF; -fx-text-fill: #FFFFFF; -fx-background-radius: 10;"
+                text="Workspace">
+            <font>
+                <Font name="System Bold" size="13.0"/>
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND"/>
+            </cursor>
+        </Button>
 <!--        <ComboBox fx:id="submittedAssignments" layoutX="73.0" layoutY="209.0" prefHeight="27.0" prefWidth="173.0" />-->
 
-        <Label layoutX="88.0" layoutY="158.0" prefHeight="51.0" prefWidth="183.0" text="Submitted Assignments" visible="true">
+        <Label layoutX="71.0" layoutY="158.0" prefHeight="51.0" prefWidth="183.0" text="Submitted Assignments"
+               visible="true">
             <font>
                 <Font name="Helvetica Bold" size="13.0" />
             </font>
         </Label>
 <!--        <ComboBox fx:id="notSubmittedAssignments" layoutX="401.0" layoutY="209.0" prefHeight="27.0" prefWidth="173.0" />-->
-        <BarChart fx:id="assignmentComparisonChart" layoutX="729.0" layoutY="274.0">
+        <BarChart fx:id="assignmentComparisonChart" barGap="15.0" layoutX="729.0" layoutY="274.0" prefWidth="500.0">
             <xAxis>
                 <CategoryAxis side="BOTTOM" />
             </xAxis>
@@ -64,13 +86,15 @@
                 <NumberAxis side="LEFT" />
             </yAxis>
         </BarChart>
-        <ScrollPane layoutX="394.0" layoutY="210.0" prefHeight="400.0" prefWidth="200.0">
+        <ScrollPane layoutX="394.0" layoutY="210.0" prefHeight="440.0" prefWidth="300.0">
             <content>
-                <VBox fx:id="notSubmittedVBox" prefHeight="400.0" prefWidth="196.0" />
+                <VBox fx:id="notSubmittedVBox" prefHeight="440.0" prefWidth="300.0"
+                      style="-fx-spacing: 3; -fx-padding: 5;"/>
             </content></ScrollPane>
-        <ScrollPane layoutX="71.0" layoutY="210.0" prefHeight="400.0" prefWidth="200.0">
+        <ScrollPane layoutX="50.0" layoutY="210.0" prefHeight="439.0" prefWidth="300.0">
             <content>
-                <VBox fx:id="submittedVBox" prefHeight="402.0" prefWidth="199.0" />
+                <VBox fx:id="submittedVBox" prefHeight="440.0" prefWidth="300.0"
+                      style="-fx-padding: 5; -fx-spacing: 3;"/>
             </content>
         </ScrollPane>
 

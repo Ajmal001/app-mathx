@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 
 public class UnaryOperator implements ParentOperator {
     @Override
+    //produces the operator of unary type
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
         stackPane.setPrefSize(200, 50);

@@ -6,8 +6,10 @@ import com.google.firebase.FirebaseOptions;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.*;
-import javafx.scene.web.WebView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -16,7 +18,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MainClass extends Application {
-
 
     public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage, practStage, adminStage;
 
@@ -38,20 +39,15 @@ public class MainClass extends Application {
 
         FirebaseApp.initializeApp(options);
 
-        loginStage = primaryStage;
-
-
-
-
-         openLoginWindow();
+        asgnStage = primaryStage;
+        openLoginWindow();
         //   listWindow();
-        //openWorkSpaceWindow();
+//        openWorkSpaceWindow();
 //        openSignUpWindow();
 //        assignmentWindow();
         //       view_assignmentWindow();
 
 //        create_assignmentWindow();
-//        openAdminWindow();
     }
 
 

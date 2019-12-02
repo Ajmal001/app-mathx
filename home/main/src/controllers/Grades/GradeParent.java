@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
  * @author Karandeep Singh Grewal
  */
 
+//Parent Class
 public interface GradeParent {
-    void produceWorkspace(Pane sandbox, VBox expressionPane, StackPane resultOrQuestionPane);
+    void produceWorkspace(Pane sandbox, VBox expressionPane, StackPane resultOrQuestionPane, String question);
 }

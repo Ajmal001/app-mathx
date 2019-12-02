@@ -18,10 +18,15 @@ import com.firebase.client.ValueEventListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import main.MainClass;
 import main.src.models.AdminModel;
 import main.src.models.StudentSignUpModel;
@@ -162,7 +167,7 @@ public class LoginController implements Initializable {
 
 
         new MainClass().openSignUpWindow();
-        MainClass.loginStage.close();
+//        MainClass.loginStage.close();
 
     }
 
@@ -230,17 +235,17 @@ public class LoginController implements Initializable {
                 }
             }
             if (returnValue == 1 && type.equals("Admin")) {
-                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
+//                showSuccess("Admin" + adminModel.getName() + "Logged in Successfully" );
                 new MainClass().openAdminWindow();
                 MainClass.loginStage.close();
             } else if (returnValue == 1 && type.equals("Teacher")) {
-                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
+//                showSuccess("Teacher" + teacherModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().assignmentWindow();
                 MainClass.loginStage.close();
 
             } else if (returnValue == 1 && type.equals("Student")) {
-                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
+//                showSuccess("Student" + studentModel.getName() + "Logged in Successfully");
                 //uncomment when done
                 new MainClass().openHomePageWindow();
                 MainClass.loginStage.close();
@@ -265,4 +270,16 @@ public class LoginController implements Initializable {
 
     }
 
+    public void adminClick(ActionEvent actionEvent) {
+        WebView myWebView = new WebView();
+        WebEngine engine = myWebView.getEngine();
+
+
+        engine.load("https://ser515-team4.firebaseio.com/");
+        VBox vBox = new VBox(myWebView);
+        Scene scene = new Scene(vBox, 1200, 600);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
