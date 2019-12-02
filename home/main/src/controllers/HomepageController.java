@@ -114,7 +114,7 @@ public class HomepageController {
             emailLabel.setText(userAddress);
             grade = LoginController.studentModel.getGrade();
             gradeLabel.setText("Grade-"+grade);
-            compareAssignmentsOnBarChart(userAddress);
+            compareAssignmentsOnBarChart("karandeep@gmail.com");
 
         }
 
