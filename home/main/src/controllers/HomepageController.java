@@ -146,7 +146,7 @@ public class HomepageController {
 //            notSubmittedVBox.getChildren().add(radioButtonAssign);
 //        }
 
-        Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
+        Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document("karandeep@gmail.com").collection("Submitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApiSolved;
         DocumentSnapshot documentDataSolved;
 
