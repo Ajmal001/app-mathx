@@ -11,45 +11,39 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
 import main.MainClass;
 import main.src.models.AssignmentModel;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
+/**
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author Mahapatra Manas, Bajaj Aditya
+ */
 
 /**
- * @author Manas
- * @author Aditya Bajaj
+ * The Class AssignmentController.
  */
 
 public class AssignmentController implements Initializable {
 
+    /** The list box main. */
     @FXML
     private ListView<String> listBoxMain;
-
-    @FXML
-    private VBox VBoxMain;
-
+    
+    /** The asgn. */
     static String asgn;
-
-    public static AssignmentModel assignmentModel = new AssignmentModel();
-
-    private void showAlert(String message) {
-
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(" ");
-        alert.setHeaderText(null);
-        //   alert.setHeaderText("Required Fields Empty");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
+    
+    /** The assignment model. */
+    private static AssignmentModel assignmentModel = new AssignmentModel();
 
     /**
      * Create assignment action.
@@ -65,14 +59,15 @@ public class AssignmentController implements Initializable {
 
     }
 
+    /** The assign. */
+    private ObservableList<String> assign = FXCollections.observableArrayList(displayAssignments());
+
     /**
      * Initialize.
      *
-     * @param url            the url
+     * @param url the url
      * @param resourceBundle the resource bundle
      */
-    ObservableList<String> assign = FXCollections.observableArrayList(displayAssignments());
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listBoxMain.setItems(assign);
@@ -87,9 +82,13 @@ public class AssignmentController implements Initializable {
         });
     }
 
-    List<String> displayAssignments() {
+    /**
+     * Display assignments.
+     *
+     * @return the list
+     */
+    public List<String> displayAssignments() {
         CountDownLatch done = new CountDownLatch(1);
-        final String[] message = {null};
         List<String> assignmentlist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
@@ -116,8 +115,4 @@ public class AssignmentController implements Initializable {
         return assignmentlist;
     }
 
-    public static void main(String[] args) {
-        AssignmentController as = new AssignmentController();
-        as.displayAssignments();
-    }
 }

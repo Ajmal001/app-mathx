@@ -15,54 +15,77 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import main.MainClass;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
-
 import java.net.URL;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
 
 /**
- * @author Manas
- * @author Aditya Bajaj
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author Mahapatra Manas, Bajaj Aditya
+ */
+/**
+ * The Class CreateAssignmentController.
  */
 
 
 public class CreateAssignmentController implements Initializable {
 
+    /** The grade. */
     @FXML
     private ComboBox grade;
+    
+    /** The name TF. */
     @FXML
     private TextField nameTF;
-
+    
+    /** The ques TF. */
     @FXML
     private TextField quesTF;
+    
+    /** The ans TF. */
     @FXML
     private TextField ansTF;
-
-    @FXML
-    private VBox VBoxMain;
+    
+    /** The list box main. */
     @FXML
     private ListView<String> listBoxMain;
-
-    @FXML
-    private VBox VBoxMain2;
+    
+    /** The list box Q. */
     @FXML
     private ListView<String> listBoxQ;
 
-    public static QuestionAnsModel questionAnsModel = new QuestionAnsModel();
-    static List<QuestionAnsModel> questionAnsModelList = new ArrayList<>();
+    /** The question ans model. */
+    private static QuestionAnsModel questionAnsModel = new QuestionAnsModel();
+    
+    /** The question ans model list. */
+    private static List<QuestionAnsModel> questionAnsModelList = new ArrayList<>();
+    
+    /** The asgn. */
+    private ObservableList<String> asgn = FXCollections.observableArrayList();
+    
+    /** The one. */
+    private ObservableList<String> one = FXCollections.observableArrayList(displayQuestions("1"));
+    
+    /** The two. */
+    private ObservableList<String> two = FXCollections.observableArrayList(displayQuestions("2"));
+    
+    /** The five. */
+    private ObservableList<String> five = FXCollections.observableList(displayQuestions("5"));
 
-    ObservableList<String> initial = FXCollections.observableArrayList("Choose your Grade ");
-    ObservableList<String> asgn = FXCollections.observableArrayList();
-
-    ObservableList<String> one = FXCollections.observableArrayList(displayQuestions("1"));
-    ObservableList<String> two = FXCollections.observableArrayList(displayQuestions("2"));
-    ObservableList<String> five = FXCollections.observableList(displayQuestions("5"));
-
+    /**
+     * Initialize.
+     *
+     * @param url the url
+     * @param rb the rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //   listBoxMain.setItems(initial);
@@ -76,21 +99,20 @@ public class CreateAssignmentController implements Initializable {
                 }
                 System.out.println(asgn);
                 listBoxQ.setItems(asgn);
-                //AssignmentController.asgn = t1;
-                // new MainClass().view_assignmentWindow();
             }
         });
         listBoxQ.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                // asgn.remove(t1);
-                // listBoxQ.setItems(asgn);
-                //AssignmentController.asgn = t1;
-                // new MainClass().view_assignmentWindow();
             }
         });
     }
 
+    /**
+     * Sets the q.
+     *
+     * @param actionEvent the new q
+     */
     public void setQ(ActionEvent actionEvent) {
         listBoxQ.getItems().clear();
         asgn.removeAll();
@@ -105,6 +127,11 @@ public class CreateAssignmentController implements Initializable {
         }
     }
 
+    /**
+     * Show alert.
+     *
+     * @param message the message
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Add Question Error");
@@ -114,6 +141,12 @@ public class CreateAssignmentController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Show confirm.
+     *
+     * @param message the message
+     * @param title the title
+     */
     private void showConfirm(String message, String title) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
@@ -124,7 +157,11 @@ public class CreateAssignmentController implements Initializable {
 
     /**
      * Use this method to push questions to the DB
-     * This Pushes grade,question and ans to firebase
+     * This Pushes grade,question and ans to firebase.
+     *
+     * @param grade the grade
+     * @param question the question
+     * @param answer the answer
      */
     void pushQuestions(String grade, String question, String answer) {
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -137,6 +174,11 @@ public class CreateAssignmentController implements Initializable {
         System.out.println("Question pushed Successfully");
     }
 
+    /**
+     * Addqs.
+     *
+     * @param actionEvent the action event
+     */
     @FXML
     void addqs(ActionEvent actionEvent) {
         String ques = quesTF.getText();
@@ -171,10 +213,14 @@ public class CreateAssignmentController implements Initializable {
     }
 
 
+    /**
+     * Display questions.
+     *
+     * @param grade the grade
+     * @return the list
+     */
     List<String> displayQuestions(String grade) {
         CountDownLatch done = new CountDownLatch(1);
-        final String[] message = {null};
-        List<String> questionanslist = new ArrayList<>();
         List<String> Qlist = new ArrayList<>();
         Set<String> set = new HashSet<String>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -185,7 +231,6 @@ public class CreateAssignmentController implements Initializable {
                     questionAnsModel = data.getValue(QuestionAnsModel.class);
                     questionAnsModel.setId(data.getKey());
                     questionAnsModelList.add(questionAnsModel);
-                    //    System.out.println("Size:" + questionAnsModelList.size());
                 }
                 done.countDown();
             }
@@ -206,11 +251,15 @@ public class CreateAssignmentController implements Initializable {
             }
         }
         Qlist.addAll(set);
-
-        // System.out.println(Qlist);
         return Qlist;
     }
 
+    /**
+     * Mapping.
+     *
+     * @param grade the grade
+     * @return the hash map
+     */
     HashMap<String, String> mapping(String grade) {
         CountDownLatch done = new CountDownLatch(1);
 
@@ -224,7 +273,6 @@ public class CreateAssignmentController implements Initializable {
                     questionAnsModel = data.getValue(QuestionAnsModel.class);
                     questionAnsModel.setId(data.getKey());
                     questionAnsModelList.add(questionAnsModel);
-                    //    System.out.println("Size:" + questionAnsModelList.size());
                 }
                 done.countDown();
             }
@@ -252,10 +300,14 @@ public class CreateAssignmentController implements Initializable {
         return map;
     }
 
+    /**
+     * Display questions id.
+     *
+     * @param grade the grade
+     * @return the list
+     */
     List<String> displayQuestionsId(String grade) {
         CountDownLatch done = new CountDownLatch(1);
-        final String[] message = {null};
-        List<String> questionanslist = new ArrayList<>();
         List<String> Qlist = new ArrayList<>();
         Set<String> set = new HashSet<String>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -266,7 +318,6 @@ public class CreateAssignmentController implements Initializable {
                     questionAnsModel = data.getValue(QuestionAnsModel.class);
                     questionAnsModel.setId(data.getKey());
                     questionAnsModelList.add(questionAnsModel);
-                    //    System.out.println("Size:" + questionAnsModelList.size());
                 }
                 done.countDown();
             }
@@ -287,10 +338,14 @@ public class CreateAssignmentController implements Initializable {
             }
         }
         Qlist.addAll(set);
-        // System.out.println(Qlist);
         return Qlist;
     }
 
+    /**
+     * Creates the A.
+     *
+     * @param actionEvent the action event
+     */
     public void createA(ActionEvent actionEvent) {
         String name = nameTF.getText();
         if (name.isEmpty()) {
@@ -323,6 +378,13 @@ public class CreateAssignmentController implements Initializable {
     }
 
 
+    /**
+     * Push assignment.
+     *
+     * @param assignmentName the assignment name
+     * @param grade the grade
+     * @param questionId the question id
+     */
     void pushAssignment(String assignmentName, String grade, List<String> questionId) {
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         AssignmentModel assignmentModel = new AssignmentModel();
@@ -332,22 +394,5 @@ public class CreateAssignmentController implements Initializable {
         firebase.child("Assignment").push().setValue(assignmentModel);
         System.out.println("Assignment pushed Successfully");
     }
-
-
-
-
- /*
-    public static void main(String[] args) {
-        CreateAssignmentController cm = new CreateAssignmentController();
-        System.out.println("Displaying questions");
-        System.out.println(cm.displayQuestions("1"));
-
-        System.out.println("Displaying questionsID");
-        System.out.println(cm.displayQuestionsId("1"));
-
-        System.out.println("Displaying hashmap");
-        System.out.println(cm.mapping("1"));
-    }
-*/
 
 }

@@ -9,14 +9,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.VBox;
 import main.MainClass;
 import main.src.models.AssignmentModel;
 import main.src.models.QuestionAnsModel;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,29 +21,52 @@ import java.util.ResourceBundle;
 import java.util.concurrent.CountDownLatch;
 
 /**
- * @author Manas
- * @author Aditya Bajaj
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author Mahapatra Manas, Bajaj Aditya
+ */
+/**
+ * The Class ViewAssignmentController.
  */
 
 
 public class ViewAssignmentController implements Initializable {
 
+    /** The name TF. */
     @FXML
     private Label nameTF;
-
-    @FXML
-    private VBox VBoxMain;
+    
+    /** The list box main. */
     @FXML
     private ListView<String> listBoxMain;
 
-    public static AssignmentModel assignmentModel2 = new AssignmentModel();
-    public static QuestionAnsModel questionAnsModel2 = new QuestionAnsModel();
-    List<String> questionids;
-    List<String> questions = new ArrayList<>();
+    /** The assignment model 2. */
+    private static AssignmentModel assignmentModel2 = new AssignmentModel();
+    
+    /** The question ans model 2. */
+    private static QuestionAnsModel questionAnsModel2 = new QuestionAnsModel();
+    
+    /** The questionids. */
+    private List<String> questionids;
+    
+    /** The questions. */
+    private List<String> questions = new ArrayList<>();
+    
+    /** The asgn. */
+    private String asgn = AssignmentController.asgn;
+    
+    /** The Qlist. */
+    private ObservableList<String> Qlist = FXCollections.observableArrayList(displayQuestions(asgn));
 
-    String asgn = AssignmentController.asgn;
-    ObservableList<String> Qlist = FXCollections.observableArrayList(displayQuestions(asgn));
-
+    /**
+     * Initialize.
+     *
+     * @param url the url
+     * @param resourceBundle the resource bundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listBoxMain.setItems(Qlist);
@@ -56,16 +76,6 @@ public class ViewAssignmentController implements Initializable {
         System.out.println(asgn);
     }
 
-    private void showAlert(String message) {
-
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(" ");
-        alert.setHeaderText(null);
-        //   alert.setHeaderText("Required Fields Empty");
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
     /**
      * Create assignment action.
      *
@@ -73,7 +83,6 @@ public class ViewAssignmentController implements Initializable {
      */
     @FXML
     void back(ActionEvent actionEvent) {
-        //new MainClass().assignmentWindow();
         MainClass.view_asgnStage.close();
     }
 
@@ -82,11 +91,13 @@ public class ViewAssignmentController implements Initializable {
      * <p>
      * //     * @param url            the url
      * //     * @param resourceBundle the resource bundle
+     *
+     * @param Assignment the assignment
+     * @return the list
      */
 
     List<String> displayQuestions(String Assignment) {
         CountDownLatch done = new CountDownLatch(1);
-        final String[] message = {null};
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
             @Override
@@ -97,7 +108,6 @@ public class ViewAssignmentController implements Initializable {
                     if (assignmentModel2.getAssignmentName().equals(asgn)) {
                         questionids = assignmentModel2.getQuestionId();
                     }
-                    //System.out.println("Size:" + assignmentlist.size());
                 }
                 done.countDown();
             }
@@ -115,7 +125,6 @@ public class ViewAssignmentController implements Initializable {
             System.out.println("===" + questionids.get(i));
 
         CountDownLatch done2 = new CountDownLatch(1);
-        final String[] message2 = {null};
         Firebase firebase2 = new Firebase("https://ser515-team4.firebaseio.com/");
         firebase2.child("Grade").addValueEventListener(new ValueEventListener() {
             @Override
@@ -140,17 +149,8 @@ public class ViewAssignmentController implements Initializable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < questions.size(); i++)
-            System.out.println(questions.get(i));
-        System.out.println("****"+questions);
         return questions;
 
     }
 
-
-//    public static void main(String[] args) {
-//
-//        ViewAssignmentController vm = new ViewAssignmentController();
-//        vm.displayQuestions("Assignment1");
-//    }
 }
