@@ -44,27 +44,39 @@ public class SignUpController implements Initializable {
     public static AssignmentModel assignmentModel2 = new AssignmentModel();
 
 
-    /** The name TF. */
+    /**
+     * The name TF.
+     */
     @FXML
     private TextField nameTF;
 
-    /** The email TF. */
+    /**
+     * The email TF.
+     */
     @FXML
     private TextField emailTF;
 
-    /** The pswd TF. */
+    /**
+     * The pswd TF.
+     */
     @FXML
     private TextField pswdTF;
 
-    /** The rpswd TF. */
+    /**
+     * The rpswd TF.
+     */
     @FXML
     private TextField rpswdTF;
 
-    /** The grade. */
+    /**
+     * The grade.
+     */
     @FXML
     private ComboBox grade;
 
-    /** The User. */
+    /**
+     * The User.
+     */
     @FXML
     private ToggleGroup User;
 
@@ -211,17 +223,13 @@ public class SignUpController implements Initializable {
 
             new MainClass().openLoginWindow();
             MainClass.signUpStage.close();
-
         }
-
-
     }
 
-
-    List<String> showAssignments(String grade){
+    List<String> showAssignments(String grade) {
 
         CountDownLatch done = new CountDownLatch(1);
-        final String message[] = {null};
+        final String[] message = {null};
 
         List<String> assignmentlist = new ArrayList<>();
         Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
@@ -232,7 +240,7 @@ public class SignUpController implements Initializable {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     assignmentModel2 = data.getValue(AssignmentModel.class);
                     assignmentModel2.setId(data.getKey());
-                    if(assignmentModel2.getGrade().equals(grade))
+                    if (assignmentModel2.getGrade().equals(grade))
                         assignmentlist.add(assignmentModel2.getAssignmentName());
                 }
                 done.countDown();
@@ -251,8 +259,8 @@ public class SignUpController implements Initializable {
         }
 
 
-        for(int i=0;i<assignmentlist.size();i++)
-            System.out.println( assignmentlist.get(i));
+//        for(int i=0;i<assignmentlist.size();i++)
+//            System.out.println( assignmentlist.get(i));
 
         return assignmentlist;
     }
@@ -271,7 +279,7 @@ public class SignUpController implements Initializable {
         docData.put("Question 3", "");
         for (int i = 0; i < listAssign.size(); i++) {
             ApiFuture<WriteResult> future = db.collection("UserAssignmentStatus").document(emailTF.getText()).collection("NotSubmitted").document(listAssign.get(i)).set(docData, SetOptions.merge());
-            System.out.println(future.get().getUpdateTime());
+//            System.out.println(future.get().getUpdateTime());
         }
     }
 

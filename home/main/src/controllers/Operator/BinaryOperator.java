@@ -1,7 +1,5 @@
 package main.src.controllers.Operator;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,18 +18,20 @@ import javafx.scene.shape.StrokeType;
 
 public class BinaryOperator implements ParentOperator {
     @Override
+    //produces the operator of binary type
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
+
+        final int LIMIT = 5;    //Limit of numbers in the input - 5 for lower grades
+        float shapeWidth = 220;
+
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
-
-        float shapeWidth = 200;
 
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
-        rectangle.setOpacity(0.8);
-        rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Paint.valueOf("007AFF"));
+        rectangle.setFill(Paint.valueOf("#FF3B30"));
+        rectangle.setStroke(Paint.valueOf("FF3B30"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
@@ -47,50 +47,29 @@ public class BinaryOperator implements ParentOperator {
         operator.setTextFill(Color.WHITE);
 
         TextField input1 = new TextField();
-        input1.setMinWidth(60);
-        input1.setPrefWidth(60);
-
-//        input1.textProperty().addListener((observable, oldValue, newValue) -> {
-//            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-//            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
-//        });
-
-
-        final int LIMIT = 5;
-        input1.lengthProperty().addListener(new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                if (newValue.intValue() > oldValue.intValue()) {
-                    if (input1.getText().length() >= LIMIT) {
-                        input1.setText(input1.getText().substring(0, LIMIT));
-                    }
-                } else if (input1.getText().length() < LIMIT)
-                    rectangle.setWidth(190);
-            }
+        input1.setMinWidth(70);
+        input1.setPrefWidth(70);
+        input1.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
+        input1.lengthProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.intValue() > oldValue.intValue()) {
+                if (input1.getText().length() >= LIMIT) {
+                    input1.setText(input1.getText().substring(0, LIMIT));
+                }
+            } else if (input1.getText().length() < LIMIT)
+                rectangle.setWidth(190);
         });
 
         TextField input2 = new TextField();
-        input2.setMinWidth(60);
-        input2.setPrefWidth(60);
-
-//        input2.textProperty().addListener((observable, oldValue, newValue) -> {
-//            if (oldValue != newValue) {
-//                ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-//                expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
-//            }
-//        });
-
-
-        input2.lengthProperty().addListener(new ChangeListener<>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observableValue, Number oldValue, Number newValue) {
-                if (newValue.intValue() > oldValue.intValue()) {
-                    if (input2.getText().length() >= LIMIT) {
-                        input2.setText(input2.getText().substring(0, LIMIT));
-                    }
-                } else if (input2.getText().length() < LIMIT)
-                    rectangle.setWidth(190);
-            }
+        input2.setMinWidth(70);
+        input2.setPrefWidth(70);
+        input2.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
+        input2.lengthProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.intValue() > oldValue.intValue()) {
+                if (input2.getText().length() >= LIMIT) {
+                    input2.setText(input2.getText().substring(0, LIMIT));
+                }
+            } else if (input2.getText().length() < LIMIT)
+                rectangle.setWidth(190);
         });
 
         hBox.getChildren().addAll(input1, operator, input2);
@@ -98,6 +77,7 @@ public class BinaryOperator implements ParentOperator {
         return stackPane;
     }
 
+    //produces the label for an operator type
     @Override
     public StackPane produceLabel() {
         StackPane labelPane = new StackPane();

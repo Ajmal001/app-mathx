@@ -13,6 +13,8 @@ import javafx.util.Duration;
 
 public class SidePaneListeners {
 
+    //installs the toolTip to the sidepane operator
+    //bug: doesn't perform as expected sometimes. requires testing
     public void installToolTip(StackPane stackPane) {
         Tooltip tooltip = new Tooltip("Tooltip");
         tooltip.setShowDelay(new Duration(100));

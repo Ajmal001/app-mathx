@@ -11,10 +11,12 @@ package main.src.controllers;
  * @since 8/30/2019
  */
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.DocumentReference;
-import com.google.cloud.firestore.DocumentSnapshot;
-import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,6 +26,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
 import main.MainClass;
+import main.src.models.AssignmentModel;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * The Class HomepageController.
@@ -36,9 +45,11 @@ public class HomepageController {
     @FXML
     private VBox submittedVBox;
     public RadioButton radioButtonAssign;
+    public static String selectedAssignment = "Assignment 1";
     /**
      * The assignment elements.
      */
+    public static AssignmentModel assignmentModel2 = new AssignmentModel();
 
 
     @FXML
@@ -103,29 +114,39 @@ public class HomepageController {
             emailLabel.setText(userAddress);
             grade = LoginController.studentModel.getGrade();
             gradeLabel.setText("Grade-"+grade);
-            compareAssignmentsOnBarChart();
+            compareAssignmentsOnBarChart("karandeep@gmail.com");
 
         }
 
+        refreshList();
 
         String userEmail = userAddress;
-        Iterable<DocumentReference> docRefUpcoming = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();
-        ApiFuture<DocumentSnapshot> documentApi;
-        DocumentSnapshot documentData;
+//        Iterable<DocumentReference> docRefUpcoming = db.collection("UserAssignmentStatus").document(userEmail).collection("NotSubmitted").listDocuments();
+//        ApiFuture<DocumentSnapshot> documentApi;
+//        DocumentSnapshot documentData;
 
         notSubmittedVBox.setSpacing(5);
+        List<String> listAssign = showAssignments(gradeLabel.getText().split("-")[1]);
+
         //Unsubmitted Assignments
-        for (DocumentReference doc : docRefUpcoming) {
-            documentApi = doc.get();             //Gets reference of document
-            documentData = documentApi.get();
+        for (int i = 0; i < listAssign.size(); i++) {
             radioButtonAssign = new RadioButton();
-//            radioButtonAssign.setBorder();
-            radioButtonAssign.setText(documentData.getId());
+            radioButtonAssign.setText(listAssign.get(i));
             radioButtonAssign.setToggleGroup(toggleGroup);
             notSubmittedVBox.getChildren().add(radioButtonAssign);
         }
 
-        Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
+//        for (DocumentReference doc : docRefUpcoming) {
+//            documentApi = doc.get();             //Gets reference of document
+//            documentData = documentApi.get();
+//            radioButtonAssign = new RadioButton();
+////            radioButtonAssign.setBorder();
+//            radioButtonAssign.setText(documentData.getId());
+//            radioButtonAssign.setToggleGroup(toggleGroup);
+//            notSubmittedVBox.getChildren().add(radioButtonAssign);
+//        }
+
+        Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document("karandeep@gmail.com").collection("Submitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApiSolved;
         DocumentSnapshot documentDataSolved;
 
@@ -148,16 +169,16 @@ public class HomepageController {
      * Comparing grades of assignments on bar charts
      */
 
-    void compareAssignmentsOnBarChart() throws Exception {
+    void compareAssignmentsOnBarChart(String userAddress) throws Exception {
 
         Firestore db = FirestoreClient.getFirestore();
 
-        String userEmail = "karandeep@gmail.com";
+        String userEmail = userAddress;
 
         Iterable<DocumentReference> docRefSolved = db.collection("UserAssignmentStatus").document(userEmail).collection("Submitted").listDocuments();
         ApiFuture<DocumentSnapshot> documentApiSolved;
         DocumentSnapshot documentDataSolved;
-        assignmentComparisonChart.setTitle("Comparison of Assignments graded");
+        assignmentComparisonChart.setTitle("Comparison: Graded Assignments");
         assignmentComparisonChart.getXAxis().setLabel("Assignments");
         assignmentComparisonChart.getYAxis().setLabel("Grades out of 10");
         XYChart.Series<String, Number> assignments = new XYChart.Series<>();
@@ -173,11 +194,69 @@ public class HomepageController {
 
             assignments.getData().add(new XYChart.Data<>(documentDataSolved.getId(), grade));
 
-            System.out.println(documentDataSolved.getData());
+//            System.out.println(documentDataSolved.getData());
 
         }
 
         assignmentComparisonChart.getData().addAll(assignments);
+    }
+
+
+    List<String> showAssignments(String grade) {
+
+        CountDownLatch done = new CountDownLatch(1);
+        final String[] message = {null};
+
+        List<String> assignmentlist = new ArrayList<>();
+        Firebase firebase = new Firebase("https://ser515-team4.firebaseio.com/");
+        firebase.child("Assignment").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    assignmentModel2 = data.getValue(AssignmentModel.class);
+                    assignmentModel2.setId(data.getKey());
+                    if (assignmentModel2.getGrade().equals(grade))
+                        assignmentlist.add(assignmentModel2.getAssignmentName());
+                }
+                done.countDown();
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+
+            }
+        });
+
+        try {
+            done.await(); //it will wait till the response is received from firebase.
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+//        for(int i=0;i<assignmentlist.size();i++)
+//            System.out.println( assignmentlist.get(i));
+
+        return assignmentlist;
+    }
+
+
+    //Refreshing list of assignments based on grade
+    public void refreshList() throws Exception {
+        Firestore db = FirestoreClient.getFirestore();
+        List<String> listAssign = showAssignments(gradeLabel.getText().split("-")[1]);
+        //Set unsubmitted assignments
+        Map<String, Object> docData = new HashMap<>();
+        docData.put("Question 1", "");
+        docData.put("Question 2", "");
+        docData.put("Question 3", "");
+
+        for (int i = 0; i < listAssign.size(); i++) {
+            System.out.println(emailLabel.getText());
+            ApiFuture<WriteResult> future = db.collection("UserAssignmentStatus").document(emailLabel.getText()).collection("NotSubmitted").document(listAssign.get(i)).set(docData, SetOptions.merge());
+            System.out.println(future.get().getUpdateTime());
+        }
     }
 
 
@@ -188,9 +267,12 @@ public class HomepageController {
      */
     @FXML
     void workspaceAction(ActionEvent actionEvent) {
-//        toggleGroup.getSelectedToggle().toString().split("'")[1];
+//        if(toggleGroup.getSelectedToggle()!=null)
+        selectedAssignment = toggleGroup.getSelectedToggle().toString().split("'")[1];
+        System.out.println(selectedAssignment);
         new MainClass().openWorkSpaceWindow();
         MainClass.homePageStage.close();
+
     }
 
     /**

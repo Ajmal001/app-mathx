@@ -1,37 +1,37 @@
 package main.src.controllers.Operator;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeLineJoin;
 import javafx.scene.shape.StrokeType;
-
-import java.util.Random;
+import javafx.scene.text.Text;
 
 /**
  * @author Karandeep Singh Grewal
  */
 
-public class CompareOperator implements ParentOperator {
+public class EquationOperator implements ParentOperator {
     @Override
-    //produces the operator to compare two numbers as > or < or =
+    //produces the operator of equation type - solves most of the equation inputs
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
+        stackPane.setPrefSize(200, 50);
         stackPane.setAlignment(Pos.CENTER);
 
-        float shapeWidth = 200;
+        float shapeWidth = 150;
 
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
-        rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Paint.valueOf("#007AFF"));
+        rectangle.setFill(Paint.valueOf("#248A3D"));
+        rectangle.setStroke(Paint.valueOf("#248A3D"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
@@ -40,46 +40,36 @@ public class CompareOperator implements ParentOperator {
         hBox.setMinWidth(shapeWidth);
         hBox.setAlignment(Pos.CENTER);
 
-        Label number1 = new Label(operatorString);
-        number1.setMinWidth(40);
-        number1.setAlignment(Pos.CENTER);
-        number1.setStyle("-fx-font-size: 14");
-        number1.setTextFill(Color.WHITE);
-
         TextField input = new TextField();
-        input.setMinWidth(30);
-        input.setPrefWidth(30);
+        input.setMinWidth(60);
+        input.setPrefWidth(60);
         input.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
 
-        final int LIMIT = 1;
-        input.lengthProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (newValue.intValue() > oldValue.intValue()) {
-                if (input.getText().length() >= LIMIT) {
-                    input.setText(input.getText().substring(0, LIMIT));
-                }
-            } else if (input.getText().length() < LIMIT)
+        input.textProperty().addListener((ov, prevText, currText) -> Platform.runLater(() -> {
+            Text text = new Text(currText);
+            text.setFont(input.getFont());
+            double width = text.getLayoutBounds().getWidth()
+                    + input.getPadding().getLeft() + input.getPadding().getRight()
+                    + 2d;
+            if (width < 30)
                 rectangle.setWidth(190);
-        });
+            input.setPrefWidth(width);
+            input.positionCaret(input.getCaretPosition());
+            rectangle.setWidth(110 + input.getWidth());
+        }));
 
-        Label number2 = new Label(operatorString);
-        number2.setMinWidth(40);
-        number2.setAlignment(Pos.CENTER);
-        number2.setStyle("-fx-font-size: 14");
-        number2.setTextFill(Color.WHITE);
-        hBox.getChildren().addAll(number1, input, number2);
-        //random numbers are put into the compare operator
-        number1.setText(String.valueOf(new Random().nextInt(50)));
-        number2.setText(String.valueOf(new Random().nextInt(50)));
 
+        hBox.getChildren().addAll(input);
         stackPane.getChildren().addAll(rectangle, hBox);
         return stackPane;
     }
+
 
     @Override
     public StackPane produceLabel() {
         StackPane labelPane = new StackPane();
         labelPane.setPrefSize(200, 30);
-        Label label = new Label("Compare");
+        Label label = new Label("");
         label.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
         labelPane.getChildren().addAll(label);
         return labelPane;

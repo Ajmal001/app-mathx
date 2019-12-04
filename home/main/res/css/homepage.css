@@ -1,0 +1,19 @@
+.buttonW {
+  -fx-text-color: black;
+  -fx-padding: 10px 26px;
+  -fx-text-align: center;
+  -fx-text-decoration: none;
+  -fx-display: inline-block;
+  -fx-font-size: 13px;
+  -fx-margin: 4px 2px;
+  -fx-transition-duration: 0.4s;
+  -fx-cursor: pointer;
+  -fx-border-color: #008CBA;
+  -fx-border: 2 2 2 2 ;
+}
+
+.buttonW:hover {
+  -fx-background-color: #008CBA;
+  -fx-color: white;
+}
+

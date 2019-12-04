@@ -1,5 +1,8 @@
 package main;
 
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,21 +11,30 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+/**
+ * Title:		 Math-X Application
+ * Description:  SER 515 Project
+ * Copyright:    Copyright (c) 2019
+ * Company:      Department of Computer Software Engineering, Arizona State University.
+ *
+ * @author Mahapatra Manas, Bajaj Aditya, Mehta Ria, Sheran Dass, Karandeep Singh Grewal
+ */
 
 public class MainClass extends Application {
 
-    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage;
+    public static Stage signUpStage, loginStage, homePageStage, workspaceStage, asgnStage, create_asgnStage, view_asgnStage, practStage, adminStage;
 
     public static void main(String[] args) {
+        System.setProperty("sun.net.http.allowRestrictedHeaders", "true");
         launch(args);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        InputStream serviceAccount = new FileInputStream("/main/src/controllers/jsonFile.json");
-
         InputStream serviceAccount = new FileInputStream(new File(getClass().getResource("src/controllers/jsonFile.json").getFile()));
         GoogleCredentials credentials = GoogleCredentials.fromStream(serviceAccount);
         FirebaseOptions options = new FirebaseOptions.Builder()
@@ -33,26 +45,33 @@ public class MainClass extends Application {
         FirebaseApp.initializeApp(options);
 
         asgnStage = primaryStage;
-//         openLoginWindow();
-        //    openWorkSpaceWindow();
-//           openSignUpWindow();
-        assignmentWindow();
-        // view_assignmentWindow();
-        //  create_assignmentWindow();
+        openLoginWindow();
+
+    }
+
+
+    public void listWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/ListViewUi.fxml"));
+            AnchorPane pane = loader.load();
+            Scene scene = new Scene(pane);
+            practStage = new Stage();
+            practStage.setScene(scene);
+            practStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void openSignUpWindow() {
-
         try {
-
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/signup.fxml"));
             GridPane pane = loader.load();
             Scene scene = new Scene(pane);
             signUpStage = new Stage();
             signUpStage.setScene(scene);
             signUpStage.show();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -69,6 +88,22 @@ public class MainClass extends Application {
             loginStage = new Stage();
             loginStage.setScene(scene);
             loginStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void openAdminWindow() {
+
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("res/view/adminpage.fxml"));
+            Pane pane = loader.load();
+            Scene scene = new Scene(pane);
+            adminStage = new Stage();
+            adminStage.setScene(scene);
+            adminStage.show();
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,53 +7,82 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="1080.0" prefWidth="1920.0"
-            style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/11.0.1"
-            fx:controller="main.src.controllers.WorkspaceController">
-   <top>
-       <HBox prefHeight="40.0" prefWidth="1920.0" style="-fx-background-color: #F3F3F3;" BorderPane.alignment="CENTER">
-         <Pane prefHeight="45.0" prefWidth="135.0">
-             <Label fx:id="homeButton" layoutX="38.0" layoutY="7.0" text="Home">
-               <font>
-                  <Font name="FreeSans Bold" size="14.0" />
-               </font>
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </Pane>
-         <Pane prefHeight="45.0" prefWidth="135.0">
-             <Label fx:id="resetButton" layoutX="38.0" layoutY="7.0" text="Reset">
-               <font>
-                  <Font name="FreeSans Bold" size="14.0" />
-               </font>
-               <padding>
-                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </Pane>
-      </HBox>
-   </top>
-   <left>
-      <Pane prefHeight="1040.0" prefWidth="250.0" BorderPane.alignment="CENTER">
-          <ScrollPane layoutY="-1.0" prefHeight="1040.0" prefWidth="250.0">
-              <VBox fx:id="sidePane" maxHeight="5000.0" minHeight="1000.0" prefHeight="1040.0" prefWidth="250.0"
-                    style="-fx-background-color: #ECECEC; -fx-spacing: 10;"/>
-         </ScrollPane>
-      </Pane>
-   </left>
-   <center>
-       <Pane style="-fx-background-color: #FFFFFF" BorderPane.alignment="CENTER">
-           <VBox prefHeight="1040.0" prefWidth="1670.0">
-               <Pane fx:id="sandBox" prefHeight="520.0" prefWidth="1670.0" style="-fx-border-color: #BBBBBB;"/>
-               <StackPane fx:id="commonPane" prefHeight="520.0" prefWidth="1670.0"/>
+            style="-fx-background-color: #FFFFFF;" stylesheets="/main/res/css/workspace.css"
+            xmlns="http://javafx.com/javafx/11.0.1" fx:controller="main.src.controllers.WorkspaceController">
+    <top>
+        <HBox prefHeight="40.0" prefWidth="1920.0" style="-fx-background-color: #F3F3F3;" BorderPane.alignment="CENTER">
+            <Pane prefHeight="45.0" prefWidth="135.0">
+                <Label fx:id="homeButton" layoutX="38.0" layoutY="7.0"
+                       style="-fx-background-color: #F3F3F3; -fx-background-radius: 5;" text="Home">
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                    </padding>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </Label>
+            </Pane>
+            <Pane prefHeight="45.0" prefWidth="135.0">
+                <!--                <Label fx:id="resetButton" layoutX="38.0" layoutY="7.0"-->
+                <!--                       style="-fx-background-color: #888888; -fx-background-radius: 5;" text="     " textFill="WHITE">-->
+                <!--                    <padding>-->
+                <!--                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>-->
+                <!--                    </padding>-->
+                <!--                    <cursor>-->
+                <!--                        <Cursor fx:constant="HAND"/>-->
+                <!--                    </cursor>-->
+                <!--                </Label>-->
+            </Pane>
+            <Pane prefHeight="40.0" prefWidth="501.0"/>
+            <Pane prefHeight="40.0" prefWidth="461.0">
+                <children>
+                    <Label fx:id="assignmentName" layoutX="14.0" layoutY="1.0" prefHeight="43.0" prefWidth="431.0"
+                           style="-fx-text-fill: #000000;" text="Assignment Name" textAlignment="CENTER"
+                           textFill="WHITE">
+                        <padding>
+                            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                        </padding>
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                        <font>
+                            <Font name="System Bold" size="16.0"/>
+                        </font>
+                    </Label>
+                </children>
+            </Pane>
+            <Pane prefHeight="40.0" prefWidth="501.0"/>
+            <Pane prefHeight="45.0" prefWidth="135.0">
+                <children>
+                    <Label fx:id="submitButton" layoutX="51.0" layoutY="7.0" style="-fx-background-radius: 5;"
+                           text="Submit" textFill="#007aff">
+                        <padding>
+                            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0"/>
+                        </padding>
+                        <cursor>
+                            <Cursor fx:constant="HAND"/>
+                        </cursor>
+                    </Label>
+                </children>
+            </Pane>
+        </HBox>
+    </top>
+    <left>
+        <Pane prefHeight="1040.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+            <ScrollPane layoutY="-1.0" prefHeight="1040.0" prefWidth="270.0">
+                <VBox fx:id="sidePane" maxHeight="5000.0" minHeight="500.0" prefHeight="1000.0" prefWidth="270.0"
+                      style="-fx-background-color: #ECECEC; -fx-spacing: 10;"/>
+            </ScrollPane>
+        </Pane>
+    </left>
+    <center>
+        <Pane style="-fx-background-color: #FFFFFF" BorderPane.alignment="CENTER">
+            <VBox prefHeight="1040.0" prefWidth="1670.0">
+                <Pane fx:id="sandBox" prefHeight="520.0" prefWidth="1670.0" style="-fx-border-color: #BBBBBB;">
+                </Pane>
+                <StackPane fx:id="commonPane" prefHeight="520.0" prefWidth="1670.0"/>
 
-           </VBox>
-       </Pane>
-   </center>
+            </VBox>
+        </Pane>
+    </center>
 </BorderPane>

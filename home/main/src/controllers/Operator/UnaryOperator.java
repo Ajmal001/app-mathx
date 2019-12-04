@@ -20,6 +20,7 @@ import javafx.scene.text.Text;
 
 public class UnaryOperator implements ParentOperator {
     @Override
+    //produces the operator of unary type
     public StackPane produceOperator(String operatorString, StackPane commonPane) {
         StackPane stackPane = new StackPane();
         stackPane.setPrefSize(200, 50);
@@ -30,9 +31,8 @@ public class UnaryOperator implements ParentOperator {
         Rectangle rectangle = new Rectangle(shapeWidth, 50);
         rectangle.setArcHeight(50);
         rectangle.setArcWidth(50);
-        rectangle.setOpacity(0.8);
-        rectangle.setFill(Paint.valueOf("#007AFF"));
-        rectangle.setStroke(Paint.valueOf("007AFF"));
+        rectangle.setFill(Paint.valueOf("#FF9500"));
+        rectangle.setStroke(Paint.valueOf("#FF9500"));
         rectangle.setStrokeLineCap(StrokeLineCap.ROUND);
         rectangle.setStrokeType(StrokeType.OUTSIDE);
         rectangle.setStrokeLineJoin(StrokeLineJoin.ROUND);
@@ -48,6 +48,10 @@ public class UnaryOperator implements ParentOperator {
         operator.setTextFill(Color.WHITE);
 
         TextField input = new TextField();
+        input.setStyle("-fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
+        input.setMinWidth(60);
+        input.setPrefWidth(60);
+
         if (operatorString.contains("gcd")) {
             input.setText("( )");
         }
@@ -63,17 +67,6 @@ public class UnaryOperator implements ParentOperator {
             input.positionCaret(input.getCaretPosition());
             rectangle.setWidth(110 + input.getWidth());
         }));
-
-//
-//        input.textProperty().addListener((observable, oldValue, newValue) -> {
-//            ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
-//            expressionEvaluator.produceResult((Pane) operator.getParent(), commonPane);
-//        });
-
-        input.setMinWidth(60);
-        input.setPrefWidth(60);
-
-
 
 
         hBox.getChildren().addAll(operator, input);
